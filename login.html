@@ -3,18 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Đăng nhập | Việt Xanh Admin</title>
+    <title>Đăng nhập - Việt Xanh</title>
     <style>
       :root {
-        --bg: #e9ecef;
-        --text: #495057;
-        --muted: #6c757d;
-        --primary: #007bff;
-        --primary-dark: #0069d9;
-        --danger: #dc3545;
-        --success: #28a745;
-        --card: #fff;
-        --border: #dee2e6;
+        --bg: #f1f1f1;
+        --text: #1f1f1f;
+        --line: #d8d8d8;
+        --primary: #1e6eea;
+        --primary-dark: #1459c2;
+        --danger: #d93636;
+        --success: #158a3f;
       }
 
       * { box-sizing: border-box; }
@@ -22,212 +20,321 @@
       body {
         margin: 0;
         min-height: 100vh;
-        font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        background: var(--bg);
+        font-family: Arial, Helvetica, sans-serif;
         color: var(--text);
+        background: var(--bg);
       }
 
-      .login-page {
+      .page {
+        width: min(1280px, 94vw);
+        margin: 0 auto;
         min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        align-items: center;
+        gap: 26px;
+      }
+
+      .art-wrap {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 16px;
       }
 
-      .login-box {
-        width: 360px;
-        max-width: 100%;
+      .scene {
+        width: min(620px, 100%);
+        aspect-ratio: 16/10;
+        position: relative;
       }
 
-      .login-logo {
-        text-align: center;
-        margin-bottom: 16px;
-        font-size: 35px;
-        line-height: 1.2;
+      .monitor {
+        position: absolute;
+        inset: 12% 11% 13% 9%;
       }
 
-      .login-logo b {
-        font-weight: 700;
-        color: #343a40;
-      }
-
-      .login-logo span {
-        color: var(--primary);
-        font-weight: 300;
-      }
-
-      .card {
-        background: var(--card);
-        border-radius: 0.25rem;
-        box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
+      .screen {
+        position: absolute;
+        inset: 0 0 20% 0;
+        border: 5px solid #d7d7d7;
+        border-bottom-width: 10px;
+        background: #fbfdff;
         overflow: hidden;
       }
 
-      .card-body {
-        padding: 20px;
+      .base {
+        position: absolute;
+        left: 8%;
+        right: 8%;
+        bottom: 0;
+        height: 18%;
+        background: #d8d8d8;
       }
 
-      .login-box-msg {
-        margin: 0 0 18px;
-        text-align: center;
-        color: #666;
+      .foot {
+        position: absolute;
+        left: 34%;
+        width: 32%;
+        height: 2.6%;
+        bottom: -6%;
+        background: #3f8bff;
       }
 
-      .input-group {
+      .blob,
+      .blob2,
+      .blob3,
+      .blob4 {
+        position: absolute;
+        border-radius: 999px;
+        opacity: 0.4;
+      }
+
+      .blob { width: 130px; height: 130px; left: -25px; bottom: 18px; background: #85b6ff; }
+      .blob2 { width: 84px; height: 84px; right: -20px; top: 32px; background: #99beff; }
+      .blob3 { width: 86px; height: 86px; left: 36%; top: 8%; background: #b6d1ff; }
+      .blob4 { width: 72px; height: 72px; right: 3%; bottom: 10px; background: #c5dcff; }
+
+      .paper {
+        position: absolute;
+        width: 40%;
+        height: 54%;
+        left: 34%;
+        top: 20%;
+        transform: rotate(-20deg);
+        background: linear-gradient(140deg, #1f2c82, #1a245f);
+      }
+
+      .paper::after {
+        content: "";
+        position: absolute;
+        width: 40%;
+        height: 6%;
+        left: 45%;
+        top: 54%;
+        border-radius: 999px;
+        background: #f15d5d;
+      }
+
+      .hand-a,
+      .hand-b {
+        position: absolute;
+        height: 11%;
+        border-radius: 999px;
+        background: #ffc8bf;
+      }
+
+      .hand-a { width: 31%; left: 15%; top: 40%; transform: rotate(-22deg); }
+      .hand-b { width: 30%; right: 18%; top: 33%; transform: rotate(24deg); }
+
+      .pen {
+        position: absolute;
+        width: 26%;
+        height: 2.8%;
+        right: 27%;
+        top: 30%;
+        transform: rotate(-52deg);
+        border-radius: 8px;
+        background: #eb4f4f;
+      }
+
+      .login-wrap {
+        width: min(470px, 100%);
+        margin: 0 auto;
+      }
+
+      .brand {
         display: flex;
-        width: 100%;
-        margin-bottom: 14px;
-      }
-
-      .form-control {
-        width: 100%;
-        border: 1px solid var(--border);
-        color: #495057;
-        border-radius: 0.25rem 0 0 0.25rem;
-        padding: 0.5rem 0.75rem;
-        font-size: 1rem;
-        line-height: 1.5;
-        height: 42px;
-      }
-
-      .form-control:focus {
-        outline: none;
-        border-color: #80bdff;
-        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-        z-index: 2;
-      }
-
-      .input-group-text {
-        min-width: 42px;
-        height: 42px;
-        display: inline-flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
-        border: 1px solid var(--border);
-        border-left: 0;
-        border-radius: 0 0.25rem 0.25rem 0;
-        color: #6c757d;
-        background: #f8f9fa;
+        margin-bottom: 20px;
       }
 
-      .row {
+      .leaf {
+        width: 100px;
+        height: 62px;
+        position: relative;
+      }
+
+      .leaf::before,
+      .leaf::after {
+        content: "";
+        position: absolute;
+        width: 44px;
+        height: 58px;
+        border-radius: 90% 0 90% 0;
+        top: 2px;
+      }
+
+      .leaf::before { left: 12px; background: #0d8f0b; transform: rotate(-35deg); }
+      .leaf::after { right: 12px; background: #22d40f; transform: rotate(35deg) scaleX(-1); }
+
+      .brand h1 {
+        margin: 0;
+        font-size: clamp(44px, 5vw, 56px);
+        font-style: italic;
+        font-weight: 800;
+        color: #0c0c0c;
+      }
+
+      .title {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 12px;
+        align-items: center;
+        margin: 18px 0 18px;
+        color: #444;
+        font-size: 30px;
+        font-weight: 700;
+      }
+
+      .title::before,
+      .title::after {
+        content: "";
+        height: 1px;
+        background: var(--line);
+      }
+
+      .field { margin-bottom: 16px; }
+
+      .field input {
+        width: 100%;
+        height: 50px;
+        border: 1px solid #b8b8b8;
+        border-radius: 2px;
+        padding: 0 12px;
+        font-size: 30px;
+        background: #f6f6f6;
+      }
+
+      .field input:focus {
+        outline: 2px solid rgba(30, 110, 234, 0.23);
+        border-color: #4f8ef3;
+        background: #fff;
+      }
+
+      .options {
         display: flex;
-        flex-wrap: wrap;
+        justify-content: space-between;
         align-items: center;
-        margin: 0 -6px;
+        margin: 2px 0 8px;
+        font-size: 30px;
+        color: #3f3f3f;
       }
 
-      .col-8,
-      .col-4 {
-        padding: 0 6px;
-      }
-
-      .col-8 { width: 66.6667%; }
-      .col-4 { width: 33.3333%; }
-
-      .icheck {
+      .remember {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        color: #495057;
-        font-size: 0.95rem;
       }
 
-      .icheck input { width: 16px; height: 16px; }
+      .remember input { width: 16px; height: 16px; }
 
-      .btn {
-        width: 100%;
-        border: 1px solid transparent;
-        border-radius: 0.25rem;
-        color: #fff;
-        background: var(--primary);
-        font-size: 1rem;
-        font-weight: 600;
-        line-height: 1.5;
-        padding: 0.5rem 0.75rem;
-        cursor: pointer;
-        transition: background-color .15s ease-in-out;
+      .forgot {
+        color: #404040;
+        text-decoration: none;
       }
-
-      .btn:hover { background: var(--primary-dark); }
-      .btn:disabled { background: #7db4f7; cursor: not-allowed; }
 
       .feedback {
-        min-height: 24px;
-        margin: 4px 0 12px;
-        font-size: 0.92rem;
+        min-height: 30px;
+        margin: 6px 0 10px;
+        font-size: 24px;
       }
 
       .feedback.error { color: var(--danger); }
       .feedback.success { color: var(--success); }
 
-      .login-footer {
-        margin-top: 14px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
+      .btn {
+        height: 52px;
+        min-width: 170px;
+        padding: 0 28px;
+        border: 0;
+        border-radius: 6px;
+        background: var(--primary);
+        color: white;
+        font-size: 24px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 2px 6px rgba(30, 110, 234, 0.35);
       }
 
-      .login-footer a {
-        color: #007bff;
-        font-size: 0.92rem;
-        text-decoration: none;
+      .btn:hover { background: var(--primary-dark); }
+      .btn:disabled { background: #90b6f4; box-shadow: none; cursor: not-allowed; }
+
+      @media (max-width: 980px) {
+        .page {
+          width: min(680px, 94vw);
+          grid-template-columns: 1fr;
+          gap: 4px;
+          padding: 20px 0;
+        }
+
+        .art-wrap { order: 2; }
+        .login-wrap { order: 1; }
       }
 
-      .login-footer a:hover { text-decoration: underline; }
+      @media (max-width: 560px) {
+        .options {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 6px;
+        }
 
-      @media (max-width: 420px) {
-        .login-box { width: 100%; }
-        .row { gap: 10px; }
-        .col-8, .col-4 { width: 100%; }
+        .btn {
+          width: 100%;
+        }
       }
     </style>
   </head>
   <body>
-    <main class="login-page">
-      <div class="login-box">
-        <div class="login-logo">
-          <b>Việt Xanh</b> <span>Admin</span>
-        </div>
-
-        <div class="card">
-          <div class="card-body">
-            <p class="login-box-msg">Đăng nhập để bắt đầu phiên làm việc</p>
-
-            <form id="loginForm" novalidate>
-              <div class="input-group">
-                <input class="form-control" id="username" name="username" type="text" placeholder="Mã NS hoặc Số điện thoại" autocomplete="username" required />
-                <span class="input-group-text" aria-hidden="true">👤</span>
-              </div>
-
-              <div class="input-group">
-                <input class="form-control" id="pin" name="pin" type="password" placeholder="Mã PIN" autocomplete="current-password" required minlength="4" />
-                <span class="input-group-text" aria-hidden="true">🔒</span>
-              </div>
-
-              <div id="feedback" class="feedback" role="alert" aria-live="polite"></div>
-
-              <div class="row">
-                <div class="col-8">
-                  <label class="icheck">
-                    <input type="checkbox" id="remember" />
-                    <span>Ghi nhớ đăng nhập</span>
-                  </label>
-                </div>
-                <div class="col-4">
-                  <button type="submit" id="loginBtn" class="btn">Đăng nhập</button>
-                </div>
-              </div>
-            </form>
-
-            <div class="login-footer">
-              <a href="#">Quên mã PIN?</a>
-              <a href="#">Đăng ký tài khoản mới</a>
+    <main class="page">
+      <section class="art-wrap" aria-hidden="true">
+        <div class="scene">
+          <div class="monitor">
+            <div class="screen">
+              <div class="blob"></div>
+              <div class="blob2"></div>
+              <div class="blob3"></div>
+              <div class="blob4"></div>
+              <div class="paper"></div>
+              <div class="hand-a"></div>
+              <div class="hand-b"></div>
+              <div class="pen"></div>
             </div>
+            <div class="base"></div>
+            <div class="foot"></div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section class="login-wrap">
+        <div class="brand">
+          <div class="leaf"></div>
+          <h1>Việt Xanh</h1>
+        </div>
+
+        <div class="title">Đăng nhập</div>
+
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <input id="username" name="username" type="text" placeholder="Nhập Mã NS hoặc Số ĐT:" required autocomplete="username" />
+          </div>
+
+          <div class="field">
+            <input id="pin" name="pin" type="password" placeholder="Mã PIN:" required minlength="4" autocomplete="current-password" />
+          </div>
+
+          <div class="options">
+            <label class="remember">
+              <input type="checkbox" id="remember" />
+              <span>Lưu trạng thái đăng nhập</span>
+            </label>
+            <a href="#" class="forgot">Quên mã PIN</a>
+          </div>
+
+          <div id="feedback" class="feedback" role="alert" aria-live="polite"></div>
+
+          <button type="submit" class="btn" id="loginBtn">ĐĂNG NHẬP</button>
+        </form>
+      </section>
     </main>
 
     <script>
@@ -250,10 +357,9 @@
 
       function applyLockState() {
         const sec = remainingLockSeconds();
-
         if (sec > 0) {
           loginBtn.disabled = true;
-          setFeedback(`Bạn đã nhập sai quá 3 lần. Vui lòng thử lại sau ${sec} giây.`, 'error');
+          setFeedback(`Sai mã PIN quá 3 lần. Vui lòng thử lại sau ${sec}s.`, 'error');
           return true;
         }
 
@@ -261,7 +367,7 @@
         return false;
       }
 
-      const lockTimer = setInterval(() => {
+      const lockTicker = setInterval(() => {
         if (!applyLockState()) {
           if (failedAttempts === 0 && !feedback.classList.contains('success')) {
             setFeedback('');
@@ -272,11 +378,10 @@
         }
       }, 1000);
 
-      window.addEventListener('beforeunload', () => clearInterval(lockTimer));
+      window.addEventListener('beforeunload', () => clearInterval(lockTicker));
 
       form.addEventListener('submit', (event) => {
         event.preventDefault();
-
         if (applyLockState()) return;
 
         const username = form.username.value.trim();
@@ -284,11 +389,6 @@
 
         if (!username || !pin) {
           setFeedback('Vui lòng nhập đầy đủ tài khoản và mã PIN.', 'error');
-          return;
-        }
-
-        if (pin.length < 4) {
-          setFeedback('Mã PIN phải có tối thiểu 4 ký tự.', 'error');
           return;
         }
 
