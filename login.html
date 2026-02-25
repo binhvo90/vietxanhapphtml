@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập - Việt Xanh</title>
+    <style>
+      :root {
+        --bg: #f3f3f3;
+        --card: #ffffff;
+        --text: #1e1e1e;
+        --muted: #7a7a7a;
+        --primary: #1f67da;
+        --primary-dark: #164fa9;
+        --danger: #db3a3a;
+        --line: #d9d9d9;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, Helvetica, sans-serif;
+        color: var(--text);
+        background: var(--bg);
+      }
+
+      .page {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        align-items: center;
+        gap: 20px;
+        width: min(1200px, 94vw);
+        margin: 0 auto;
+        padding: 30px 0;
+      }
+
+      .illustration {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .monitor {
+        width: min(540px, 95%);
+        aspect-ratio: 16/11;
+        position: relative;
+      }
+
+      .monitor-screen {
+        position: absolute;
+        inset: 11% 12% 22% 12%;
+        border: 6px solid #d6d6d6;
+        border-bottom-width: 10px;
+        background: linear-gradient(145deg, #f5f9ff, #ffffff);
+        overflow: hidden;
+      }
+
+      .shape-1, .shape-2, .shape-3 {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.35;
+      }
+
+      .shape-1 { width: 120px; height: 120px; background: #66a8ff; left: -30px; bottom: 20px; }
+      .shape-2 { width: 80px; height: 80px; background: #a9caff; right: -20px; top: 30px; }
+      .shape-3 { width: 70px; height: 70px; background: #6b9fff; left: 35%; top: 8%; }
+
+      .paper {
+        position: absolute;
+        width: 42%;
+        height: 56%;
+        left: 32%;
+        top: 20%;
+        transform: rotate(-19deg);
+        background: linear-gradient(145deg, #1f2a7d, #1b255e);
+      }
+
+      .hand-left, .hand-right {
+        position: absolute;
+        background: #ffc3bb;
+        border-radius: 16px;
+      }
+
+      .hand-left { width: 33%; height: 11%; left: 16%; top: 40%; transform: rotate(-23deg); }
+      .hand-right { width: 31%; height: 11%; right: 20%; top: 34%; transform: rotate(24deg); }
+
+      .pen {
+        position: absolute;
+        width: 24%;
+        height: 2.6%;
+        right: 29%;
+        top: 31%;
+        background: #e84b4b;
+        transform: rotate(-53deg);
+        border-radius: 10px;
+      }
+
+      .monitor-base {
+        position: absolute;
+        height: 14%;
+        width: 70%;
+        left: 15%;
+        bottom: 8%;
+        background: #d8d8d8;
+      }
+
+      .monitor-foot {
+        position: absolute;
+        height: 3%;
+        width: 36%;
+        left: 32%;
+        bottom: 0;
+        background: #3c86ff;
+      }
+
+      .form-wrap {
+        width: min(470px, 100%);
+        margin: 0 auto;
+      }
+
+      .brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .leaf {
+        position: relative;
+        width: 94px;
+        height: 58px;
+      }
+
+      .leaf::before,
+      .leaf::after {
+        content: "";
+        position: absolute;
+        width: 42px;
+        height: 56px;
+        border-radius: 80% 0 80% 0;
+        top: 0;
+      }
+
+      .leaf::before {
+        left: 10px;
+        background: #168a0c;
+        transform: rotate(-35deg);
+      }
+
+      .leaf::after {
+        right: 10px;
+        background: #27cf0f;
+        transform: rotate(35deg) scaleX(-1);
+      }
+
+      .brand h1 {
+        margin: 0;
+        font-size: clamp(36px, 5vw, 48px);
+        font-style: italic;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+      }
+
+      .title-line {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        gap: 12px;
+        margin: 24px 0;
+        color: #4b4b4b;
+        font-weight: 700;
+      }
+
+      .title-line::before,
+      .title-line::after {
+        content: "";
+        height: 1px;
+        background: var(--line);
+      }
+
+      .field { margin-bottom: 18px; }
+
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        border: 1px solid #bdbdbd;
+        border-radius: 3px;
+        height: 46px;
+        padding: 0 12px;
+        font-size: 22px;
+        background: #fff;
+      }
+
+      input:focus {
+        border-color: var(--primary);
+        outline: 2px solid rgba(31, 103, 218, 0.2);
+      }
+
+      .option-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 16px;
+        color: #484848;
+        font-size: 28px;
+      }
+
+      .remember {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .remember input {
+        width: 18px;
+        height: 18px;
+      }
+
+      .forgot {
+        color: #2e2e2e;
+        text-decoration: none;
+      }
+
+      .btn {
+        border: 0;
+        background: var(--primary);
+        color: #fff;
+        font-weight: 700;
+        font-size: 26px;
+        border-radius: 6px;
+        padding: 12px 34px;
+        min-width: 180px;
+        cursor: pointer;
+        box-shadow: 0 3px 8px rgba(31, 103, 218, 0.35);
+      }
+
+      .btn:hover { background: var(--primary-dark); }
+      .btn:disabled { background: #7f9fd5; cursor: not-allowed; box-shadow: none; }
+
+      .feedback {
+        min-height: 28px;
+        font-size: 24px;
+        margin: 8px 0;
+      }
+
+      .feedback.error { color: var(--danger); }
+      .feedback.success { color: #0f8c34; }
+
+      @media (max-width: 980px) {
+        .page {
+          grid-template-columns: 1fr;
+          gap: 14px;
+          width: min(620px, 92vw);
+        }
+
+        .illustration { order: 2; }
+        .form-wrap { order: 1; }
+      }
+
+      @media (max-width: 520px) {
+        .option-row { flex-direction: column; align-items: flex-start; }
+        .btn { width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="illustration" aria-hidden="true">
+        <div class="monitor">
+          <div class="monitor-screen">
+            <div class="shape-1"></div>
+            <div class="shape-2"></div>
+            <div class="shape-3"></div>
+            <div class="paper"></div>
+            <div class="hand-left"></div>
+            <div class="hand-right"></div>
+            <div class="pen"></div>
+          </div>
+          <div class="monitor-base"></div>
+          <div class="monitor-foot"></div>
+        </div>
+      </section>
+
+      <section class="form-wrap">
+        <div class="brand">
+          <div class="leaf"></div>
+          <h1>Việt Xanh</h1>
+        </div>
+
+        <div class="title-line">Đăng nhập</div>
+
+        <form id="loginForm" novalidate>
+          <div class="field">
+            <label for="username" class="sr-only"></label>
+            <input id="username" name="username" type="text" placeholder="Nhập Mã NS hoặc Số ĐT:" required />
+          </div>
+          <div class="field">
+            <label for="pin" class="sr-only"></label>
+            <input id="pin" name="pin" type="password" placeholder="Mã PIN:" required minlength="4" />
+          </div>
+
+          <div class="option-row">
+            <label class="remember">
+              <input type="checkbox" id="remember" />
+              <span>Lưu trạng thái đăng nhập</span>
+            </label>
+            <a class="forgot" href="#">Quên mã PIN</a>
+          </div>
+
+          <div id="feedback" class="feedback" role="alert" aria-live="polite"></div>
+
+          <button type="submit" id="loginBtn" class="btn">ĐĂNG NHẬP</button>
+        </form>
+      </section>
+    </main>
+
+    <script>
+      const form = document.getElementById('loginForm');
+      const feedback = document.getElementById('feedback');
+      const loginBtn = document.getElementById('loginBtn');
+
+      const demoAccount = {
+        username: 'admin',
+        pin: '123456'
+      };
+
+      let failedAttempts = 0;
+      let lockUntil = 0;
+
+      function setFeedback(message, type) {
+        feedback.textContent = message;
+        feedback.className = `feedback ${type || ''}`.trim();
+      }
+
+      function remainingLockSeconds() {
+        return Math.max(0, Math.ceil((lockUntil - Date.now()) / 1000));
+      }
+
+      function applyLockState() {
+        const seconds = remainingLockSeconds();
+
+        if (seconds > 0) {
+          loginBtn.disabled = true;
+          setFeedback(`Sai mã PIN quá 3 lần. Vui lòng thử lại sau ${seconds}s.`, 'error');
+          return true;
+        }
+
+        loginBtn.disabled = false;
+        return false;
+      }
+
+      setInterval(() => {
+        if (!applyLockState() && failedAttempts === 0 && !feedback.classList.contains('success')) {
+          setFeedback('');
+        }
+      }, 1000);
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        if (applyLockState()) return;
+
+        const username = form.username.value.trim();
+        const pin = form.pin.value.trim();
+
+        if (!username || !pin) {
+          setFeedback('Vui lòng nhập đầy đủ tài khoản và mã PIN.', 'error');
+          return;
+        }
+
+        if (username === demoAccount.username && pin === demoAccount.pin) {
+          failedAttempts = 0;
+          setFeedback('Đăng nhập thành công!', 'success');
+          return;
+        }
+
+        failedAttempts += 1;
+
+        if (failedAttempts >= 3) {
+          lockUntil = Date.now() + 30 * 1000;
+          applyLockState();
+        } else {
+          setFeedback(`Sai tài khoản hoặc mã PIN. Bạn còn ${3 - failedAttempts} lần thử.`, 'error');
+        }
+      });
+    </script>
+  </body>
+</html>
