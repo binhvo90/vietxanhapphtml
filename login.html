@@ -6,13 +6,14 @@
     <title>Đăng nhập - Việt Xanh</title>
     <style>
       :root {
-        --bg: #f1f1f1;
-        --text: #1f1f1f;
-        --line: #d8d8d8;
-        --primary: #1e6eea;
-        --primary-dark: #1459c2;
-        --danger: #d93636;
-        --success: #158a3f;
+        --bg: #f2f2f2;
+        --text: #1e1e1e;
+        --line: #dbdbdb;
+        --input-border: #b8b8b8;
+        --primary: #1e66e6;
+        --primary-dark: #1656c2;
+        --danger: #da3a3a;
+        --success: #15883e;
       }
 
       * { box-sizing: border-box; }
@@ -26,38 +27,38 @@
       }
 
       .page {
-        width: min(1280px, 94vw);
-        margin: 0 auto;
+        width: min(1240px, 95vw);
         min-height: 100vh;
+        margin: 0 auto;
         display: grid;
-        grid-template-columns: 1.15fr 0.85fr;
+        grid-template-columns: 1.08fr 0.92fr;
         align-items: center;
-        gap: 26px;
+        gap: 24px;
       }
 
-      .art-wrap {
+      .illustration {
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
       }
 
       .scene {
-        width: min(620px, 100%);
-        aspect-ratio: 16/10;
+        width: min(640px, 100%);
+        aspect-ratio: 16 / 10.2;
         position: relative;
       }
 
       .monitor {
         position: absolute;
-        inset: 12% 11% 13% 9%;
+        inset: 10% 9% 12% 10%;
       }
 
       .screen {
         position: absolute;
         inset: 0 0 20% 0;
         border: 5px solid #d7d7d7;
-        border-bottom-width: 10px;
-        background: #fbfdff;
+        border-bottom-width: 9px;
+        background: #fdfefe;
         overflow: hidden;
       }
 
@@ -66,7 +67,7 @@
         left: 8%;
         right: 8%;
         bottom: 0;
-        height: 18%;
+        height: 17%;
         background: #d8d8d8;
       }
 
@@ -74,70 +75,71 @@
         position: absolute;
         left: 34%;
         width: 32%;
-        height: 2.6%;
+        height: 2.8%;
         bottom: -6%;
-        background: #3f8bff;
+        background: #3f8bfd;
       }
 
-      .blob,
-      .blob2,
-      .blob3,
-      .blob4 {
+      .shape,
+      .shape2,
+      .shape3,
+      .shape4,
+      .shape5 {
         position: absolute;
         border-radius: 999px;
-        opacity: 0.4;
       }
 
-      .blob { width: 130px; height: 130px; left: -25px; bottom: 18px; background: #85b6ff; }
-      .blob2 { width: 84px; height: 84px; right: -20px; top: 32px; background: #99beff; }
-      .blob3 { width: 86px; height: 86px; left: 36%; top: 8%; background: #b6d1ff; }
-      .blob4 { width: 72px; height: 72px; right: 3%; bottom: 10px; background: #c5dcff; }
+      .shape { width: 140px; height: 140px; left: -34px; bottom: 12px; background: #9cbef5; opacity: .45; }
+      .shape2 { width: 84px; height: 84px; left: -6px; top: 46px; background: #bfd8ff; opacity: .55; }
+      .shape3 { width: 92px; height: 92px; right: -18px; top: 30px; background: #8eb7f5; opacity: .75; }
+      .shape4 { width: 110px; height: 110px; right: -30px; bottom: 36px; background: #d7e6fb; opacity: .9; }
+      .shape5 { width: 90px; height: 90px; left: 31%; top: 8%; background: #d2e2fb; opacity: .8; }
 
       .paper {
         position: absolute;
         width: 40%;
         height: 54%;
         left: 34%;
-        top: 20%;
-        transform: rotate(-20deg);
-        background: linear-gradient(140deg, #1f2c82, #1a245f);
+        top: 19%;
+        transform: rotate(-19deg);
+        background: linear-gradient(145deg, #1f2d81, #1a245f);
       }
 
       .paper::after {
         content: "";
         position: absolute;
-        width: 40%;
+        width: 35%;
         height: 6%;
-        left: 45%;
+        left: 49%;
         top: 54%;
         border-radius: 999px;
-        background: #f15d5d;
+        background: #f15353;
       }
 
-      .hand-a,
-      .hand-b {
+      .hand-left,
+      .hand-right {
         position: absolute;
         height: 11%;
         border-radius: 999px;
         background: #ffc8bf;
       }
 
-      .hand-a { width: 31%; left: 15%; top: 40%; transform: rotate(-22deg); }
-      .hand-b { width: 30%; right: 18%; top: 33%; transform: rotate(24deg); }
+      .hand-left { width: 31%; left: 15%; top: 40%; transform: rotate(-22deg); }
+      .hand-right { width: 30%; right: 19%; top: 33%; transform: rotate(24deg); }
 
       .pen {
         position: absolute;
-        width: 26%;
+        width: 25%;
         height: 2.8%;
-        right: 27%;
+        right: 28%;
         top: 30%;
         transform: rotate(-52deg);
+        background: #ea4d4d;
         border-radius: 8px;
-        background: #eb4f4f;
       }
 
-      .login-wrap {
-        width: min(470px, 100%);
+      .form-wrap {
+        width: min(440px, 100%);
         margin: 0 auto;
       }
 
@@ -145,12 +147,12 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
       }
 
       .leaf {
-        width: 100px;
-        height: 62px;
+        width: 98px;
+        height: 58px;
         position: relative;
       }
 
@@ -158,55 +160,56 @@
       .leaf::after {
         content: "";
         position: absolute;
-        width: 44px;
-        height: 58px;
-        border-radius: 90% 0 90% 0;
-        top: 2px;
+        width: 43px;
+        height: 56px;
+        top: 0;
+        border-radius: 85% 0 85% 0;
       }
 
-      .leaf::before { left: 12px; background: #0d8f0b; transform: rotate(-35deg); }
-      .leaf::after { right: 12px; background: #22d40f; transform: rotate(35deg) scaleX(-1); }
+      .leaf::before { left: 10px; background: #138d0e; transform: rotate(-35deg); }
+      .leaf::after { right: 10px; background: #27cd11; transform: rotate(35deg) scaleX(-1); }
 
       .brand h1 {
         margin: 0;
-        font-size: clamp(44px, 5vw, 56px);
+        font-size: clamp(52px, 5vw, 56px);
         font-style: italic;
         font-weight: 800;
-        color: #0c0c0c;
+        color: #0a0a0a;
       }
 
-      .title {
+      .title-line {
         display: grid;
         grid-template-columns: 1fr auto 1fr;
-        gap: 12px;
         align-items: center;
-        margin: 18px 0 18px;
-        color: #444;
+        gap: 12px;
+        margin: 22px 0;
+        color: #454545;
         font-size: 30px;
         font-weight: 700;
       }
 
-      .title::before,
-      .title::after {
+      .title-line::before,
+      .title-line::after {
         content: "";
         height: 1px;
         background: var(--line);
       }
 
-      .field { margin-bottom: 16px; }
+      .field { margin-bottom: 14px; }
 
       .field input {
         width: 100%;
-        height: 50px;
-        border: 1px solid #b8b8b8;
+        height: 48px;
+        border: 1px solid var(--input-border);
         border-radius: 2px;
-        padding: 0 12px;
-        font-size: 30px;
+        padding: 0 10px;
+        font-size: 31px;
+        color: #3b3b3b;
         background: #f6f6f6;
       }
 
       .field input:focus {
-        outline: 2px solid rgba(30, 110, 234, 0.23);
+        outline: 2px solid rgba(30, 102, 230, 0.2);
         border-color: #4f8ef3;
         background: #fff;
       }
@@ -215,9 +218,9 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 2px 0 8px;
-        font-size: 30px;
-        color: #3f3f3f;
+        margin: 0 0 8px;
+        font-size: 31px;
+        color: #3c3c3c;
       }
 
       .remember {
@@ -229,31 +232,32 @@
       .remember input { width: 16px; height: 16px; }
 
       .forgot {
-        color: #404040;
         text-decoration: none;
+        color: #3f3f3f;
       }
 
       .feedback {
-        min-height: 30px;
-        margin: 6px 0 10px;
-        font-size: 24px;
+        min-height: 28px;
+        margin: 8px 0;
+        font-size: 23px;
       }
 
       .feedback.error { color: var(--danger); }
       .feedback.success { color: var(--success); }
 
       .btn {
-        height: 52px;
-        min-width: 170px;
-        padding: 0 28px;
         border: 0;
         border-radius: 6px;
+        height: 50px;
+        min-width: 172px;
+        padding: 0 28px;
         background: var(--primary);
-        color: white;
-        font-size: 24px;
+        color: #fff;
+        font-size: 22px;
         font-weight: 700;
+        letter-spacing: .3px;
+        box-shadow: 0 2px 7px rgba(30, 102, 230, 0.35);
         cursor: pointer;
-        box-shadow: 0 2px 6px rgba(30, 110, 234, 0.35);
       }
 
       .btn:hover { background: var(--primary-dark); }
@@ -261,42 +265,41 @@
 
       @media (max-width: 980px) {
         .page {
-          width: min(680px, 94vw);
+          width: min(700px, 94vw);
           grid-template-columns: 1fr;
-          gap: 4px;
+          gap: 8px;
           padding: 20px 0;
         }
 
-        .art-wrap { order: 2; }
-        .login-wrap { order: 1; }
+        .illustration { order: 2; }
+        .form-wrap { order: 1; }
       }
 
       @media (max-width: 560px) {
         .options {
           flex-direction: column;
           align-items: flex-start;
-          gap: 6px;
+          gap: 8px;
         }
 
-        .btn {
-          width: 100%;
-        }
+        .btn { width: 100%; }
       }
     </style>
   </head>
   <body>
     <main class="page">
-      <section class="art-wrap" aria-hidden="true">
+      <section class="illustration" aria-hidden="true">
         <div class="scene">
           <div class="monitor">
             <div class="screen">
-              <div class="blob"></div>
-              <div class="blob2"></div>
-              <div class="blob3"></div>
-              <div class="blob4"></div>
+              <div class="shape"></div>
+              <div class="shape2"></div>
+              <div class="shape3"></div>
+              <div class="shape4"></div>
+              <div class="shape5"></div>
               <div class="paper"></div>
-              <div class="hand-a"></div>
-              <div class="hand-b"></div>
+              <div class="hand-left"></div>
+              <div class="hand-right"></div>
               <div class="pen"></div>
             </div>
             <div class="base"></div>
@@ -305,21 +308,21 @@
         </div>
       </section>
 
-      <section class="login-wrap">
+      <section class="form-wrap">
         <div class="brand">
           <div class="leaf"></div>
           <h1>Việt Xanh</h1>
         </div>
 
-        <div class="title">Đăng nhập</div>
+        <div class="title-line">Đăng nhập</div>
 
         <form id="loginForm" novalidate>
           <div class="field">
-            <input id="username" name="username" type="text" placeholder="Nhập Mã NS hoặc Số ĐT:" required autocomplete="username" />
+            <input id="username" name="username" type="text" placeholder="Nhập Mã NS hoặc Số ĐT:" autocomplete="username" required />
           </div>
 
           <div class="field">
-            <input id="pin" name="pin" type="password" placeholder="Mã PIN:" required minlength="4" autocomplete="current-password" />
+            <input id="pin" name="pin" type="password" placeholder="Mã PIN:" autocomplete="current-password" required minlength="4" />
           </div>
 
           <div class="options">
@@ -327,7 +330,7 @@
               <input type="checkbox" id="remember" />
               <span>Lưu trạng thái đăng nhập</span>
             </label>
-            <a href="#" class="forgot">Quên mã PIN</a>
+            <a class="forgot" href="#">Quên mã PIN</a>
           </div>
 
           <div id="feedback" class="feedback" role="alert" aria-live="polite"></div>
@@ -356,13 +359,12 @@
       }
 
       function applyLockState() {
-        const sec = remainingLockSeconds();
-        if (sec > 0) {
+        const seconds = remainingLockSeconds();
+        if (seconds > 0) {
           loginBtn.disabled = true;
-          setFeedback(`Sai mã PIN quá 3 lần. Vui lòng thử lại sau ${sec}s.`, 'error');
+          setFeedback(`Sai mã PIN quá 3 lần. Vui lòng thử lại sau ${seconds}s.`, 'error');
           return true;
         }
-
         loginBtn.disabled = false;
         return false;
       }
@@ -401,7 +403,6 @@
 
         failedAttempts += 1;
         const remain = 3 - failedAttempts;
-
         if (remain <= 0) {
           lockUntil = Date.now() + 30 * 1000;
           applyLockState();
