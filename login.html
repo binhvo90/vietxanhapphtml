@@ -2,55 +2,33 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Đăng nhập - Việt Xanh</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
     <style>
-      :root {
-        --bg: #f3f3f3;
-        --text: #242424;
-        --line: #d9d9d9;
-        --input-border: #bcbcbc;
-        --primary: #1f6ae5;
-        --primary-hover: #1858be;
-        --danger: #d63a3a;
-        --success: #1b8b44;
-      }
-
-      * { box-sizing: border-box; }
-
       body {
-        margin: 0;
+        background: #f2f2f2;
         min-height: 100vh;
         font-family: Arial, Helvetica, sans-serif;
-        background: var(--bg);
-        color: var(--text);
       }
 
-      .page {
-        width: min(1220px, 94vw);
-        margin: 0 auto;
+      .login-shell {
         min-height: 100vh;
-        display: grid;
-        grid-template-columns: 1.08fr 0.92fr;
-        align-items: center;
-        gap: 26px;
       }
 
-      .left {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      .illustration-wrap {
+        min-height: 420px;
       }
 
       .scene {
-        width: min(590px, 100%);
-        aspect-ratio: 16 / 10;
+        width: min(620px, 100%);
+        aspect-ratio: 16/10;
         position: relative;
       }
 
       .monitor {
         position: absolute;
-        inset: 12% 10% 13% 10%;
+        inset: 12% 10% 12% 10%;
       }
 
       .screen {
@@ -75,22 +53,21 @@
         position: absolute;
         left: 34%;
         width: 32%;
-        height: 2.9%;
+        height: 2.8%;
         bottom: -6%;
-        background: #3d88ff;
+        background: #3f8bff;
       }
 
-      .dot, .dot2, .dot3, .dot4, .dot5 {
+      .b, .b2, .b3, .b4 {
         position: absolute;
         border-radius: 999px;
         opacity: 0.6;
       }
 
-      .dot { width: 130px; height: 130px; left: -30px; bottom: 24px; background: #9fc2fb; }
-      .dot2 { width: 88px; height: 88px; left: -4px; top: 44px; background: #c8ddff; }
-      .dot3 { width: 88px; height: 88px; left: 34%; top: 6%; background: #c3d9ff; }
-      .dot4 { width: 84px; height: 84px; right: -18px; top: 34px; background: #8fb7f6; }
-      .dot5 { width: 108px; height: 108px; right: -28px; bottom: 28px; background: #d8e8ff; }
+      .b { width: 130px; height: 130px; left: -28px; bottom: 20px; background: #a7c7fb; }
+      .b2 { width: 88px; height: 88px; left: -6px; top: 42px; background: #d3e3ff; }
+      .b3 { width: 90px; height: 90px; right: -20px; top: 32px; background: #8db6f4; }
+      .b4 { width: 108px; height: 108px; right: -28px; bottom: 28px; background: #dce9fd; }
 
       .paper {
         position: absolute;
@@ -98,30 +75,30 @@
         height: 54%;
         left: 33%;
         top: 20%;
-        background: linear-gradient(140deg, #202d81, #1a245f);
+        background: linear-gradient(145deg, #1f2d82, #1a245f);
         transform: rotate(-19deg);
       }
 
       .paper::after {
         content: "";
         position: absolute;
-        width: 37%;
+        width: 36%;
         height: 6%;
-        left: 48%;
+        left: 49%;
         top: 55%;
         border-radius: 999px;
-        background: #ef5555;
+        background: #ef5858;
       }
 
-      .hand1, .hand2 {
+      .hand-a, .hand-b {
         position: absolute;
         height: 11%;
         border-radius: 999px;
-        background: #ffc7be;
+        background: #ffc8bf;
       }
 
-      .hand1 { width: 31%; left: 15%; top: 40%; transform: rotate(-23deg); }
-      .hand2 { width: 30%; right: 19%; top: 33%; transform: rotate(23deg); }
+      .hand-a { width: 31%; left: 15%; top: 40%; transform: rotate(-23deg); }
+      .hand-b { width: 30%; right: 19%; top: 33%; transform: rotate(23deg); }
 
       .pen {
         position: absolute;
@@ -134,16 +111,8 @@
         transform: rotate(-52deg);
       }
 
-      .right {
-        width: min(410px, 100%);
-        margin: 0 auto;
-      }
-
-      .brand {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 18px;
+      .form-col {
+        max-width: 430px;
       }
 
       .leaf {
@@ -162,189 +131,121 @@
         border-radius: 85% 0 85% 0;
       }
 
-      .leaf::before {
-        left: 10px;
-        background: #108d0c;
-        transform: rotate(-35deg);
-      }
+      .leaf::before { left: 10px; background: #118c0d; transform: rotate(-35deg); }
+      .leaf::after { right: 10px; background: #26cf12; transform: rotate(35deg) scaleX(-1); }
 
-      .leaf::after {
-        right: 10px;
-        background: #24cf10;
-        transform: rotate(35deg) scaleX(-1);
-      }
-
-      .brand h1 {
-        margin: 0;
-        font-size: 48px;
+      .brand-name {
+        font-size: clamp(44px, 5vw, 52px);
         font-style: italic;
         font-weight: 800;
         line-height: 1;
-        color: #0e0e0e;
       }
 
-      .title {
-        margin: 20px 0 18px;
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        gap: 12px;
-        align-items: center;
-        color: #444;
+      .section-title {
+        color: #454545;
         font-size: 28px;
         font-weight: 700;
       }
 
-      .title::before,
-      .title::after {
+      .title-line::before,
+      .title-line::after {
         content: "";
         height: 1px;
-        background: var(--line);
+        background: #d9d9d9;
+        flex: 1;
       }
 
-      .field {
-        margin-bottom: 14px;
-      }
-
-      .field input {
-        width: 100%;
+      .vx-input {
         height: 48px;
-        border: 1px solid var(--input-border);
         border-radius: 2px;
-        padding: 0 10px;
-        font-size: 31px;
-        color: #393939;
-        background: #f4f4f4;
+        border-color: #bcbcbc;
+        background: #f5f5f5;
+        font-size: 1.15rem;
       }
 
-      .field input:focus {
-        outline: 2px solid rgba(31, 106, 229, 0.2);
-        border-color: #4f8ef3;
-        background: #fff;
+      .vx-input::placeholder { color: #666; }
+
+      .btn-login {
+        background: #1f6ae5;
+        color: #fff;
+        font-weight: 700;
+        min-width: 132px;
+        height: 50px;
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(31, 106, 229, 0.35);
       }
 
-      .row {
-        margin: 4px 0 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: #3e3e3e;
-        font-size: 31px;
-      }
-
-      .remember {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .remember input { width: 15px; height: 15px; }
-
-      .forgot {
-        text-decoration: none;
-        color: #3f3f3f;
-      }
+      .btn-login:hover { background: #1858be; color: #fff; }
 
       .feedback {
-        min-height: 28px;
-        margin: 6px 0 10px;
-        font-size: 23px;
+        min-height: 24px;
+        font-size: .95rem;
       }
 
-      .feedback.error { color: var(--danger); }
-      .feedback.success { color: var(--success); }
-
-      .btn {
-        border: 0;
-        border-radius: 6px;
-        min-width: 130px;
-        height: 50px;
-        padding: 0 26px;
-        background: var(--primary);
-        color: #fff;
-        font-size: 22px;
-        font-weight: 700;
-        box-shadow: 0 2px 8px rgba(31, 106, 229, 0.35);
-        cursor: pointer;
-      }
-
-      .btn:hover { background: var(--primary-hover); }
-      .btn:disabled { background: #8eb5f4; box-shadow: none; cursor: not-allowed; }
-
-      @media (max-width: 980px) {
-        .page {
-          width: min(690px, 93vw);
-          grid-template-columns: 1fr;
-          gap: 8px;
-          padding: 20px 0;
-        }
-
-        .left { order: 2; }
-        .right { order: 1; }
-      }
-
-      @media (max-width: 560px) {
-        .row {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 8px;
-        }
-
-        .btn { width: 100%; }
+      @media (max-width: 991.98px) {
+        .illustration-col { order: 2; }
+        .form-col-wrap { order: 1; }
       }
     </style>
   </head>
   <body>
-    <main class="page">
-      <section class="left" aria-hidden="true">
-        <div class="scene">
-          <div class="monitor">
-            <div class="screen">
-              <div class="dot"></div>
-              <div class="dot2"></div>
-              <div class="dot3"></div>
-              <div class="dot4"></div>
-              <div class="dot5"></div>
-              <div class="paper"></div>
-              <div class="hand1"></div>
-              <div class="hand2"></div>
-              <div class="pen"></div>
+    <main class="container login-shell d-flex align-items-center">
+      <div class="row align-items-center w-100 g-4">
+        <section class="col-lg-7 illustration-col">
+          <div class="illustration-wrap d-flex align-items-center justify-content-center">
+            <div class="scene" aria-hidden="true">
+              <div class="monitor">
+                <div class="screen">
+                  <div class="b"></div>
+                  <div class="b2"></div>
+                  <div class="b3"></div>
+                  <div class="b4"></div>
+                  <div class="paper"></div>
+                  <div class="hand-a"></div>
+                  <div class="hand-b"></div>
+                  <div class="pen"></div>
+                </div>
+                <div class="base"></div>
+                <div class="foot"></div>
+              </div>
             </div>
-            <div class="base"></div>
-            <div class="foot"></div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section class="right">
-        <div class="brand">
-          <div class="leaf"></div>
-          <h1>Việt Xanh</h1>
-        </div>
+        <section class="col-lg-5 form-col-wrap">
+          <div class="form-col mx-auto">
+            <div class="d-flex flex-column align-items-center mb-3">
+              <div class="leaf"></div>
+              <h1 class="brand-name m-0">Việt Xanh</h1>
+            </div>
 
-        <div class="title">Đăng nhập</div>
+            <div class="title-line d-flex align-items-center gap-3 mb-4">
+              <span class="section-title">Đăng nhập</span>
+            </div>
 
-        <form id="loginForm" novalidate>
-          <div class="field">
-            <input id="username" name="username" type="text" placeholder="Nhập Mã NS hoặc Số ĐT:" autocomplete="username" required />
+            <form id="loginForm" novalidate>
+              <div class="mb-3">
+                <input id="username" name="username" type="text" class="form-control vx-input" placeholder="Nhập Mã NS hoặc Số ĐT:" autocomplete="username" required />
+              </div>
+              <div class="mb-2">
+                <input id="pin" name="pin" type="password" class="form-control vx-input" placeholder="Mã PIN:" autocomplete="current-password" required minlength="4" />
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center small text-secondary mb-2">
+                <label class="d-inline-flex align-items-center gap-2">
+                  <input class="form-check-input m-0" type="checkbox" id="remember" />
+                  <span>Lưu trạng thái đăng nhập</span>
+                </label>
+                <a href="#" class="text-decoration-none text-secondary">Quên mã PIN</a>
+              </div>
+
+              <div id="feedback" class="feedback mb-2" role="alert" aria-live="polite"></div>
+
+              <button id="loginBtn" type="submit" class="btn btn-login">ĐĂNG NHẬP</button>
+            </form>
           </div>
-
-          <div class="field">
-            <input id="pin" name="pin" type="password" placeholder="Mã PIN:" autocomplete="current-password" required minlength="4" />
-          </div>
-
-          <div class="row">
-            <label class="remember">
-              <input type="checkbox" id="remember" />
-              <span>Lưu trạng thái đăng nhập</span>
-            </label>
-            <a href="#" class="forgot">Quên mã PIN</a>
-          </div>
-
-          <div id="feedback" class="feedback" role="alert" aria-live="polite"></div>
-
-          <button id="loginBtn" type="submit" class="btn">ĐĂNG NHẬP</button>
-        </form>
-      </section>
+        </section>
+      </div>
     </main>
 
     <script>
@@ -358,7 +259,7 @@
 
       function setFeedback(message, type = '') {
         feedback.textContent = message;
-        feedback.className = `feedback ${type}`.trim();
+        feedback.className = `feedback mb-2 ${type}`.trim();
       }
 
       function remainingLockSeconds() {
@@ -369,7 +270,7 @@
         const seconds = remainingLockSeconds();
         if (seconds > 0) {
           loginBtn.disabled = true;
-          setFeedback(`Sai mã PIN quá 3 lần. Vui lòng thử lại sau ${seconds}s.`, 'error');
+          setFeedback(`Sai mã PIN quá 3 lần. Vui lòng thử lại sau ${seconds}s.`, 'text-danger');
           return true;
         }
         loginBtn.disabled = false;
@@ -378,7 +279,7 @@
 
       const lockTicker = setInterval(() => {
         if (!applyLockState()) {
-          if (failedAttempts === 0 && !feedback.classList.contains('success')) {
+          if (failedAttempts === 0 && !feedback.classList.contains('text-success')) {
             setFeedback('');
           }
           if (lockUntil > 0 && remainingLockSeconds() === 0) {
@@ -398,14 +299,14 @@
         const pin = form.pin.value.trim();
 
         if (!username || !pin) {
-          setFeedback('Vui lòng nhập đầy đủ tài khoản và mã PIN.', 'error');
+          setFeedback('Vui lòng nhập đầy đủ tài khoản và mã PIN.', 'text-danger');
           return;
         }
 
         if (username === demoAccount.username && pin === demoAccount.pin) {
           failedAttempts = 0;
           lockUntil = 0;
-          setFeedback('Đăng nhập thành công!', 'success');
+          setFeedback('Đăng nhập thành công!', 'text-success');
           return;
         }
 
@@ -416,7 +317,7 @@
           lockUntil = Date.now() + 30 * 1000;
           applyLockState();
         } else {
-          setFeedback(`Sai tài khoản hoặc mã PIN. Bạn còn ${remaining} lần thử.`, 'error');
+          setFeedback(`Sai tài khoản hoặc mã PIN. Bạn còn ${remaining} lần thử.`, 'text-danger');
         }
       });
     </script>
