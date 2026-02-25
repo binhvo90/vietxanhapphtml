@@ -3,17 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Đăng nhập - Việt Xanh</title>
+    <title>Đăng nhập | Việt Xanh Admin</title>
     <style>
       :root {
-        --bg: #f3f3f3;
-        --card: #ffffff;
-        --text: #1e1e1e;
-        --muted: #7a7a7a;
-        --primary: #1f67da;
-        --primary-dark: #164fa9;
-        --danger: #db3a3a;
-        --line: #d9d9d9;
+        --bg: #e9ecef;
+        --text: #495057;
+        --muted: #6c757d;
+        --primary: #007bff;
+        --primary-dark: #0069d9;
+        --danger: #dc3545;
+        --success: #28a745;
+        --card: #fff;
+        --border: #dee2e6;
       }
 
       * { box-sizing: border-box; }
@@ -21,301 +22,212 @@
       body {
         margin: 0;
         min-height: 100vh;
-        font-family: Arial, Helvetica, sans-serif;
-        color: var(--text);
+        font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         background: var(--bg);
+        color: var(--text);
       }
 
-      .page {
+      .login-page {
         min-height: 100vh;
-        display: grid;
-        grid-template-columns: 1.1fr 1fr;
-        align-items: center;
-        gap: 20px;
-        width: min(1200px, 94vw);
-        margin: 0 auto;
-        padding: 30px 0;
-      }
-
-      .illustration {
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
+        padding: 16px;
       }
 
-      .monitor {
-        width: min(540px, 95%);
-        aspect-ratio: 16/11;
-        position: relative;
+      .login-box {
+        width: 360px;
+        max-width: 100%;
       }
 
-      .monitor-screen {
-        position: absolute;
-        inset: 11% 12% 22% 12%;
-        border: 6px solid #d6d6d6;
-        border-bottom-width: 10px;
-        background: linear-gradient(145deg, #f5f9ff, #ffffff);
+      .login-logo {
+        text-align: center;
+        margin-bottom: 16px;
+        font-size: 35px;
+        line-height: 1.2;
+      }
+
+      .login-logo b {
+        font-weight: 700;
+        color: #343a40;
+      }
+
+      .login-logo span {
+        color: var(--primary);
+        font-weight: 300;
+      }
+
+      .card {
+        background: var(--card);
+        border-radius: 0.25rem;
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.125), 0 1px 3px rgba(0, 0, 0, 0.2);
         overflow: hidden;
       }
 
-      .shape-1, .shape-2, .shape-3 {
-        position: absolute;
-        border-radius: 50%;
-        opacity: 0.35;
+      .card-body {
+        padding: 20px;
       }
 
-      .shape-1 { width: 120px; height: 120px; background: #66a8ff; left: -30px; bottom: 20px; }
-      .shape-2 { width: 80px; height: 80px; background: #a9caff; right: -20px; top: 30px; }
-      .shape-3 { width: 70px; height: 70px; background: #6b9fff; left: 35%; top: 8%; }
-
-      .paper {
-        position: absolute;
-        width: 42%;
-        height: 56%;
-        left: 32%;
-        top: 20%;
-        transform: rotate(-19deg);
-        background: linear-gradient(145deg, #1f2a7d, #1b255e);
+      .login-box-msg {
+        margin: 0 0 18px;
+        text-align: center;
+        color: #666;
       }
 
-      .hand-left, .hand-right {
-        position: absolute;
-        background: #ffc3bb;
-        border-radius: 16px;
-      }
-
-      .hand-left { width: 33%; height: 11%; left: 16%; top: 40%; transform: rotate(-23deg); }
-      .hand-right { width: 31%; height: 11%; right: 20%; top: 34%; transform: rotate(24deg); }
-
-      .pen {
-        position: absolute;
-        width: 24%;
-        height: 2.6%;
-        right: 29%;
-        top: 31%;
-        background: #e84b4b;
-        transform: rotate(-53deg);
-        border-radius: 10px;
-      }
-
-      .monitor-base {
-        position: absolute;
-        height: 14%;
-        width: 70%;
-        left: 15%;
-        bottom: 8%;
-        background: #d8d8d8;
-      }
-
-      .monitor-foot {
-        position: absolute;
-        height: 3%;
-        width: 36%;
-        left: 32%;
-        bottom: 0;
-        background: #3c86ff;
-      }
-
-      .form-wrap {
-        width: min(470px, 100%);
-        margin: 0 auto;
-      }
-
-      .brand {
+      .input-group {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-      }
-
-      .leaf {
-        position: relative;
-        width: 94px;
-        height: 58px;
-      }
-
-      .leaf::before,
-      .leaf::after {
-        content: "";
-        position: absolute;
-        width: 42px;
-        height: 56px;
-        border-radius: 80% 0 80% 0;
-        top: 0;
-      }
-
-      .leaf::before {
-        left: 10px;
-        background: #168a0c;
-        transform: rotate(-35deg);
-      }
-
-      .leaf::after {
-        right: 10px;
-        background: #27cf0f;
-        transform: rotate(35deg) scaleX(-1);
-      }
-
-      .brand h1 {
-        margin: 0;
-        font-size: clamp(36px, 5vw, 48px);
-        font-style: italic;
-        font-weight: 800;
-        letter-spacing: 0.5px;
-      }
-
-      .title-line {
-        display: grid;
-        grid-template-columns: 1fr auto 1fr;
-        align-items: center;
-        gap: 12px;
-        margin: 24px 0;
-        color: #4b4b4b;
-        font-weight: 700;
-      }
-
-      .title-line::before,
-      .title-line::after {
-        content: "";
-        height: 1px;
-        background: var(--line);
-      }
-
-      .field { margin-bottom: 18px; }
-
-      input[type="text"],
-      input[type="password"] {
         width: 100%;
-        border: 1px solid #bdbdbd;
-        border-radius: 3px;
-        height: 46px;
-        padding: 0 12px;
-        font-size: 22px;
-        background: #fff;
+        margin-bottom: 14px;
       }
 
-      input:focus {
-        border-color: var(--primary);
-        outline: 2px solid rgba(31, 103, 218, 0.2);
+      .form-control {
+        width: 100%;
+        border: 1px solid var(--border);
+        color: #495057;
+        border-radius: 0.25rem 0 0 0.25rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        height: 42px;
       }
 
-      .option-row {
-        display: flex;
+      .form-control:focus {
+        outline: none;
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        z-index: 2;
+      }
+
+      .input-group-text {
+        min-width: 42px;
+        height: 42px;
+        display: inline-flex;
         align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        margin-bottom: 16px;
-        color: #484848;
-        font-size: 28px;
+        justify-content: center;
+        border: 1px solid var(--border);
+        border-left: 0;
+        border-radius: 0 0.25rem 0.25rem 0;
+        color: #6c757d;
+        background: #f8f9fa;
       }
 
-      .remember {
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 0 -6px;
+      }
+
+      .col-8,
+      .col-4 {
+        padding: 0 6px;
+      }
+
+      .col-8 { width: 66.6667%; }
+      .col-4 { width: 33.3333%; }
+
+      .icheck {
         display: inline-flex;
         align-items: center;
         gap: 8px;
+        color: #495057;
+        font-size: 0.95rem;
       }
 
-      .remember input {
-        width: 18px;
-        height: 18px;
-      }
-
-      .forgot {
-        color: #2e2e2e;
-        text-decoration: none;
-      }
+      .icheck input { width: 16px; height: 16px; }
 
       .btn {
-        border: 0;
-        background: var(--primary);
+        width: 100%;
+        border: 1px solid transparent;
+        border-radius: 0.25rem;
         color: #fff;
-        font-weight: 700;
-        font-size: 26px;
-        border-radius: 6px;
-        padding: 12px 34px;
-        min-width: 180px;
+        background: var(--primary);
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.5;
+        padding: 0.5rem 0.75rem;
         cursor: pointer;
-        box-shadow: 0 3px 8px rgba(31, 103, 218, 0.35);
+        transition: background-color .15s ease-in-out;
       }
 
       .btn:hover { background: var(--primary-dark); }
-      .btn:disabled { background: #7f9fd5; cursor: not-allowed; box-shadow: none; }
+      .btn:disabled { background: #7db4f7; cursor: not-allowed; }
 
       .feedback {
-        min-height: 28px;
-        font-size: 24px;
-        margin: 8px 0;
+        min-height: 24px;
+        margin: 4px 0 12px;
+        font-size: 0.92rem;
       }
 
       .feedback.error { color: var(--danger); }
-      .feedback.success { color: #0f8c34; }
+      .feedback.success { color: var(--success); }
 
-      @media (max-width: 980px) {
-        .page {
-          grid-template-columns: 1fr;
-          gap: 14px;
-          width: min(620px, 92vw);
-        }
-
-        .illustration { order: 2; }
-        .form-wrap { order: 1; }
+      .login-footer {
+        margin-top: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
       }
 
-      @media (max-width: 520px) {
-        .option-row { flex-direction: column; align-items: flex-start; }
-        .btn { width: 100%; }
+      .login-footer a {
+        color: #007bff;
+        font-size: 0.92rem;
+        text-decoration: none;
+      }
+
+      .login-footer a:hover { text-decoration: underline; }
+
+      @media (max-width: 420px) {
+        .login-box { width: 100%; }
+        .row { gap: 10px; }
+        .col-8, .col-4 { width: 100%; }
       }
     </style>
   </head>
   <body>
-    <main class="page">
-      <section class="illustration" aria-hidden="true">
-        <div class="monitor">
-          <div class="monitor-screen">
-            <div class="shape-1"></div>
-            <div class="shape-2"></div>
-            <div class="shape-3"></div>
-            <div class="paper"></div>
-            <div class="hand-left"></div>
-            <div class="hand-right"></div>
-            <div class="pen"></div>
-          </div>
-          <div class="monitor-base"></div>
-          <div class="monitor-foot"></div>
-        </div>
-      </section>
-
-      <section class="form-wrap">
-        <div class="brand">
-          <div class="leaf"></div>
-          <h1>Việt Xanh</h1>
+    <main class="login-page">
+      <div class="login-box">
+        <div class="login-logo">
+          <b>Việt Xanh</b> <span>Admin</span>
         </div>
 
-        <div class="title-line">Đăng nhập</div>
+        <div class="card">
+          <div class="card-body">
+            <p class="login-box-msg">Đăng nhập để bắt đầu phiên làm việc</p>
 
-        <form id="loginForm" novalidate>
-          <div class="field">
-            <label for="username" class="sr-only"></label>
-            <input id="username" name="username" type="text" placeholder="Nhập Mã NS hoặc Số ĐT:" required />
+            <form id="loginForm" novalidate>
+              <div class="input-group">
+                <input class="form-control" id="username" name="username" type="text" placeholder="Mã NS hoặc Số điện thoại" autocomplete="username" required />
+                <span class="input-group-text" aria-hidden="true">👤</span>
+              </div>
+
+              <div class="input-group">
+                <input class="form-control" id="pin" name="pin" type="password" placeholder="Mã PIN" autocomplete="current-password" required minlength="4" />
+                <span class="input-group-text" aria-hidden="true">🔒</span>
+              </div>
+
+              <div id="feedback" class="feedback" role="alert" aria-live="polite"></div>
+
+              <div class="row">
+                <div class="col-8">
+                  <label class="icheck">
+                    <input type="checkbox" id="remember" />
+                    <span>Ghi nhớ đăng nhập</span>
+                  </label>
+                </div>
+                <div class="col-4">
+                  <button type="submit" id="loginBtn" class="btn">Đăng nhập</button>
+                </div>
+              </div>
+            </form>
+
+            <div class="login-footer">
+              <a href="#">Quên mã PIN?</a>
+              <a href="#">Đăng ký tài khoản mới</a>
+            </div>
           </div>
-          <div class="field">
-            <label for="pin" class="sr-only"></label>
-            <input id="pin" name="pin" type="password" placeholder="Mã PIN:" required minlength="4" />
-          </div>
-
-          <div class="option-row">
-            <label class="remember">
-              <input type="checkbox" id="remember" />
-              <span>Lưu trạng thái đăng nhập</span>
-            </label>
-            <a class="forgot" href="#">Quên mã PIN</a>
-          </div>
-
-          <div id="feedback" class="feedback" role="alert" aria-live="polite"></div>
-
-          <button type="submit" id="loginBtn" class="btn">ĐĂNG NHẬP</button>
-        </form>
-      </section>
+        </div>
+      </div>
     </main>
 
     <script>
@@ -323,17 +235,13 @@
       const feedback = document.getElementById('feedback');
       const loginBtn = document.getElementById('loginBtn');
 
-      const demoAccount = {
-        username: 'admin',
-        pin: '123456'
-      };
-
+      const demoAccount = { username: 'admin', pin: '123456' };
       let failedAttempts = 0;
       let lockUntil = 0;
 
-      function setFeedback(message, type) {
+      function setFeedback(message, type = '') {
         feedback.textContent = message;
-        feedback.className = `feedback ${type || ''}`.trim();
+        feedback.className = `feedback ${type}`.trim();
       }
 
       function remainingLockSeconds() {
@@ -341,11 +249,11 @@
       }
 
       function applyLockState() {
-        const seconds = remainingLockSeconds();
+        const sec = remainingLockSeconds();
 
-        if (seconds > 0) {
+        if (sec > 0) {
           loginBtn.disabled = true;
-          setFeedback(`Sai mã PIN quá 3 lần. Vui lòng thử lại sau ${seconds}s.`, 'error');
+          setFeedback(`Bạn đã nhập sai quá 3 lần. Vui lòng thử lại sau ${sec} giây.`, 'error');
           return true;
         }
 
@@ -353,11 +261,18 @@
         return false;
       }
 
-      setInterval(() => {
-        if (!applyLockState() && failedAttempts === 0 && !feedback.classList.contains('success')) {
-          setFeedback('');
+      const lockTimer = setInterval(() => {
+        if (!applyLockState()) {
+          if (failedAttempts === 0 && !feedback.classList.contains('success')) {
+            setFeedback('');
+          }
+          if (lockUntil > 0 && remainingLockSeconds() === 0) {
+            lockUntil = 0;
+          }
         }
       }, 1000);
+
+      window.addEventListener('beforeunload', () => clearInterval(lockTimer));
 
       form.addEventListener('submit', (event) => {
         event.preventDefault();
@@ -372,19 +287,26 @@
           return;
         }
 
+        if (pin.length < 4) {
+          setFeedback('Mã PIN phải có tối thiểu 4 ký tự.', 'error');
+          return;
+        }
+
         if (username === demoAccount.username && pin === demoAccount.pin) {
           failedAttempts = 0;
+          lockUntil = 0;
           setFeedback('Đăng nhập thành công!', 'success');
           return;
         }
 
         failedAttempts += 1;
+        const remain = 3 - failedAttempts;
 
-        if (failedAttempts >= 3) {
+        if (remain <= 0) {
           lockUntil = Date.now() + 30 * 1000;
           applyLockState();
         } else {
-          setFeedback(`Sai tài khoản hoặc mã PIN. Bạn còn ${3 - failedAttempts} lần thử.`, 'error');
+          setFeedback(`Sai tài khoản hoặc mã PIN. Bạn còn ${remain} lần thử.`, 'error');
         }
       });
     </script>
