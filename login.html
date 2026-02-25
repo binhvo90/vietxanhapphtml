@@ -6,14 +6,14 @@
     <title>Đăng nhập - Việt Xanh</title>
     <style>
       :root {
-        --bg: #f2f2f2;
-        --text: #1e1e1e;
-        --line: #dbdbdb;
-        --input-border: #b8b8b8;
-        --primary: #1e66e6;
-        --primary-dark: #1656c2;
-        --danger: #da3a3a;
-        --success: #15883e;
+        --bg: #f3f3f3;
+        --text: #242424;
+        --line: #d9d9d9;
+        --input-border: #bcbcbc;
+        --primary: #1f6ae5;
+        --primary-hover: #1858be;
+        --danger: #d63a3a;
+        --success: #1b8b44;
       }
 
       * { box-sizing: border-box; }
@@ -22,35 +22,35 @@
         margin: 0;
         min-height: 100vh;
         font-family: Arial, Helvetica, sans-serif;
-        color: var(--text);
         background: var(--bg);
+        color: var(--text);
       }
 
       .page {
-        width: min(1240px, 95vw);
-        min-height: 100vh;
+        width: min(1220px, 94vw);
         margin: 0 auto;
+        min-height: 100vh;
         display: grid;
         grid-template-columns: 1.08fr 0.92fr;
         align-items: center;
-        gap: 24px;
+        gap: 26px;
       }
 
-      .illustration {
+      .left {
         display: flex;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
       }
 
       .scene {
-        width: min(640px, 100%);
-        aspect-ratio: 16 / 10.2;
+        width: min(590px, 100%);
+        aspect-ratio: 16 / 10;
         position: relative;
       }
 
       .monitor {
         position: absolute;
-        inset: 10% 9% 12% 10%;
+        inset: 12% 10% 13% 10%;
       }
 
       .screen {
@@ -58,16 +58,16 @@
         inset: 0 0 20% 0;
         border: 5px solid #d7d7d7;
         border-bottom-width: 9px;
-        background: #fdfefe;
+        background: #fbfdff;
         overflow: hidden;
       }
 
       .base {
         position: absolute;
-        left: 8%;
-        right: 8%;
+        left: 7%;
+        right: 7%;
         bottom: 0;
-        height: 17%;
+        height: 16%;
         background: #d8d8d8;
       }
 
@@ -75,57 +75,53 @@
         position: absolute;
         left: 34%;
         width: 32%;
-        height: 2.8%;
+        height: 2.9%;
         bottom: -6%;
-        background: #3f8bfd;
+        background: #3d88ff;
       }
 
-      .shape,
-      .shape2,
-      .shape3,
-      .shape4,
-      .shape5 {
+      .dot, .dot2, .dot3, .dot4, .dot5 {
         position: absolute;
         border-radius: 999px;
+        opacity: 0.6;
       }
 
-      .shape { width: 140px; height: 140px; left: -34px; bottom: 12px; background: #9cbef5; opacity: .45; }
-      .shape2 { width: 84px; height: 84px; left: -6px; top: 46px; background: #bfd8ff; opacity: .55; }
-      .shape3 { width: 92px; height: 92px; right: -18px; top: 30px; background: #8eb7f5; opacity: .75; }
-      .shape4 { width: 110px; height: 110px; right: -30px; bottom: 36px; background: #d7e6fb; opacity: .9; }
-      .shape5 { width: 90px; height: 90px; left: 31%; top: 8%; background: #d2e2fb; opacity: .8; }
+      .dot { width: 130px; height: 130px; left: -30px; bottom: 24px; background: #9fc2fb; }
+      .dot2 { width: 88px; height: 88px; left: -4px; top: 44px; background: #c8ddff; }
+      .dot3 { width: 88px; height: 88px; left: 34%; top: 6%; background: #c3d9ff; }
+      .dot4 { width: 84px; height: 84px; right: -18px; top: 34px; background: #8fb7f6; }
+      .dot5 { width: 108px; height: 108px; right: -28px; bottom: 28px; background: #d8e8ff; }
 
       .paper {
         position: absolute;
         width: 40%;
         height: 54%;
-        left: 34%;
-        top: 19%;
+        left: 33%;
+        top: 20%;
+        background: linear-gradient(140deg, #202d81, #1a245f);
         transform: rotate(-19deg);
-        background: linear-gradient(145deg, #1f2d81, #1a245f);
       }
 
       .paper::after {
         content: "";
         position: absolute;
-        width: 35%;
+        width: 37%;
         height: 6%;
-        left: 49%;
-        top: 54%;
+        left: 48%;
+        top: 55%;
         border-radius: 999px;
-        background: #f15353;
+        background: #ef5555;
       }
 
-      .hand-left,
-      .hand-right {
+      .hand1, .hand2 {
         position: absolute;
         height: 11%;
         border-radius: 999px;
-        background: #ffc8bf;
+        background: #ffc7be;
       }
 
-      .hand-left { width: 31%; left: 15%; top: 40%; transform: rotate(-22deg); }
-      .hand-right { width: 30%; right: 19%; top: 33%; transform: rotate(24deg); }
+      .hand1 { width: 31%; left: 15%; top: 40%; transform: rotate(-23deg); }
+      .hand2 { width: 30%; right: 19%; top: 33%; transform: rotate(23deg); }
 
       .pen {
         position: absolute;
@@ -133,13 +129,13 @@
         height: 2.8%;
         right: 28%;
         top: 30%;
-        transform: rotate(-52deg);
-        background: #ea4d4d;
         border-radius: 8px;
+        background: #e84f4f;
+        transform: rotate(-52deg);
       }
 
-      .form-wrap {
-        width: min(440px, 100%);
+      .right {
+        width: min(410px, 100%);
         margin: 0 auto;
       }
 
@@ -151,8 +147,8 @@
       }
 
       .leaf {
-        width: 98px;
-        height: 58px;
+        width: 96px;
+        height: 56px;
         position: relative;
       }
 
@@ -160,42 +156,54 @@
       .leaf::after {
         content: "";
         position: absolute;
-        width: 43px;
-        height: 56px;
         top: 0;
+        width: 42px;
+        height: 54px;
         border-radius: 85% 0 85% 0;
       }
 
-      .leaf::before { left: 10px; background: #138d0e; transform: rotate(-35deg); }
-      .leaf::after { right: 10px; background: #27cd11; transform: rotate(35deg) scaleX(-1); }
+      .leaf::before {
+        left: 10px;
+        background: #108d0c;
+        transform: rotate(-35deg);
+      }
+
+      .leaf::after {
+        right: 10px;
+        background: #24cf10;
+        transform: rotate(35deg) scaleX(-1);
+      }
 
       .brand h1 {
         margin: 0;
-        font-size: clamp(52px, 5vw, 56px);
+        font-size: 48px;
         font-style: italic;
         font-weight: 800;
-        color: #0a0a0a;
+        line-height: 1;
+        color: #0e0e0e;
       }
 
-      .title-line {
+      .title {
+        margin: 20px 0 18px;
         display: grid;
         grid-template-columns: 1fr auto 1fr;
-        align-items: center;
         gap: 12px;
-        margin: 22px 0;
-        color: #454545;
-        font-size: 30px;
+        align-items: center;
+        color: #444;
+        font-size: 28px;
         font-weight: 700;
       }
 
-      .title-line::before,
-      .title-line::after {
+      .title::before,
+      .title::after {
         content: "";
         height: 1px;
         background: var(--line);
       }
 
-      .field { margin-bottom: 14px; }
+      .field {
+        margin-bottom: 14px;
+      }
 
       .field input {
         width: 100%;
@@ -204,23 +212,23 @@
         border-radius: 2px;
         padding: 0 10px;
         font-size: 31px;
-        color: #3b3b3b;
-        background: #f6f6f6;
+        color: #393939;
+        background: #f4f4f4;
       }
 
       .field input:focus {
-        outline: 2px solid rgba(30, 102, 230, 0.2);
+        outline: 2px solid rgba(31, 106, 229, 0.2);
         border-color: #4f8ef3;
         background: #fff;
       }
 
-      .options {
+      .row {
+        margin: 4px 0 10px;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 0 0 8px;
+        color: #3e3e3e;
         font-size: 31px;
-        color: #3c3c3c;
       }
 
       .remember {
@@ -229,7 +237,7 @@
         gap: 8px;
       }
 
-      .remember input { width: 16px; height: 16px; }
+      .remember input { width: 15px; height: 15px; }
 
       .forgot {
         text-decoration: none;
@@ -238,7 +246,7 @@
 
       .feedback {
         min-height: 28px;
-        margin: 8px 0;
+        margin: 6px 0 10px;
         font-size: 23px;
       }
 
@@ -248,35 +256,34 @@
       .btn {
         border: 0;
         border-radius: 6px;
+        min-width: 130px;
         height: 50px;
-        min-width: 172px;
-        padding: 0 28px;
+        padding: 0 26px;
         background: var(--primary);
         color: #fff;
         font-size: 22px;
         font-weight: 700;
-        letter-spacing: .3px;
-        box-shadow: 0 2px 7px rgba(30, 102, 230, 0.35);
+        box-shadow: 0 2px 8px rgba(31, 106, 229, 0.35);
         cursor: pointer;
       }
 
-      .btn:hover { background: var(--primary-dark); }
-      .btn:disabled { background: #90b6f4; box-shadow: none; cursor: not-allowed; }
+      .btn:hover { background: var(--primary-hover); }
+      .btn:disabled { background: #8eb5f4; box-shadow: none; cursor: not-allowed; }
 
       @media (max-width: 980px) {
         .page {
-          width: min(700px, 94vw);
+          width: min(690px, 93vw);
           grid-template-columns: 1fr;
           gap: 8px;
           padding: 20px 0;
         }
 
-        .illustration { order: 2; }
-        .form-wrap { order: 1; }
+        .left { order: 2; }
+        .right { order: 1; }
       }
 
       @media (max-width: 560px) {
-        .options {
+        .row {
           flex-direction: column;
           align-items: flex-start;
           gap: 8px;
@@ -288,18 +295,18 @@
   </head>
   <body>
     <main class="page">
-      <section class="illustration" aria-hidden="true">
+      <section class="left" aria-hidden="true">
         <div class="scene">
           <div class="monitor">
             <div class="screen">
-              <div class="shape"></div>
-              <div class="shape2"></div>
-              <div class="shape3"></div>
-              <div class="shape4"></div>
-              <div class="shape5"></div>
+              <div class="dot"></div>
+              <div class="dot2"></div>
+              <div class="dot3"></div>
+              <div class="dot4"></div>
+              <div class="dot5"></div>
               <div class="paper"></div>
-              <div class="hand-left"></div>
-              <div class="hand-right"></div>
+              <div class="hand1"></div>
+              <div class="hand2"></div>
               <div class="pen"></div>
             </div>
             <div class="base"></div>
@@ -308,13 +315,13 @@
         </div>
       </section>
 
-      <section class="form-wrap">
+      <section class="right">
         <div class="brand">
           <div class="leaf"></div>
           <h1>Việt Xanh</h1>
         </div>
 
-        <div class="title-line">Đăng nhập</div>
+        <div class="title">Đăng nhập</div>
 
         <form id="loginForm" novalidate>
           <div class="field">
@@ -325,17 +332,17 @@
             <input id="pin" name="pin" type="password" placeholder="Mã PIN:" autocomplete="current-password" required minlength="4" />
           </div>
 
-          <div class="options">
+          <div class="row">
             <label class="remember">
               <input type="checkbox" id="remember" />
               <span>Lưu trạng thái đăng nhập</span>
             </label>
-            <a class="forgot" href="#">Quên mã PIN</a>
+            <a href="#" class="forgot">Quên mã PIN</a>
           </div>
 
           <div id="feedback" class="feedback" role="alert" aria-live="polite"></div>
 
-          <button type="submit" class="btn" id="loginBtn">ĐĂNG NHẬP</button>
+          <button id="loginBtn" type="submit" class="btn">ĐĂNG NHẬP</button>
         </form>
       </section>
     </main>
@@ -384,6 +391,7 @@
 
       form.addEventListener('submit', (event) => {
         event.preventDefault();
+
         if (applyLockState()) return;
 
         const username = form.username.value.trim();
@@ -402,12 +410,13 @@
         }
 
         failedAttempts += 1;
-        const remain = 3 - failedAttempts;
-        if (remain <= 0) {
+        const remaining = 3 - failedAttempts;
+
+        if (remaining <= 0) {
           lockUntil = Date.now() + 30 * 1000;
           applyLockState();
         } else {
-          setFeedback(`Sai tài khoản hoặc mã PIN. Bạn còn ${remain} lần thử.`, 'error');
+          setFeedback(`Sai tài khoản hoặc mã PIN. Bạn còn ${remaining} lần thử.`, 'error');
         }
       });
     </script>
