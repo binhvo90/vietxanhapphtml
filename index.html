@@ -416,7 +416,87 @@
 
         <div id="attendance-overtime-section" class="content-section d-none">
           <h3 class="mb-3">Tăng ca</h3>
-          <div class="card card-teal"><div class="card-header"><h3 class="card-title">Đăng ký thời gian tăng ca</h3></div><div class="card-body"><p class="mb-2">Họ và tên: Võ Quốc Bình</p><p class="mb-2">Bộ phận: IT</p><p class="mb-0">Trạng thái: Chưa đăng ký</p></div></div>
+
+          <div class="card card-teal">
+            <div class="card-header">
+              <h3 class="card-title">Đăng ký thời gian tăng ca</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Ngày viết đơn</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <input type="text" class="form-control" value="26/02/2026" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Họ và tên</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="Võ Quốc Bình" readonly></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Bộ phận</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="IT" readonly></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Công việc</label>
+                <div class="col-sm-10"><input type="text" class="form-control" placeholder="Nhập công việc tăng ca"></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Giờ vào</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <input type="text" class="form-control" value="23/02/2026 11:00">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Giờ ra</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <input type="text" class="form-control" value="23/02/2026 11:00">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Trưởng bộ phận</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="Nguyễn Hoàng Sơn" readonly></div>
+              </div>
+              <div class="form-group row mb-2">
+                <label class="col-sm-2 col-form-label">GĐ bộ phận</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="Nguyễn Đình Phú" readonly></div>
+              </div>
+
+              <div class="border-top pt-3">
+                <button type="button" class="btn btn-teal">Gửi đơn</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Các đăng ký tăng ca gần đây</h3></div>
+            <div class="card-body p-0">
+              <table class="table table-sm table-bordered mb-0">
+                <thead>
+                  <tr>
+                    <th style="width:50px">#</th>
+                    <th>Nội dung</th>
+                    <th>TBP<br>Hoàng Sơn</th>
+                    <th>GĐ Bộ phận<br>Đình Phú</th>
+                    <th>Tình trạng</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="5" class="text-center text-muted py-3">Chưa có dữ liệu tăng ca.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
         <div id="attendance-check-section" class="content-section d-none">
           <h3 class="mb-3">Kiểm tra công</h3>
