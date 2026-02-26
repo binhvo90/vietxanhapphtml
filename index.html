@@ -521,17 +521,23 @@
           </div>
         </div>
         <div id="attendance-check-section" class="content-section d-none">
-          <h3 class="mb-3">Kiểm tra công tháng 02-2026</h3>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h3 class="mb-0">Kiểm tra công tháng 02-2026</h3>
+            <div class="d-flex align-items-center gap-2">
+              <input class="form-control form-control-sm" style="width:120px" value="02-2026" readonly>
+              <button class="btn btn-sm btn-outline-secondary" type="button"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
 
           <div class="card">
-            <div class="card-body py-2">
-              <div class="d-flex flex-wrap align-items-center justify-content-between">
-                <div class="d-flex flex-wrap gap-3">
-                  <span class="mr-3"><span class="legend-dot dot-blue"></span>Đủ 8 tiếng</span>
-                  <span class="mr-3"><span class="legend-dot dot-yellow"></span>Đi muộn về sớm</span>
-                  <span class="mr-3"><span class="legend-dot dot-red"></span>Chưa đủ giờ</span>
-                </div>
-                <button class="btn btn-sm btn-outline-primary" type="button">Xuất Excel</button>
+            <div class="card-body py-3">
+              <div class="d-flex flex-column">
+                <span><span class="legend-dot dot-blue"></span>Đã chấm</span>
+                <span><span class="legend-dot dot-yellow"></span>Chưa chấm</span>
+                <span><span class="legend-dot dot-yellow"></span>Đúng quy định</span>
+                <span><span class="legend-dot dot-red"></span>Không đi làm</span>
+                <span><span class="legend-dot dot-blue"></span>Đi trễ về sớm</span>
+                <span><span class="legend-dot dot-yellow"></span>Giấy phép</span>
               </div>
             </div>
           </div>
@@ -543,35 +549,47 @@
                   <thead>
                     <tr>
                       <th>Ngày</th>
-                      <th>Đi vào</th>
-                      <th>Giấy chấm công</th>
-                      <th>Trạng thái</th>
+                      <th>Dữ liệu</th>
+                      <th>Được chấm</th>
+                      <th>T.trạng</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>01/02/2026<br><small class="text-muted">Thứ 2</small></td>
-                      <td>V: 08:05<br>R: 17:10</td>
-                      <td>V: 08:06<br>R: 17:12</td>
-                      <td><span class="text-primary">■</span> Đủ 8 tiếng</td>
+                      <td>C.Nhật<br>01/02</td>
+                      <td></td>
+                      <td>HC: 00:00<br>TC: 00:00<br>Chưa chấm <span class="text-warning">⚠</span></td>
+                      <td><span class="text-danger">⊘</span></td>
                     </tr>
                     <tr>
-                      <td>02/02/2026<br><small class="text-muted">Thứ 3</small></td>
-                      <td>V: 08:23<br>R: 17:00</td>
-                      <td>V: 08:24<br>R: 17:01</td>
-                      <td><span class="text-warning">■</span> Đi muộn</td>
+                      <td>Th 2<br>02/02</td>
+                      <td>V: 08:09<br>R: 17:06</td>
+                      <td>HC: 08:00<br>TC: 00:00<br>Đã chấm <span class="text-primary">☑</span></td>
+                      <td><span class="text-primary">☑</span></td>
                     </tr>
                     <tr>
-                      <td>03/02/2026<br><small class="text-muted">Thứ 4</small></td>
-                      <td>V: 08:45<br>R: 15:20</td>
-                      <td>V: 08:46<br>R: 15:21</td>
-                      <td><span class="text-danger">■</span> Chưa đủ giờ</td>
+                      <td>Thứ 3<br>03/02</td>
+                      <td>V: 08:06<br>R: 17:06</td>
+                      <td>HC: 08:00<br>TC: 00:00<br>Đã chấm <span class="text-primary">☑</span></td>
+                      <td><span class="text-primary">☑</span></td>
                     </tr>
                     <tr>
-                      <td>04/02/2026<br><small class="text-muted">Thứ 5</small></td>
-                      <td>V: 08:01<br>R: 17:31</td>
-                      <td>V: 08:02<br>R: 17:32</td>
-                      <td><span class="text-primary">■</span> Đủ 8 tiếng</td>
+                      <td>Thứ 4<br>04/02</td>
+                      <td>V: 08:00<br>R: 17:05</td>
+                      <td>HC: 08:00<br>TC: 00:00<br>Đã chấm <span class="text-primary">☑</span></td>
+                      <td><span class="text-primary">☑</span></td>
+                    </tr>
+                    <tr>
+                      <td>Thứ 5<br>05/02</td>
+                      <td>V: 07:56<br>R: 17:10</td>
+                      <td>HC: 08:00<br>TC: 00:00<br>Đã chấm <span class="text-primary">☑</span></td>
+                      <td><span class="text-primary">☑</span></td>
+                    </tr>
+                    <tr>
+                      <td>Thứ 7<br>07/02</td>
+                      <td></td>
+                      <td>HC: 00:00<br>TC: 00:00<br>Đã chấm <span class="text-primary">☑</span></td>
+                      <td><span class="text-danger">⊘</span></td>
                     </tr>
                   </tbody>
                 </table>
