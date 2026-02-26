@@ -52,6 +52,16 @@
       font-weight: 600;
       color: #343a40;
     }
+
+    .dot-warning {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffc107;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -117,6 +127,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="#" class="nav-link js-menu" data-target="salary-advance-section">
+              <i class="nav-icon fas fa-money-check-dollar"></i>
+              <p>Tạm ứng lương <span class="dot-warning" aria-hidden="true"></span></p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="login.html" class="nav-link">
               <i class="nav-icon fas fa-right-to-bracket"></i>
               <p>Login Page</p>
@@ -135,6 +151,7 @@
             <h1 id="page-title">Trang chính</h1>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -349,6 +366,19 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="salary-advance-section" class="content-section d-none">
+          <h3 class="mb-3">Tạm ứng lương tháng 02-2026</h3>
+          <div class="card card-teal">
+            <div class="card-header">
+              <h3 class="card-title">Theo quy định, thời gian cho phép tạm ứng sẽ kết thúc 12h00 ngày 19 hàng tháng.</h3>
+            </div>
+            <div class="card-body">
+              <div class="mb-2 text-danger"><i class="far fa-circle"></i> BẠN CHƯA ĐĂNG KÝ TẠM ỨNG</div>
+              <div class="text-secondary"><i class="far fa-circle text-warning"></i> Hết 12h00 ngày 19. Hệ thống sẽ tự động khóa cho bạn thao tác tạm ứng !!!</div>
             </div>
           </div>
         </div>
