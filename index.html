@@ -220,6 +220,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="#" class="nav-link js-menu" data-target="system-log-section" data-title="Nhật ký vận hành hệ thống">
+              <i class="nav-icon fas fa-list-check"></i>
+              <p>Nhật ký hệ thống</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="login.html" class="nav-link">
               <i class="nav-icon fas fa-right-to-bracket"></i>
               <p>Login Page</p>
@@ -953,6 +959,74 @@
             </div>
           </div>
         </div>
+
+        <div id="system-log-section" class="content-section d-none">
+          <div class="d-flex justify-content-end mb-2">
+            <button type="button" class="btn btn-primary"><i class="fas fa-plus mr-1"></i>Thêm mới nhật ký</button>
+          </div>
+
+          <div class="card card-teal">
+            <div class="card-header"><h3 class="card-title">Lọc dữ liệu</h3></div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Từ ngày</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
+                      <input type="text" class="form-control" value="01/02/2026" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Đến ngày</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
+                      <input type="text" class="form-control" value="26/02/2026" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Hệ thống</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-search"></i></span></div>
+                      <select class="form-control">
+                        <option>Hãy chọn hệ thống</option>
+                        <option>Nhân sự</option>
+                        <option>Chấm công</option>
+                        <option>Bảo trì</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Tình trạng</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-check-circle"></i></span></div>
+                      <select class="form-control">
+                        <option>Chưa trả lời</option>
+                        <option>Đã trả lời</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <button type="button" class="btn btn-info px-4">Tìm kiếm</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body py-4"></div>
+          </div>
+        </div>
+        </div>
       </div>
     </section>
   </div>
@@ -989,7 +1063,7 @@
         section.classList.toggle('d-none', section.id !== targetId);
       });
 
-      pageTitle.textContent = item.textContent.trim();
+      pageTitle.textContent = item.getAttribute('data-title') || item.textContent.trim();
     });
   });
 
