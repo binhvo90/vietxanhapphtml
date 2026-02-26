@@ -452,7 +452,7 @@
                 <div class="col-sm-10">
                   <div class="input-group">
                     <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
-                    <input type="date" class="form-control" value="2026-02-23" data-display-format="DD-MM-YY PP:SS" title="DD-MM-YY PP:SS">
+                    <input type="datetime-local" class="form-control overtime-datetime" value="2026-02-23T11:00" data-display-format="DD-MM-YYYY HH:SS" title="DD-MM-YYYY HH:SS">
                   </div>
                 </div>
               </div>
@@ -461,11 +461,11 @@
                 <div class="col-sm-10">
                   <div class="input-group">
                     <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
-                    <input type="date" class="form-control" value="2026-02-23" data-display-format="DD-MM-YY PP:SS" title="DD-MM-YY PP:SS">
+                    <input type="datetime-local" class="form-control overtime-datetime" value="2026-02-23T11:00" data-display-format="DD-MM-YYYY HH:SS" title="DD-MM-YYYY HH:SS">
                   </div>
                 </div>
               </div>
-              <div class="small text-muted mb-2">Định dạng hiển thị yêu cầu: DD-MM-YY PP:SS</div>
+              <div class="small text-muted mb-2">Định dạng hiển thị yêu cầu: DD-MM-YYYY HH:SS</div>
               <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Trưởng bộ phận</label>
                 <div class="col-sm-10"><input type="text" class="form-control" value="Nguyễn Hoàng Sơn" readonly></div>
@@ -591,6 +591,11 @@
   const contractorDateInputs = document.querySelectorAll('.contractor-date');
   contractorDateInputs.forEach((input) => {
     input.setAttribute('title', 'DD-MM-YYYY');
+  });
+
+  const overtimeDateTimeInputs = document.querySelectorAll('.overtime-datetime');
+  overtimeDateTimeInputs.forEach((input) => {
+    input.setAttribute('title', 'DD-MM-YYYY HH:SS');
   });
 
   const trainingLink = document.querySelector('.js-training-link');
