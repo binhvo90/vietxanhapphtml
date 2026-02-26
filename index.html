@@ -729,7 +729,116 @@
         </div>
         <div id="attendance-leave-section" class="content-section d-none">
           <h3 class="mb-3">Xin nghỉ phép</h3>
-          <div class="card"><div class="card-body"><p class="mb-2">Số ngày phép còn lại: 8 ngày</p><p class="mb-0">Bạn có thể tạo đơn xin nghỉ phép tại đây.</p></div></div>
+
+          <div class="card card-teal">
+            <div class="card-header">
+              <h3 class="card-title">Đơn xin nghỉ phép</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Ngày viết đơn</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <input type="text" class="form-control" value="26/02/2026" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Họ và tên</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="Võ Quốc Bình" readonly></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Bộ phận</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="IT" readonly></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Số ngày nghỉ</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <select class="form-control">
+                      <option selected>1 ngày</option>
+                      <option>0.5 ngày</option>
+                      <option>2 ngày</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Từ thời gian</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <input type="datetime-local" class="form-control" value="2026-02-25T14:50">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Đến thời gian</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <input type="datetime-local" class="form-control" value="2026-02-25T14:50">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Lý do nghỉ</label>
+                <div class="col-sm-10"><input type="text" class="form-control" placeholder="Nhập lý do nghỉ"></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Người bàn giao</label>
+                <div class="col-sm-10"><input type="text" class="form-control" placeholder="Nhập người bàn giao"></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Trưởng bộ phận</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="Nguyễn Hoàng Sơn" readonly></div>
+              </div>
+              <div class="form-group row mb-2">
+                <label class="col-sm-2 col-form-label">GĐ bộ phận</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="Nguyễn Đình Phú" readonly></div>
+              </div>
+              <div class="border-top pt-3">
+                <button type="button" class="btn btn-teal">Gửi đơn</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Các đơn xin nghỉ phép gần đây</h3></div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-sm table-bordered mb-0">
+                  <thead>
+                    <tr>
+                      <th style="width:40px">#</th>
+                      <th>Nội dung</th>
+                      <th style="width:120px">TBP</th>
+                      <th style="width:120px">GĐ bộ phận</th>
+                      <th style="width:110px">Tình trạng</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Ngày viết: 05/02/2026<br>Nghỉ: 1 ngày<br>Từ: 07/02/2026 08:00<br>Đến: 07/02/2026 17:00<br>Lý do: Em bận việc gia đình<br>Bàn giao: NGUYỄN HOÀNG SƠN</td>
+                      <td><span class="approve-chip">Đã duyệt</span><br><small>Hoàng Sơn</small></td>
+                      <td><span class="approve-chip">Đã duyệt</span><br><small>Đình Phú</small></td>
+                      <td><span class="approve-chip">Đã xử lý</span></td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Ngày viết: 26/01/2026<br>Nghỉ: 0.5 ngày<br>Từ: 27/01/2026 08:00<br>Đến: 27/01/2026 13:00<br>Lý do: Em đi làm hồ sơ cá nhân hộp công ty<br>Bàn giao: Nguyễn Hoàng Sơn</td>
+                      <td><span class="approve-chip">Đã duyệt</span><br><small>Hoàng Sơn</small></td>
+                      <td><span class="approve-chip">Đã duyệt</span><br><small>Đình Phú</small></td>
+                      <td><span class="approve-chip">Đã xử lý</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
         <div id="attendance-approve-section" class="content-section d-none">
           <h3 class="mb-3">Duyệt</h3>
