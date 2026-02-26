@@ -195,7 +195,16 @@
               <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-check-section"><i class="far fa-square nav-icon"></i><p>Kiểm tra công</p></a></li>
               <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-confirm-section"><i class="far fa-square nav-icon"></i><p>Xác nhận công</p></a></li>
               <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-leave-section"><i class="far fa-square nav-icon"></i><p>Xin nghỉ phép</p></a></li>
-              <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-approve-section"><i class="far fa-square nav-icon"></i><p>Duyệt</p></a></li>
+                          </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-approval-main">
+              <i class="nav-icon fas fa-pen-to-square"></i>
+              <p>Duyệt <i class="fas fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav nav-treeview attendance-submenu approval-submenu">
+              <li class="nav-item"><a href="#" class="nav-link js-approval-sub" data-target="approval-leave-section"><i class="far fa-square nav-icon"></i><p>Duyệt nghỉ phép</p></a></li>
+              <li class="nav-item"><a href="#" class="nav-link js-approval-sub" data-target="approval-confirm-section"><i class="far fa-square nav-icon"></i><p>Duyệt xác nhận công</p></a></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -838,9 +847,56 @@
             </div>
           </div>
         </div>
-        <div id="attendance-approve-section" class="content-section d-none">
-          <h3 class="mb-3">Duyệt</h3>
-          <div class="card"><div class="card-body"><p class="mb-2">Danh sách đơn chờ duyệt.</p><p class="mb-0">Hiện tại chưa có đơn cần duyệt.</p></div></div>
+        <div id="approval-leave-section" class="content-section d-none">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h3 class="mb-0">Duyệt Xin nghỉ phép</h3>
+            <nav class="small text-muted">Home / Duyệt Xin nghỉ phép</nav>
+          </div>
+          <div class="card card-teal">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h3 class="card-title">Các đơn xin nghỉ phép</h3>
+              <div class="d-flex gap-2" style="min-width:260px">
+                <input type="month" class="form-control form-control-sm" value="2026-02">
+                <select class="form-control form-control-sm"><option>Chưa duyệt</option><option>Đã duyệt</option></select>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <table class="table table-sm table-bordered mb-0">
+                <thead>
+                  <tr><th style="width:40px">#</th><th>Nội dung</th><th style="width:160px">TBP</th><th style="width:160px">GĐ Bộ phận</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="4" class="text-center text-muted py-3">Chưa có dữ liệu</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="approval-confirm-section" class="content-section d-none">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h3 class="mb-0">Duyệt xác nhận công</h3>
+            <nav class="small text-muted">Home / Duyệt xác nhận công</nav>
+          </div>
+          <div class="card card-teal">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h3 class="card-title">Các đơn xác nhận công</h3>
+              <div class="d-flex gap-2" style="min-width:260px">
+                <input type="month" class="form-control form-control-sm" value="2026-02">
+                <select class="form-control form-control-sm"><option>Chưa duyệt</option><option>Đã duyệt</option></select>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <table class="table table-sm table-bordered mb-0">
+                <thead>
+                  <tr><th style="width:40px">#</th><th>Nội dung</th><th style="width:160px">TBP</th><th style="width:160px">GĐ Bộ phận</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="4" class="text-center text-muted py-3">Chưa có dữ liệu</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -900,6 +956,40 @@
       attendanceSubmenu.classList.add('show');
 
       attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      subItem.classList.add('active-sub');
+
+      const targetId = subItem.getAttribute('data-target');
+      sections.forEach((section) => {
+        section.classList.toggle('d-none', section.id !== targetId);
+      });
+
+      pageTitle.textContent = subItem.textContent.trim();
+    });
+  });
+
+  const approvalMain = document.querySelector('.js-approval-main');
+  const approvalSubmenu = document.querySelector('.approval-submenu');
+  const approvalSubItems = document.querySelectorAll('.js-approval-sub');
+
+  if (approvalMain && approvalSubmenu) {
+    approvalMain.addEventListener('click', (event) => {
+      event.preventDefault();
+      menuItems.forEach((m) => m.classList.remove('active'));
+      approvalMain.classList.add('active');
+      approvalSubmenu.classList.toggle('show');
+    });
+  }
+
+  approvalSubItems.forEach((subItem) => {
+    subItem.addEventListener('click', (event) => {
+      event.preventDefault();
+      menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
+      approvalMain.classList.add('active');
+      approvalSubmenu.classList.add('show');
+
+      approvalSubItems.forEach((i) => i.classList.remove('active-sub'));
       subItem.classList.add('active-sub');
 
       const targetId = subItem.getAttribute('data-target');
