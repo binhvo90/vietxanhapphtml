@@ -79,6 +79,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="https://lms.vietxanh.co/" class="nav-link js-training-link">
+              <i class="nav-icon fas fa-graduation-cap"></i>
+              <p>Hệ thống đào tạo</p>
+            </a>
+          </li>
+          <li class="nav-item">
             <a href="#" class="nav-link js-menu" data-target="contractor-section">
               <i class="nav-icon fas fa-id-card"></i>
               <p>Đăng ký khách, nhà thầu</p>
@@ -276,6 +282,14 @@
   contractorDateInputs.forEach((input) => {
     input.setAttribute('title', 'DD-MM-YYYY');
   });
+
+  const trainingLink = document.querySelector('.js-training-link');
+  if (trainingLink) {
+    trainingLink.addEventListener('click', () => {
+      menuItems.forEach((m) => m.classList.remove('active'));
+      trainingLink.classList.add('active');
+    });
+  }
 </script>
 </body>
 </html>
