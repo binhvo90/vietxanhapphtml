@@ -86,6 +86,24 @@
     .attendance-submenu .nav-link.active-sub .nav-icon {
       color: #111 !important;
     }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .dot-blue { background: #0d6efd; }
+    .dot-yellow { background: #ffc107; }
+    .dot-red { background: #dc3545; }
+
+    .attendance-check-table td,
+    .attendance-check-table th {
+      font-size: .9rem;
+      vertical-align: top;
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -503,8 +521,63 @@
           </div>
         </div>
         <div id="attendance-check-section" class="content-section d-none">
-          <h3 class="mb-3">Kiểm tra công</h3>
-          <div class="card"><div class="card-body"><p class="mb-2">Thông tin chấm công tháng 02/2026.</p><p class="mb-0">Ngày công hiện tại: 20 ngày.</p></div></div>
+          <h3 class="mb-3">Kiểm tra công tháng 02-2026</h3>
+
+          <div class="card">
+            <div class="card-body py-2">
+              <div class="d-flex flex-wrap align-items-center justify-content-between">
+                <div class="d-flex flex-wrap gap-3">
+                  <span class="mr-3"><span class="legend-dot dot-blue"></span>Đủ 8 tiếng</span>
+                  <span class="mr-3"><span class="legend-dot dot-yellow"></span>Đi muộn về sớm</span>
+                  <span class="mr-3"><span class="legend-dot dot-red"></span>Chưa đủ giờ</span>
+                </div>
+                <button class="btn btn-sm btn-outline-primary" type="button">Xuất Excel</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-bordered table-sm mb-0 attendance-check-table">
+                  <thead>
+                    <tr>
+                      <th>Ngày</th>
+                      <th>Đi vào</th>
+                      <th>Giấy chấm công</th>
+                      <th>Trạng thái</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>01/02/2026<br><small class="text-muted">Thứ 2</small></td>
+                      <td>V: 08:05<br>R: 17:10</td>
+                      <td>V: 08:06<br>R: 17:12</td>
+                      <td><span class="text-primary">■</span> Đủ 8 tiếng</td>
+                    </tr>
+                    <tr>
+                      <td>02/02/2026<br><small class="text-muted">Thứ 3</small></td>
+                      <td>V: 08:23<br>R: 17:00</td>
+                      <td>V: 08:24<br>R: 17:01</td>
+                      <td><span class="text-warning">■</span> Đi muộn</td>
+                    </tr>
+                    <tr>
+                      <td>03/02/2026<br><small class="text-muted">Thứ 4</small></td>
+                      <td>V: 08:45<br>R: 15:20</td>
+                      <td>V: 08:46<br>R: 15:21</td>
+                      <td><span class="text-danger">■</span> Chưa đủ giờ</td>
+                    </tr>
+                    <tr>
+                      <td>04/02/2026<br><small class="text-muted">Thứ 5</small></td>
+                      <td>V: 08:01<br>R: 17:31</td>
+                      <td>V: 08:02<br>R: 17:32</td>
+                      <td><span class="text-primary">■</span> Đủ 8 tiếng</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
         <div id="attendance-confirm-section" class="content-section d-none">
           <h3 class="mb-3">Xác nhận công</h3>
