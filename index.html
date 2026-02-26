@@ -72,6 +72,15 @@
       display: block;
     }
 
+    .nested-submenu {
+      display: none;
+      padding-left: 14px;
+    }
+
+    .nested-submenu.show {
+      display: block;
+    }
+
     .attendance-submenu .nav-link {
       color: #c2c7d0;
     }
@@ -195,17 +204,20 @@
               <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-check-section"><i class="far fa-square nav-icon"></i><p>Kiểm tra công</p></a></li>
               <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-confirm-section"><i class="far fa-square nav-icon"></i><p>Xác nhận công</p></a></li>
               <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-leave-section"><i class="far fa-square nav-icon"></i><p>Xin nghỉ phép</p></a></li>
-                          </ul>
+              <li class="nav-item">
+                <a href="#" class="nav-link js-attendance-approve-main"><i class="far fa-square nav-icon"></i><p>Duyệt <i class="fas fa-angle-left right"></i></p></a>
+                <ul class="nav nav-treeview nested-submenu">
+                  <li class="nav-item"><a href="#" class="nav-link js-attendance-approve-sub" data-target="approval-leave-section"><i class="far fa-square nav-icon"></i><p>Duyệt nghỉ phép</p></a></li>
+                  <li class="nav-item"><a href="#" class="nav-link js-attendance-approve-sub" data-target="approval-confirm-section"><i class="far fa-square nav-icon"></i><p>Duyệt xác nhận công</p></a></li>
+                </ul>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link js-approval-main">
-              <i class="nav-icon fas fa-pen-to-square"></i>
-              <p>Duyệt <i class="fas fa-angle-left right"></i></p>
+            <a href="#" class="nav-link js-menu" data-target="salary-table-section">
+              <i class="nav-icon fas fa-money-bill-wave"></i>
+              <p>Xem bảng lương</p>
             </a>
-            <ul class="nav nav-treeview attendance-submenu approval-submenu">
-              <li class="nav-item"><a href="#" class="nav-link js-approval-sub" data-target="approval-leave-section"><i class="far fa-square nav-icon"></i><p>Duyệt nghỉ phép</p></a></li>
-              <li class="nav-item"><a href="#" class="nav-link js-approval-sub" data-target="approval-confirm-section"><i class="far fa-square nav-icon"></i><p>Duyệt xác nhận công</p></a></li>
-            </ul>
           </li>
           <li class="nav-item">
             <a href="login.html" class="nav-link">
@@ -890,6 +902,57 @@
             </div>
           </div>
         </div>
+
+        <div id="salary-table-section" class="content-section d-none">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h3 class="mb-0">Bảng lương tháng 01-2026</h3>
+            <div class="d-flex align-items-center gap-2">
+              <input type="month" class="form-control form-control-sm" style="width:120px" value="2026-01">
+              <button class="btn btn-sm btn-outline-secondary" type="button">Quản lý</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Bảng lương</h3></div>
+            <div class="card-body p-0">
+              <table class="table table-sm table-bordered mb-0">
+                <tbody>
+                  <tr><th style="width:55%">PHIẾU LƯƠNG</th><th>THÁNG 01-2026</th></tr>
+                  <tr><td>A.HỌ VÀ TÊN</td><td>Võ Quốc Bình</td></tr>
+                  <tr><td>B.BỘ PHẬN</td><td>Võ Quốc Bình</td></tr>
+                  <tr><td>C.NGÀY VÀO LÀM VIỆC</td><td>17/01/2026</td></tr>
+                  <tr><td>D.THÁNG LÀM VIỆC</td><td>1 tháng</td></tr>
+                  <tr><td><strong>I.TỔNG LƯƠNG ĐƯỢC TÍNH</strong></td><td><strong>5,050,434 đồng</strong></td></tr>
+                  <tr><td>I.1.Lương hợp đồng</td><td>3,502,534 đồng</td></tr>
+                  <tr><td>I.2.Lương thực tế được nhận</td><td>Công ngày thường: 12.5</td></tr>
+                  <tr><td>I.4.Lương ngày lễ, phép</td><td>N.A: 0.0<br>Thành tiền: 0 đồng</td></tr>
+                  <tr><td>I.5.Lương ngoài giờ</td><td></td></tr>
+                  <tr><td>- T ca ngày thường</td><td>Tổng: 0.0 giờ<br>Tiền TC thường: 0 đồng</td></tr>
+                  <tr><td>- T ca ngày chủ nhật</td><td>Tổng: 0.0 giờ<br>Tiền TC CN: 0 đồng</td></tr>
+                  <tr><td>- T ca ngày lễ</td><td>Tổng: 0.0 giờ<br>Tiền TC Lễ: 0 đồng</td></tr>
+                  <tr><td><strong>- CÁC KHOẢN PHỤ CẤP, HỖ TRỢ NGOÀI LƯƠNG</strong></td><td></td></tr>
+                  <tr><td>I.1.Phụ cấp độc hại</td><td>48,077 đồng</td></tr>
+                  <tr><td>I.2.Phụ cấp chuyên cần</td><td>0 đồng</td></tr>
+                  <tr><td>I.3.Phụ cấp PCCC</td><td>0 đồng</td></tr>
+                  <tr><td>I.4.Phụ cấp công việc</td><td>0 đồng</td></tr>
+                  <tr><td>I.5.Hỗ trợ nhà ở</td><td>576,923 đồng</td></tr>
+                  <tr><td>I.6.Hỗ trợ điện thoại</td><td>144,231 đồng</td></tr>
+                  <tr><td>I.7.Hỗ trợ tiền ăn</td><td>384,615 đồng</td></tr>
+                  <tr><td>I.8.Hỗ trợ tăng xe</td><td>384,231 đồng</td></tr>
+                  <tr><td>I.9.Bổ sung khác</td><td>0 đồng</td></tr>
+                  <tr><td>I.10.Thưởng năng suất</td><td>Nhóm khoán: Không khoán năng suất</td></tr>
+                  <tr><td><strong>II.KHẤU TRỪ</strong></td><td>0 đồng</td></tr>
+                  <tr><td>II.1.Lương tính bảo hiểm</td><td>0 đồng</td></tr>
+                  <tr><td>II.2.Bảo hiểm</td><td>0 đồng</td></tr>
+                  <tr><td>II.3.Phí công đoàn</td><td>0 đồng</td></tr>
+                  <tr><td>II.4.Khấu trừ khác</td><td>0 đồng</td></tr>
+                  <tr><td>II.5.Tạm ứng</td><td>0 đồng</td></tr>
+                  <tr><td><strong>III.TỔNG NHẬN CÒN LẠI (I) - (II)</strong></td><td><strong>5,050,434 đồng</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -916,6 +979,11 @@
       if (trainingLink) trainingLink.classList.remove('active');
       item.classList.add('active');
 
+      if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
+      if (nestedSubmenu) nestedSubmenu.classList.remove('show');
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+
       const targetId = item.getAttribute('data-target');
       sections.forEach((section) => {
         section.classList.toggle('d-none', section.id !== targetId);
@@ -933,8 +1001,16 @@
     attendanceMain.addEventListener('click', (event) => {
       event.preventDefault();
       menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
       attendanceMain.classList.add('active');
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
       attendanceSubmenu.classList.toggle('show');
+
+      if (!attendanceSubmenu.classList.contains('show') && nestedSubmenu) {
+        nestedSubmenu.classList.remove('show');
+      }
     });
   }
 
@@ -948,6 +1024,8 @@
       attendanceSubmenu.classList.add('show');
 
       attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      const attendanceApproveSubItems = document.querySelectorAll('.js-attendance-approve-sub');
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
       subItem.classList.add('active-sub');
 
       const targetId = subItem.getAttribute('data-target');
@@ -959,29 +1037,31 @@
     });
   });
 
-  const approvalMain = document.querySelector('.js-approval-main');
-  const approvalSubmenu = document.querySelector('.approval-submenu');
-  const approvalSubItems = document.querySelectorAll('.js-approval-sub');
+  const attendanceApproveMain = document.querySelector('.js-attendance-approve-main');
+  const nestedSubmenu = document.querySelector('.nested-submenu');
+  const attendanceApproveSubItems = document.querySelectorAll('.js-attendance-approve-sub');
 
-  if (approvalMain && approvalSubmenu) {
-    approvalMain.addEventListener('click', (event) => {
+  if (attendanceApproveMain && nestedSubmenu) {
+    attendanceApproveMain.addEventListener('click', (event) => {
       event.preventDefault();
-      menuItems.forEach((m) => m.classList.remove('active'));
-      approvalMain.classList.add('active');
-      approvalSubmenu.classList.toggle('show');
+      nestedSubmenu.classList.toggle('show');
+      attendanceSubmenu.classList.add('show');
+      attendanceMain.classList.add('active');
     });
   }
 
-  approvalSubItems.forEach((subItem) => {
+  attendanceApproveSubItems.forEach((subItem) => {
     subItem.addEventListener('click', (event) => {
       event.preventDefault();
       menuItems.forEach((m) => m.classList.remove('active'));
       const trainingLink = document.querySelector('.js-training-link');
       if (trainingLink) trainingLink.classList.remove('active');
-      approvalMain.classList.add('active');
-      approvalSubmenu.classList.add('show');
+      attendanceMain.classList.add('active');
+      attendanceSubmenu.classList.add('show');
+      nestedSubmenu.classList.add('show');
 
-      approvalSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
       subItem.classList.add('active-sub');
 
       const targetId = subItem.getAttribute('data-target');
@@ -1008,6 +1088,10 @@
     trainingLink.addEventListener('click', () => {
       menuItems.forEach((m) => m.classList.remove('active'));
       trainingLink.classList.add('active');
+      if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
+      if (nestedSubmenu) nestedSubmenu.classList.remove('show');
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
     });
   }
 </script>
