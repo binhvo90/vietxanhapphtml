@@ -215,7 +215,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                     </div>
-                    <input type="text" class="form-control" value="01-02-2026" placeholder="DD-MM-YYYY" pattern="\d{2}-\d{2}-\d{4}">
+                    <input type="date" class="form-control contractor-date" value="2026-02-01" data-display-format="DD-MM-YYYY">
                   </div>
                 </div>
                 <div class="form-group col-md-4">
@@ -224,11 +224,12 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                     </div>
-                    <input type="text" class="form-control" value="01-03-2026" placeholder="DD-MM-YYYY" pattern="\d{2}-\d{2}-\d{4}">
+                    <input type="date" class="form-control contractor-date" value="2026-03-01" data-display-format="DD-MM-YYYY">
                   </div>
                 </div>
               </div>
               <button type="button" class="btn btn-teal">Tìm kiếm</button>
+              <div class="small text-muted mt-2">Định dạng ngày yêu cầu: DD-MM-YYYY</div>
             </div>
           </div>
 
@@ -269,6 +270,11 @@
 
       pageTitle.textContent = item.textContent.trim();
     });
+  });
+
+  const contractorDateInputs = document.querySelectorAll('.contractor-date');
+  contractorDateInputs.forEach((input) => {
+    input.setAttribute('title', 'DD-MM-YYYY');
   });
 </script>
 </body>
