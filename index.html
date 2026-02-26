@@ -28,6 +28,10 @@
       white-space: normal;
       line-height: 1.2;
     }
+
+    .input-group-text i {
+      width: 14px;
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -72,6 +76,12 @@
             <a href="#" class="nav-link js-menu" data-target="feedback-section">
               <i class="nav-icon fas fa-envelope-open-text"></i>
               <p>Phản ánh - Góp Ý</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-menu" data-target="contractor-section">
+              <i class="nav-icon fas fa-id-card"></i>
+              <p>Đăng ký khách, nhà thầu</p>
             </a>
           </li>
           <li class="nav-item">
@@ -174,6 +184,57 @@
                 </div>
               </div>
               <button class="btn btn-teal" type="button">Gửi đơn</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="contractor-section" class="content-section d-none">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="m-0">Đăng ký khách hàng nhà thầu</h5>
+            <button type="button" class="btn btn-primary"><i class="fas fa-plus mr-1"></i>Thêm mới</button>
+          </div>
+
+          <div class="card card-teal">
+            <div class="card-header">
+              <h3 class="card-title">Lọc dữ liệu</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label>Từ khóa</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Nhập từ khóa">
+                  </div>
+                </div>
+                <div class="form-group col-md-4">
+                  <label>Từ ngày</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                    </div>
+                    <input type="text" class="form-control" value="01/02/2026">
+                  </div>
+                </div>
+                <div class="form-group col-md-4">
+                  <label>Đến ngày</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                    </div>
+                    <input type="text" class="form-control" value="01/03/2026">
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-teal">Tìm kiếm</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="border rounded p-3 text-muted">Dữ liệu đăng ký khách, nhà thầu sẽ hiển thị ở đây.</div>
             </div>
           </div>
         </div>
