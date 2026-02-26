@@ -62,6 +62,24 @@
       margin-left: 6px;
       vertical-align: middle;
     }
+
+    .attendance-submenu {
+      display: none;
+      padding-left: 10px;
+    }
+
+    .attendance-submenu.show {
+      display: block;
+    }
+
+    .attendance-submenu .nav-link {
+      color: #c2c7d0;
+    }
+
+    .attendance-submenu .nav-link.active-sub {
+      background: #fff;
+      color: #343a40;
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -131,6 +149,19 @@
               <i class="nav-icon fas fa-money-check-dollar"></i>
               <p>Tạm ứng lương <span class="dot-warning" aria-hidden="true"></span></p>
             </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-attendance-main">
+              <i class="nav-icon fas fa-table-cells-large"></i>
+              <p>Chấm công <i class="fas fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav nav-treeview attendance-submenu">
+              <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-overtime-section"><i class="far fa-square nav-icon"></i><p>Tăng ca</p></a></li>
+              <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-check-section"><i class="far fa-square nav-icon"></i><p>Kiểm tra công</p></a></li>
+              <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-confirm-section"><i class="far fa-square nav-icon"></i><p>Xác nhận công</p></a></li>
+              <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-leave-section"><i class="far fa-square nav-icon"></i><p>Xin nghỉ phép</p></a></li>
+              <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-approve-section"><i class="far fa-square nav-icon"></i><p>Duyệt</p></a></li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="login.html" class="nav-link">
@@ -382,6 +413,27 @@
             </div>
           </div>
         </div>
+
+        <div id="attendance-overtime-section" class="content-section d-none">
+          <h3 class="mb-3">Tăng ca</h3>
+          <div class="card card-teal"><div class="card-header"><h3 class="card-title">Đăng ký thời gian tăng ca</h3></div><div class="card-body"><p class="mb-2">Họ và tên: Võ Quốc Bình</p><p class="mb-2">Bộ phận: IT</p><p class="mb-0">Trạng thái: Chưa đăng ký</p></div></div>
+        </div>
+        <div id="attendance-check-section" class="content-section d-none">
+          <h3 class="mb-3">Kiểm tra công</h3>
+          <div class="card"><div class="card-body"><p class="mb-2">Thông tin chấm công tháng 02/2026.</p><p class="mb-0">Ngày công hiện tại: 20 ngày.</p></div></div>
+        </div>
+        <div id="attendance-confirm-section" class="content-section d-none">
+          <h3 class="mb-3">Xác nhận công</h3>
+          <div class="card"><div class="card-body"><p class="mb-2">Người xác nhận: Võ Quốc Bình</p><p class="mb-0">Trạng thái: Chờ xác nhận từ trưởng bộ phận.</p></div></div>
+        </div>
+        <div id="attendance-leave-section" class="content-section d-none">
+          <h3 class="mb-3">Xin nghỉ phép</h3>
+          <div class="card"><div class="card-body"><p class="mb-2">Số ngày phép còn lại: 8 ngày</p><p class="mb-0">Bạn có thể tạo đơn xin nghỉ phép tại đây.</p></div></div>
+        </div>
+        <div id="attendance-approve-section" class="content-section d-none">
+          <h3 class="mb-3">Duyệt</h3>
+          <div class="card"><div class="card-body"><p class="mb-2">Danh sách đơn chờ duyệt.</p><p class="mb-0">Hiện tại chưa có đơn cần duyệt.</p></div></div>
+        </div>
       </div>
     </section>
   </div>
@@ -414,6 +466,40 @@
       });
 
       pageTitle.textContent = item.textContent.trim();
+    });
+  });
+
+  const attendanceMain = document.querySelector('.js-attendance-main');
+  const attendanceSubmenu = document.querySelector('.attendance-submenu');
+  const attendanceSubItems = document.querySelectorAll('.js-attendance-sub');
+
+  if (attendanceMain && attendanceSubmenu) {
+    attendanceMain.addEventListener('click', (event) => {
+      event.preventDefault();
+      menuItems.forEach((m) => m.classList.remove('active'));
+      attendanceMain.classList.add('active');
+      attendanceSubmenu.classList.toggle('show');
+    });
+  }
+
+  attendanceSubItems.forEach((subItem) => {
+    subItem.addEventListener('click', (event) => {
+      event.preventDefault();
+      menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
+      attendanceMain.classList.add('active');
+      attendanceSubmenu.classList.add('show');
+
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      subItem.classList.add('active-sub');
+
+      const targetId = subItem.getAttribute('data-target');
+      sections.forEach((section) => {
+        section.classList.toggle('d-none', section.id !== targetId);
+      });
+
+      pageTitle.textContent = subItem.textContent.trim();
     });
   });
 
