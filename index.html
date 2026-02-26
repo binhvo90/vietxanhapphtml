@@ -96,6 +96,31 @@
       color: #111 !important;
     }
 
+
+    .fuel-submenu {
+      display: none;
+      padding-left: 10px;
+    }
+
+    .fuel-submenu.show {
+      display: block;
+    }
+
+    .fuel-submenu .nav-link {
+      color: #c2c7d0;
+    }
+
+    .fuel-submenu .nav-link.active-sub {
+      background: #fff !important;
+      color: #111 !important;
+      box-shadow: inset 0 0 0 1px #e5e7eb;
+    }
+
+    .fuel-submenu .nav-link.active-sub p,
+    .fuel-submenu .nav-link.active-sub .nav-icon {
+      color: #111 !important;
+    }
+
     .legend-dot {
       width: 10px;
       height: 10px;
@@ -224,6 +249,16 @@
               <i class="nav-icon fas fa-list-check"></i>
               <p>Nhật ký hệ thống</p>
             </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-fuel-main">
+              <i class="nav-icon fas fa-gas-pump"></i>
+              <p>Cung cấp nhiên liệu <i class="fas fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav nav-treeview fuel-submenu">
+              <li class="nav-item"><a href="#" class="nav-link js-fuel-sub" data-target="fuel-report-section"><i class="far fa-square nav-icon"></i><p>Báo cáo nhiên liệu</p></a></li>
+              <li class="nav-item"><a href="#" class="nav-link js-fuel-sub" data-target="fuel-request-section"><i class="far fa-square nav-icon"></i><p>Đề nghị cấp</p></a></li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="login.html" class="nav-link">
@@ -1026,6 +1061,103 @@
             <div class="card-body py-4"></div>
           </div>
         </div>
+
+        <div id="fuel-report-section" class="content-section d-none">
+          <div class="card card-teal mb-3">
+            <div class="card-header"><h3 class="card-title">Lọc thời gian</h3></div>
+            <div class="card-body py-2">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group mb-2">
+                    <label>Từ ngày</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
+                      <input type="text" class="form-control" value="12/01/2026">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-2">
+                    <label>Đến ngày</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
+                      <input type="text" class="form-control" value="26/02/2026">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-2">
+                    <label>Điều kiện</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-search"></i></span></div>
+                      <select class="form-control"><option>Dầu DO</option><option>Xăng A95</option></select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-2">
+                    <label>Số phương tiện</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-car-side"></i></span></div>
+                      <input type="text" class="form-control" placeholder="Nhập số phương tiện">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 mt-2">
+                  <button class="btn btn-info" type="button">Lọc theo ngày</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header card-teal"><h3 class="card-title">Danh mục phương tiện</h3></div>
+            <div class="card-body p-0">
+              <table class="table table-bordered table-sm mb-0">
+                <thead>
+                  <tr><th style="width:40px">#</th><th>Nội dung</th><th style="width:220px">Loại</th><th style="width:120px">Số lượng</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Số: 61H-163.78<br>Trọng tải: 3.705 tấn<br>Tổng km: 0.0<br>Mức tiêu thụ theo VIMAP: 5.1L/100km<br>Mức tiêu thụ thực tế: 0.0L/100km<br><span class="badge badge-success">Nhiên liệu</span> <span class="badge badge-success">Quãng đường</span></td>
+                    <td>Dầu DO<br>Cấp VC: 1,144</td>
+                    <td>1,144</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Số: 61H-164.04<br>Trọng tải: 3.705 tấn<br>Tổng km: 0.0<br>Mức tiêu thụ theo VIMAP: 5.1L/100km<br>Mức tiêu thụ thực tế: 0.0L/100km<br><span class="badge badge-success">Nhiên liệu</span> <span class="badge badge-success">Quãng đường</span></td>
+                    <td>Dầu DO<br>Cấp VC: 929</td>
+                    <td>929</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Số: 61C-021.25<br>Trọng tải: 6.5 tấn<br>Tổng km: 0.0<br>Mức tiêu thụ theo VIMAP: 22.1L/100km<br>Mức tiêu thụ thực tế: 0.0L/100km<br><span class="badge badge-success">Nhiên liệu</span> <span class="badge badge-success">Quãng đường</span></td>
+                    <td>Dầu DO<br>Cấp VC: 562</td>
+                    <td>562</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="fuel-request-section" class="content-section d-none">
+          <div class="card card-teal">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h3 class="card-title">Đề nghị cấp nhiên liệu</h3>
+              <button class="btn btn-sm btn-primary" type="button"><i class="fas fa-plus mr-1"></i>Tạo đề nghị</button>
+            </div>
+            <div class="card-body">
+              <div class="form-row">
+                <div class="form-group col-md-4"><label>Biển số xe</label><input type="text" class="form-control" placeholder="VD: 61H-163.78"></div>
+                <div class="form-group col-md-4"><label>Loại nhiên liệu</label><select class="form-control"><option>Dầu DO</option><option>Xăng A95</option></select></div>
+                <div class="form-group col-md-4"><label>Số lượng đề nghị</label><input type="number" class="form-control" placeholder="0"></div>
+              </div>
+              <button class="btn btn-info" type="button">Gửi đề nghị</button>
+            </div>
+          </div>
+        </div>
         </div>
       </div>
     </section>
@@ -1057,6 +1189,9 @@
       if (nestedSubmenu) nestedSubmenu.classList.remove('show');
       attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
       attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (fuelMain) fuelMain.classList.remove('active');
+      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
 
       const targetId = item.getAttribute('data-target');
       sections.forEach((section) => {
@@ -1080,6 +1215,9 @@
       attendanceMain.classList.add('active');
       attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
       attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (fuelMain) fuelMain.classList.remove('active');
+      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
       attendanceSubmenu.classList.toggle('show');
 
       if (!attendanceSubmenu.classList.contains('show') && nestedSubmenu) {
@@ -1096,6 +1234,9 @@
       if (trainingLink) trainingLink.classList.remove('active');
       attendanceMain.classList.add('active');
       attendanceSubmenu.classList.add('show');
+      if (fuelMain) fuelMain.classList.remove('active');
+      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
 
       attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
       const attendanceApproveSubItems = document.querySelectorAll('.js-attendance-approve-sub');
@@ -1133,9 +1274,59 @@
       attendanceMain.classList.add('active');
       attendanceSubmenu.classList.add('show');
       nestedSubmenu.classList.add('show');
+      if (fuelMain) fuelMain.classList.remove('active');
+      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
 
       attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
       attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      subItem.classList.add('active-sub');
+
+      const targetId = subItem.getAttribute('data-target');
+      sections.forEach((section) => {
+        section.classList.toggle('d-none', section.id !== targetId);
+      });
+
+      pageTitle.textContent = subItem.textContent.trim();
+    });
+  });
+
+  const fuelMain = document.querySelector('.js-fuel-main');
+  const fuelSubmenu = document.querySelector('.fuel-submenu');
+  const fuelSubItems = document.querySelectorAll('.js-fuel-sub');
+
+  if (fuelMain && fuelSubmenu) {
+    fuelMain.addEventListener('click', (event) => {
+      event.preventDefault();
+      menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
+      if (attendanceMain) attendanceMain.classList.remove('active');
+      if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
+      if (nestedSubmenu) nestedSubmenu.classList.remove('show');
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
+      fuelMain.classList.add('active');
+      fuelSubmenu.classList.toggle('show');
+    });
+  }
+
+  fuelSubItems.forEach((subItem) => {
+    subItem.addEventListener('click', (event) => {
+      event.preventDefault();
+      menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
+      if (attendanceMain) attendanceMain.classList.remove('active');
+      if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
+      if (nestedSubmenu) nestedSubmenu.classList.remove('show');
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+
+      fuelMain.classList.add('active');
+      fuelSubmenu.classList.add('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
       subItem.classList.add('active-sub');
 
       const targetId = subItem.getAttribute('data-target');
@@ -1166,6 +1357,9 @@
       if (nestedSubmenu) nestedSubmenu.classList.remove('show');
       attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
       attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (fuelMain) fuelMain.classList.remove('active');
+      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
     });
   }
 </script>
