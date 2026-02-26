@@ -32,6 +32,26 @@
     .input-group-text i {
       width: 14px;
     }
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .info-table td {
+      padding: .55rem .5rem;
+      border-top: 1px solid #e9ecef;
+      vertical-align: top;
+      font-size: .92rem;
+    }
+
+    .info-table td:first-child {
+      width: 34%;
+      font-weight: 600;
+      color: #343a40;
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -88,6 +108,12 @@
             <a href="https://lms.vietxanh.co/" class="nav-link js-training-link">
               <i class="nav-icon fas fa-graduation-cap"></i>
               <p>Hệ thống đào tạo</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-menu" data-target="personal-section">
+              <i class="nav-icon fas fa-circle-user"></i>
+              <p>Thông tin cá nhân</p>
             </a>
           </li>
           <li class="nav-item">
@@ -245,6 +271,64 @@
             </div>
           </div>
         </div>
+
+        <div id="personal-section" class="content-section d-none">
+          <div class="card mb-3">
+            <div class="card-header"><h3 class="card-title">Thông tin nhân sự</h3></div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6 text-center mb-3 mb-md-0">
+                  <img src="https://i.pravatar.cc/220?img=12" alt="Avatar" class="profile-avatar mb-2">
+                  <h4 class="mb-1">Võ Quốc Bình</h4>
+                  <div class="text-muted">Mã nhân sự: VX-1377</div>
+                  <div class="text-muted">IT</div>
+                </div>
+                <div class="col-md-6">
+                  <table class="table table-sm info-table mb-0">
+                    <tbody>
+                      <tr><td>Ngày sinh</td><td>22/11/1990</td></tr>
+                      <tr><td>Số căn cước</td><td>074090000337</td></tr>
+                      <tr><td>Ngày cấp</td><td>13/04/2021</td></tr>
+                      <tr><td>Nơi cấp</td><td>Cục Cảnh sát QLHC về trật tự xã hội</td></tr>
+                      <tr><td>Địa chỉ thường trú</td><td>20 Hưng Thọ, Phường Thuận An, TP.HCM</td></tr>
+                      <tr><td>Trình độ</td><td>Đại học</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-header"><h3 class="card-title">Thông tin công việc</h3></div>
+            <div class="card-body p-0">
+              <div class="row no-gutters">
+                <div class="col-md-6 p-3">
+                  <table class="table table-sm info-table mb-0">
+                    <tbody>
+                      <tr><td>Ngày vào</td><td>17/01/2026</td></tr>
+                      <tr><td>Chức vụ</td><td>Nhân viên</td></tr>
+                      <tr><td>Điện thoại</td><td>0933388787</td></tr>
+                      <tr><td>Số TK Ngân hàng</td><td>1021935180</td></tr>
+                      <tr><td>Ngân hàng</td><td>Vietcombank</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-6 p-3 border-left">
+                  <table class="table table-sm info-table mb-0">
+                    <tbody>
+                      <tr><td>Người liên lạc</td><td>Võ Văn Tốt</td></tr>
+                      <tr><td>Điện thoại</td><td>0978168639</td></tr>
+                      <tr><td>Mối quan hệ</td><td>Cha</td></tr>
+                      <tr><td>Bảo hiểm XH</td><td>Đang tham gia</td></tr>
+                      <tr><td>Tháng tham gia</td><td>26/02/2026</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -267,6 +351,8 @@
       event.preventDefault();
 
       menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
       item.classList.add('active');
 
       const targetId = item.getAttribute('data-target');
