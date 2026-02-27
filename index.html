@@ -1367,8 +1367,12 @@
                   <div class="form-group">
                     <label>Hình ảnh <span class="text-danger">*</span></label>
                     <div class="border rounded p-4 text-center" style="min-height:120px;">
-                      <button class="btn btn-info" type="button">Gửi hình ảnh.</button>
+                      <input id="gate-image-input" type="file" class="d-none" accept=".jpg,.jpeg,.png,image/jpeg,image/png" multiple>
+                      <button class="btn btn-info" id="gate-image-upload-btn" type="button">Gửi hình ảnh.</button>
                       <div class="small text-primary mt-2">Có thể gửi 10 tấm cùng lúc</div>
+                      <div class="small text-muted">Chỉ chấp nhận JPG/PNG, tối đa 10MB mỗi ảnh</div>
+                      <div id="gate-image-feedback" class="small mt-2"></div>
+                      <div id="gate-image-list" class="small text-left mt-2"></div>
                     </div>
                   </div>
                 </div>
@@ -1660,6 +1664,78 @@
 
   const gateItemsBody = document.getElementById('gate-items-body');
   const gateSubmitBtn = document.getElementById('gate-submit-btn');
+  const gateImageUploadBtn = document.getElementById('gate-image-upload-btn');
+  const gateImageInput = document.getElementById('gate-image-input');
+  const gateImageFeedback = document.getElementById('gate-image-feedback');
+  const gateImageList = document.getElementById('gate-image-list');
+
+  const GATE_MAX_FILES = 10;
+  const GATE_MAX_SIZE_MB = 10;
+  const GATE_MAX_SIZE_BYTES = GATE_MAX_SIZE_MB * 1024 * 1024;
+  const GATE_ALLOWED_TYPES = new Set(['image/jpeg', 'image/png']);
+
+  const setGateImageFeedback = (message, isError = false) => {
+    if (!gateImageFeedback) return;
+    gateImageFeedback.textContent = message || '';
+    gateImageFeedback.classList.toggle('text-danger', isError);
+    gateImageFeedback.classList.toggle('text-success', !isError && !!message);
+  };
+
+  const renderGateImageList = (files) => {
+    if (!gateImageList) return;
+    if (!files.length) {
+      gateImageList.innerHTML = '';
+      return;
+    }
+
+    const lines = files.map((file, index) => {
+      const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+      return `${index + 1}. ${file.name} (${sizeMb} MB)`;
+    });
+    gateImageList.innerHTML = lines.join('<br>');
+  };
+
+  if (gateImageUploadBtn && gateImageInput) {
+    gateImageUploadBtn.addEventListener('click', () => {
+      gateImageInput.click();
+    });
+
+    gateImageInput.addEventListener('change', () => {
+      const selectedFiles = Array.from(gateImageInput.files || []);
+
+      if (!selectedFiles.length) {
+        setGateImageFeedback('');
+        renderGateImageList([]);
+        return;
+      }
+
+      if (selectedFiles.length > GATE_MAX_FILES) {
+        gateImageInput.value = '';
+        renderGateImageList([]);
+        setGateImageFeedback(`Chỉ được chọn tối đa ${GATE_MAX_FILES} ảnh.`, true);
+        return;
+      }
+
+      const invalidType = selectedFiles.find((file) => !GATE_ALLOWED_TYPES.has(file.type));
+      if (invalidType) {
+        gateImageInput.value = '';
+        renderGateImageList([]);
+        setGateImageFeedback('Chỉ chấp nhận file JPG hoặc PNG.', true);
+        return;
+      }
+
+      const invalidSize = selectedFiles.find((file) => file.size > GATE_MAX_SIZE_BYTES);
+      if (invalidSize) {
+        gateImageInput.value = '';
+        renderGateImageList([]);
+        setGateImageFeedback(`Mỗi ảnh tối đa ${GATE_MAX_SIZE_MB}MB.`, true);
+        return;
+      }
+
+      setGateImageFeedback(`Đã chọn ${selectedFiles.length} ảnh hợp lệ.`);
+      renderGateImageList(selectedFiles);
+    });
+  }
 
   const validateGateRow = (row) => {
     let valid = true;
