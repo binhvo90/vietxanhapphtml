@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Việt Xanh APP | Admin</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWix+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkR4iXgY5h6JQeG7N7M6mWf5bYvYhZ+3G9Yg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css" />
+  <style>
+    .card-teal .card-header,
+    .btn-teal {
+      background-color: #17a2b8;
+      border-color: #17a2b8;
+      color: #fff;
+    }
+
+    .upload-box {
+      border: 1px solid #d4d8dd;
+      min-height: 120px;
+      display: grid;
+      place-items: center;
+      background: #fff;
+    }
+
+    .menu-compact p {
+      margin: 0;
+      white-space: normal;
+      line-height: 1.2;
+    }
+
+    .input-group-text i {
+      width: 14px;
+    }
+
+    .profile-avatar {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .info-table td {
+      padding: .55rem .5rem;
+      border-top: 1px solid #e9ecef;
+      vertical-align: top;
+      font-size: .92rem;
+    }
+
+    .info-table td:first-child {
+      width: 34%;
+      font-weight: 600;
+      color: #343a40;
+    }
+
+    .dot-warning {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffc107;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .attendance-submenu {
+      display: none;
+      padding-left: 10px;
+    }
+
+    .attendance-submenu.show {
+      display: block;
+    }
+
+    .nested-submenu {
+      display: none;
+      padding-left: 14px;
+    }
+
+    .nested-submenu.show {
+      display: block;
+    }
+
+    .attendance-submenu .nav-link {
+      color: #c2c7d0;
+    }
+
+    .attendance-submenu .nav-link.active-sub {
+      background: #fff !important;
+      color: #111 !important;
+      box-shadow: inset 0 0 0 1px #e5e7eb;
+    }
+
+    .attendance-submenu .nav-link.active-sub p,
+    .attendance-submenu .nav-link.active-sub .nav-icon {
+      color: #111 !important;
+    }
+
+
+    .fuel-submenu {
+      display: none;
+      padding-left: 10px;
+    }
+
+    .fuel-submenu.show {
+      display: block;
+    }
+
+    .fuel-submenu .nav-link {
+      color: #c2c7d0;
+    }
+
+    .fuel-submenu .nav-link.active-sub {
+      background: #fff !important;
+      color: #111 !important;
+      box-shadow: inset 0 0 0 1px #e5e7eb;
+    }
+
+    .fuel-submenu .nav-link.active-sub p,
+    .fuel-submenu .nav-link.active-sub .nav-icon {
+      color: #111 !important;
+    }
+
+
+    .gate-submenu {
+      display: none;
+      padding-left: 10px;
+    }
+
+    .gate-submenu.show {
+      display: block;
+    }
+
+    .gate-submenu .nav-link {
+      color: #c2c7d0;
+    }
+
+    .gate-submenu .nav-link.active-sub {
+      background: #fff !important;
+      color: #111 !important;
+      box-shadow: inset 0 0 0 1px #e5e7eb;
+    }
+
+    .gate-submenu .nav-link.active-sub p,
+    .gate-submenu .nav-link.active-sub .nav-icon {
+      color: #111 !important;
+    }
+
+    .gate-row-add {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .gate-item-input.is-invalid {
+      border-color: #dc3545;
+      padding-right: calc(1.5em + .75rem);
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 7 7'%3e%3ccircle r='3' fill='%23dc3545'/%3e%3cpath stroke='%23fff' d='M-1 0h2'/%3e%3cpath stroke='%23fff' d='M0-1v2'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right calc(.375em + .1875rem) center;
+      background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .dot-blue { background: #0d6efd; }
+    .dot-yellow { background: #ffc107; }
+    .dot-red { background: #dc3545; }
+
+    .attendance-check-table td,
+    .attendance-check-table th {
+      font-size: .9rem;
+      vertical-align: top;
+    }
+
+    .approve-chip {
+      border: 1px solid #28a745;
+      color: #28a745;
+      background: #f7fff9;
+      font-size: .78rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item d-flex align-items-center mr-3 text-muted small">VX-1377</li>
+    </ul>
+  </nav>
+
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="https://vietxanh.co" class="brand-link">
+      <img src="https://vietxanh.co/assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Việt Xanh APP</span>
+    </a>
+
+    <div class="sidebar">
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="https://i.pravatar.cc/40?img=12" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Võ Quốc Bình</a>
+          <span class="text-muted small">VX-1377</span>
+        </div>
+      </div>
+
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column menu-compact" role="menu" data-accordion="false">
+          <li class="nav-item">
+            <a href="#" class="nav-link js-menu active" data-target="dashboard-section">
+              <i class="nav-icon fas fa-house"></i>
+              <p>Trang chính</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-menu" data-target="feedback-section">
+              <i class="nav-icon fas fa-envelope-open-text"></i>
+              <p>Phản ánh - Góp Ý</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-menu" data-target="contractor-section">
+              <i class="nav-icon fas fa-id-card"></i>
+              <p>Đăng ký khách, nhà thầu</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="https://lms.vietxanh.co/" class="nav-link js-training-link">
+              <i class="nav-icon fas fa-graduation-cap"></i>
+              <p>Hệ thống đào tạo</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-menu" data-target="personal-section">
+              <i class="nav-icon fas fa-circle-user"></i>
+              <p>Thông tin cá nhân</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-menu" data-target="salary-advance-section">
+              <i class="nav-icon fas fa-money-check-dollar"></i>
+              <p>Tạm ứng lương <span class="dot-warning" aria-hidden="true"></span></p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-attendance-main">
+              <i class="nav-icon fas fa-table-cells-large"></i>
+              <p>Chấm công <i class="fas fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav nav-treeview attendance-submenu">
+              <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-overtime-section"><i class="far fa-square nav-icon"></i><p>Tăng ca</p></a></li>
+              <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-check-section"><i class="far fa-square nav-icon"></i><p>Kiểm tra công</p></a></li>
+              <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-confirm-section"><i class="far fa-square nav-icon"></i><p>Xác nhận công</p></a></li>
+              <li class="nav-item"><a href="#" class="nav-link js-attendance-sub" data-target="attendance-leave-section"><i class="far fa-square nav-icon"></i><p>Xin nghỉ phép</p></a></li>
+              <li class="nav-item">
+                <a href="#" class="nav-link js-attendance-approve-main"><i class="far fa-square nav-icon"></i><p>Duyệt <i class="fas fa-angle-left right"></i></p></a>
+                <ul class="nav nav-treeview nested-submenu">
+                  <li class="nav-item"><a href="#" class="nav-link js-attendance-approve-sub" data-target="approval-leave-section"><i class="far fa-square nav-icon"></i><p>Duyệt nghỉ phép</p></a></li>
+                  <li class="nav-item"><a href="#" class="nav-link js-attendance-approve-sub" data-target="approval-confirm-section"><i class="far fa-square nav-icon"></i><p>Duyệt xác nhận công</p></a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-menu" data-target="salary-table-section">
+              <i class="nav-icon fas fa-money-bill-wave"></i>
+              <p>Xem bảng lương</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-menu" data-target="system-log-section" data-title="Nhật ký vận hành hệ thống">
+              <i class="nav-icon fas fa-list-check"></i>
+              <p>Nhật ký hệ thống</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-fuel-main">
+              <i class="nav-icon fas fa-gas-pump"></i>
+              <p>Cung cấp nhiên liệu <i class="fas fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav nav-treeview fuel-submenu">
+              <li class="nav-item"><a href="#" class="nav-link js-fuel-sub" data-target="fuel-report-section" data-title="Báo cáo nhiên liệu"><i class="far fa-square nav-icon"></i><p>Báo cáo nhiên liệu</p></a></li>
+              <li class="nav-item"><a href="#" class="nav-link js-fuel-sub" data-target="fuel-request-section" data-title="Đề nghị cấp nhiên liệu"><i class="far fa-square nav-icon"></i><p>Đề nghị cấp</p></a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-gate-main">
+              <i class="nav-icon fas fa-right-from-bracket"></i>
+              <p>Phiếu ra cổng <i class="fas fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav nav-treeview gate-submenu">
+              <li class="nav-item"><a href="#" class="nav-link js-gate-sub" data-target="gate-ticket-section" data-title="Thêm phiếu ra vào cổng"><i class="far fa-square nav-icon"></i><p>Lập phiếu ra cổng</p></a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="login.html" class="nav-link">
+              <i class="nav-icon fas fa-right-to-bracket"></i>
+              <p>Login Page</p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </aside>
+
+  <div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 id="page-title">Trang chính</h1>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="content">
+      <div class="container-fluid">
+        <div id="dashboard-section" class="content-section">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3>150</h3>
+                  <p>Đơn hàng mới</p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-cart-shopping"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3>53%</h3>
+                  <p>Tỷ lệ tăng trưởng</p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-chart-line"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="feedback-section" class="content-section d-none">
+          <div class="card card-info card-outline">
+            <div class="card-body bg-info text-white rounded">
+              <h5 class="font-weight-bold">Cảm ơn bạn đã gửi phản ánh, góp ý đến BP.HCNS</h5>
+              <p class="mb-0">Nhằm cải thiện quy trình, nội quy, tác phong làm việc, BP.HCNS mong muốn được nhận các góp ý, phản ánh của tất cả cán bộ nhân sự đang làm việc tại công ty.</p>
+            </div>
+          </div>
+
+          <div class="card card-teal">
+            <div class="card-header">
+              <h3 class="card-title">Thư phản ánh - góp ý</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Ngày góp ý</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="26/02/2026" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Tên nhân sự</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="Võ Quốc Bình" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Bộ phận</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" value="IT" readonly>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Nội dung góp ý</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" rows="5" placeholder="Viết phản ánh, góp ý ..."></textarea>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Hình ảnh minh chứng</label>
+                <div class="col-sm-10">
+                  <div class="upload-box">
+                    <div class="text-center">
+                      <button class="btn btn-teal" type="button">Gửi hình ảnh.</button>
+                      <div class="small text-info mt-2">Có thể gửi 10 tấm cùng lúc</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-teal" type="button">Gửi đơn</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="contractor-section" class="content-section d-none">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h5 class="m-0">Đăng ký khách hàng nhà thầu</h5>
+            <button type="button" class="btn btn-primary"><i class="fas fa-plus mr-1"></i>Thêm mới</button>
+          </div>
+
+          <div class="card card-teal">
+            <div class="card-header">
+              <h3 class="card-title">Lọc dữ liệu</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label>Từ khóa</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-search"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Nhập từ khóa">
+                  </div>
+                </div>
+                <div class="form-group col-md-4">
+                  <label>Từ ngày</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                    </div>
+                    <input type="date" class="form-control contractor-date" value="2026-02-01" data-display-format="DD-MM-YYYY">
+                  </div>
+                </div>
+                <div class="form-group col-md-4">
+                  <label>Đến ngày</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                    </div>
+                    <input type="date" class="form-control contractor-date" value="2026-03-01" data-display-format="DD-MM-YYYY">
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-teal">Tìm kiếm</button>
+              <div class="small text-muted mt-2">Định dạng ngày yêu cầu: DD-MM-YYYY</div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body">
+              <div class="border rounded p-3 text-muted">Dữ liệu đăng ký khách, nhà thầu sẽ hiển thị ở đây.</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="personal-section" class="content-section d-none">
+          <div class="card mb-3">
+            <div class="card-header"><h3 class="card-title">Thông tin nhân sự</h3></div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6 text-center mb-3 mb-md-0">
+                  <img src="https://i.pravatar.cc/220?img=12" alt="Avatar" class="profile-avatar mb-2">
+                  <h4 class="mb-1">Võ Quốc Bình</h4>
+                  <div class="text-muted">Mã nhân sự: VX-1377</div>
+                  <div class="text-muted">IT</div>
+                </div>
+                <div class="col-md-6">
+                  <table class="table table-sm info-table mb-0">
+                    <tbody>
+                      <tr><td>Ngày sinh</td><td>22/11/1990</td></tr>
+                      <tr><td>Số căn cước</td><td>074090000337</td></tr>
+                      <tr><td>Ngày cấp</td><td>13/04/2021</td></tr>
+                      <tr><td>Nơi cấp</td><td>Cục Cảnh sát QLHC về trật tự xã hội</td></tr>
+                      <tr><td>Địa chỉ thường trú</td><td>20 Hưng Thọ, Phường Thuận An, TP.HCM</td></tr>
+                      <tr><td>Trình độ</td><td>Đại học</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-header"><h3 class="card-title">Thông tin công việc</h3></div>
+            <div class="card-body p-0">
+              <div class="row no-gutters">
+                <div class="col-md-6 p-3">
+                  <table class="table table-sm info-table mb-0">
+                    <tbody>
+                      <tr><td>Ngày vào</td><td>17/01/2026</td></tr>
+                      <tr><td>Chức vụ</td><td>Nhân viên</td></tr>
+                      <tr><td>Điện thoại</td><td>0933388787</td></tr>
+                      <tr><td>Số TK Ngân hàng</td><td>1021935180</td></tr>
+                      <tr><td>Ngân hàng</td><td>Vietcombank</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="col-md-6 p-3 border-left">
+                  <table class="table table-sm info-table mb-0">
+                    <tbody>
+                      <tr><td>Người liên lạc</td><td>Võ Văn Tốt</td></tr>
+                      <tr><td>Điện thoại</td><td>0978168639</td></tr>
+                      <tr><td>Mối quan hệ</td><td>Cha</td></tr>
+                      <tr><td>Bảo hiểm XH</td><td>Đang tham gia</td></tr>
+                      <tr><td>Tháng tham gia</td><td>26/02/2026</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Lịch sử nhân sự</h3></div>
+            <div class="card-body p-0">
+              <table class="table table-sm table-bordered mb-0">
+                <thead>
+                  <tr>
+                    <th style="width:50px">#</th>
+                    <th>Ngày bắt đầu</th>
+                    <th>Ngày kết thúc</th>
+                    <th>Loại</th>
+                    <th>Nội dung</th>
+                    <th>Xử lý</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="6" class="text-center text-muted py-3">Không có ghi chú nào</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="salary-advance-section" class="content-section d-none">
+          <h3 class="mb-3">Tạm ứng lương tháng 02-2026</h3>
+          <div class="card card-teal">
+            <div class="card-header">
+              <h3 class="card-title">Theo quy định, thời gian cho phép tạm ứng sẽ kết thúc 12h00 ngày 19 hàng tháng.</h3>
+            </div>
+            <div class="card-body">
+              <div class="mb-2 text-danger"><i class="far fa-circle"></i> BẠN CHƯA ĐĂNG KÝ TẠM ỨNG</div>
+              <div class="text-secondary"><i class="far fa-circle text-warning"></i> Hết 12h00 ngày 19. Hệ thống sẽ tự động khóa cho bạn thao tác tạm ứng !!!</div>
+            </div>
+          </div>
+        </div>
+
+        <div id="attendance-overtime-section" class="content-section d-none">
+          <div class="card card-teal">
+            <div class="card-header">
+              <h3 class="card-title">Đăng ký thời gian tăng ca</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Ngày viết đơn</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <input type="text" class="form-control" value="26/02/2026" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Họ và tên</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="Võ Quốc Bình" readonly></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Bộ phận</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="IT" readonly></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Công việc</label>
+                <div class="col-sm-10"><input type="text" class="form-control" placeholder="Nhập công việc tăng ca"></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Giờ vào</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <input type="datetime-local" class="form-control overtime-datetime" value="2026-02-23T11:00" data-display-format="DD-MM-YYYY HH:SS" title="DD-MM-YYYY HH:SS">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Giờ ra</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <input type="datetime-local" class="form-control overtime-datetime" value="2026-02-23T11:00" data-display-format="DD-MM-YYYY HH:SS" title="DD-MM-YYYY HH:SS">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Trưởng bộ phận</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="Nguyễn Hoàng Sơn" readonly></div>
+              </div>
+              <div class="form-group row mb-2">
+                <label class="col-sm-2 col-form-label">GĐ bộ phận</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="Nguyễn Đình Phú" readonly></div>
+              </div>
+
+              <div class="border-top pt-3">
+                <button type="button" class="btn btn-teal">Gửi đơn</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Các đăng ký tăng ca gần đây</h3></div>
+            <div class="card-body p-0">
+              <table class="table table-sm table-bordered mb-0">
+                <thead>
+                  <tr>
+                    <th style="width:50px">#</th>
+                    <th>Nội dung</th>
+                    <th>TBP<br>Hoàng Sơn</th>
+                    <th>GĐ Bộ phận<br>Đình Phú</th>
+                    <th>Tình trạng</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="5" class="text-center text-muted py-3">Chưa có dữ liệu tăng ca.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div id="attendance-check-section" class="content-section d-none">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h3 class="mb-0">Kiểm tra công tháng 02-2026</h3>
+            <div class="d-flex align-items-center gap-2">
+              <input type="month" class="form-control form-control-sm" style="width:120px" value="2026-02">
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body py-3">
+              <div class="d-flex flex-column">
+                <span><span class="legend-dot dot-blue"></span>Đã chấm</span>
+                <span><span class="legend-dot dot-yellow"></span>Chưa chấm</span>
+                <span><span class="legend-dot dot-yellow"></span>Đúng quy định</span>
+                <span><span class="legend-dot dot-red"></span>Không đi làm</span>
+                <span><span class="legend-dot dot-blue"></span>Đi trễ về sớm</span>
+                <span><span class="legend-dot dot-yellow"></span>Giấy phép</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-bordered table-sm mb-0 attendance-check-table">
+                  <thead>
+                    <tr>
+                      <th>Ngày</th>
+                      <th>Dữ liệu</th>
+                      <th>Được chấm</th>
+                      <th>T.trạng</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>C.Nhật<br>01/02</td>
+                      <td></td>
+                      <td>HC: 00:00<br>TC: 00:00<br>Chưa chấm <span class="text-warning">⚠</span></td>
+                      <td><span class="text-danger">⊘</span></td>
+                    </tr>
+                    <tr>
+                      <td>Th 2<br>02/02</td>
+                      <td>V: 08:09<br>R: 17:06</td>
+                      <td>HC: 08:00<br>TC: 00:00<br>Đã chấm <span class="text-primary">☑</span></td>
+                      <td><span class="text-primary">☑</span></td>
+                    </tr>
+                    <tr>
+                      <td>Thứ 3<br>03/02</td>
+                      <td>V: 08:06<br>R: 17:06</td>
+                      <td>HC: 08:00<br>TC: 00:00<br>Đã chấm <span class="text-primary">☑</span></td>
+                      <td><span class="text-primary">☑</span></td>
+                    </tr>
+                    <tr>
+                      <td>Thứ 4<br>04/02</td>
+                      <td>V: 08:00<br>R: 17:05</td>
+                      <td>HC: 08:00<br>TC: 00:00<br>Đã chấm <span class="text-primary">☑</span></td>
+                      <td><span class="text-primary">☑</span></td>
+                    </tr>
+                    <tr>
+                      <td>Thứ 5<br>05/02</td>
+                      <td>V: 07:56<br>R: 17:10</td>
+                      <td>HC: 08:00<br>TC: 00:00<br>Đã chấm <span class="text-primary">☑</span></td>
+                      <td><span class="text-primary">☑</span></td>
+                    </tr>
+                    <tr>
+                      <td>Thứ 7<br>07/02</td>
+                      <td></td>
+                      <td>HC: 00:00<br>TC: 00:00<br>Đã chấm <span class="text-primary">☑</span></td>
+                      <td><span class="text-danger">⊘</span></td>
+                    </tr>
+                    <tr>
+                      <td><strong>Tổng</strong></td>
+                      <td></td>
+                      <td><strong>Công:13.0</strong><br><strong>TC:0.0</strong><br><strong>Đêm:</strong><br><strong>CN:0</strong></td>
+                      <td><strong>Phép.1</strong></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="attendance-confirm-section" class="content-section d-none">
+          <div class="card card-teal">
+            <div class="card-header">
+              <h3 class="card-title">Đơn xin xác nhận công</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Ngày viết đơn</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <input type="text" class="form-control" value="26/02/2026" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Họ và tên</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="Võ Quốc Bình" readonly></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Bộ phận</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="IT" readonly></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Lý do</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <select class="form-control">
+                      <option selected>Quên quẹt thẻ</option>
+                      <option>Đi trễ về sớm</option>
+                      <option>Đi công tác</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Ghi chú</label>
+                <div class="col-sm-10"><input type="text" class="form-control" placeholder="Nhập ghi chú"></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Giờ vào</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <input type="datetime-local" class="form-control" value="2026-02-23T14:40">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Giờ ra</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <input type="datetime-local" class="form-control" value="2026-02-23T14:40">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Trưởng bộ phận</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="Nguyễn Hoàng Sơn" readonly></div>
+              </div>
+              <div class="form-group row mb-2">
+                <label class="col-sm-2 col-form-label">GĐ bộ phận</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="Nguyễn Đình Phú" readonly></div>
+              </div>
+              <div class="border-top pt-3">
+                <button type="button" class="btn btn-teal">Gửi đơn</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Các đơn xác nhận công gần đây</h3></div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-sm table-bordered mb-0">
+                  <thead>
+                    <tr>
+                      <th style="width:40px">#</th>
+                      <th>Nội dung</th>
+                      <th style="width:140px">TBP<br>Hoàng Sơn</th>
+                      <th style="width:140px">GĐ Bộ phận<br>Đình Phú</th>
+                      <th style="width:90px">Tình trạng</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Ngày viết: 13/02/2026<br>Lý do xác nhận: Quên quẹt thẻ<br>Từ: 12/02/2026 08:00<br>Đến: 12/02/2026 17:00</td>
+                      <td><span class="approve-chip">☑ Đã duyệt</span></td>
+                      <td><span class="approve-chip">☑ Đã duyệt</span></td>
+                      <td><span class="approve-chip">Đã xử lý</span></td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Ngày viết: 23/01/2026<br>Lý do xác nhận: Quên quẹt thẻ<br>Từ: 24/01/2026 08:00<br>Đến: 24/01/2026 17:00</td>
+                      <td><span class="approve-chip">☑ Đã duyệt</span></td>
+                      <td><span class="approve-chip">☑ Đã duyệt</span></td>
+                      <td><span class="approve-chip">Đã xử lý</span></td>
+                    </tr>
+                    <tr>
+                      <td>3</td>
+                      <td>Ngày viết: 29/01/2026<br>Lý do xác nhận: Quên quẹt thẻ<br>Từ: 28/01/2026 08:00<br>Đến: 28/01/2026 17:00</td>
+                      <td><span class="approve-chip">☑ Đã duyệt</span></td>
+                      <td><span class="approve-chip">☑ Đã duyệt</span></td>
+                      <td><span class="approve-chip">Đã xử lý</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="attendance-leave-section" class="content-section d-none">
+          <div class="card card-teal">
+            <div class="card-header">
+              <h3 class="card-title">Đơn xin nghỉ phép</h3>
+            </div>
+            <div class="card-body">
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Ngày viết đơn</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <input type="text" class="form-control" value="26/02/2026" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Họ và tên</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="Võ Quốc Bình" readonly></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Bộ phận</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="IT" readonly></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Số ngày nghỉ</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <select class="form-control">
+                      <option selected>1 ngày</option>
+                      <option>0.5 ngày</option>
+                      <option>2 ngày</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Từ thời gian</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <input type="datetime-local" class="form-control" value="2026-02-25T14:50">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Đến thời gian</label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="far fa-clock"></i></span></div>
+                    <input type="datetime-local" class="form-control" value="2026-02-25T14:50">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Lý do nghỉ</label>
+                <div class="col-sm-10"><input type="text" class="form-control" placeholder="Nhập lý do nghỉ"></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Người bàn giao</label>
+                <div class="col-sm-10"><input type="text" class="form-control" placeholder="Nhập người bàn giao"></div>
+              </div>
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Trưởng bộ phận</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="Nguyễn Hoàng Sơn" readonly></div>
+              </div>
+              <div class="form-group row mb-2">
+                <label class="col-sm-2 col-form-label">GĐ bộ phận</label>
+                <div class="col-sm-10"><input type="text" class="form-control" value="Nguyễn Đình Phú" readonly></div>
+              </div>
+              <div class="border-top pt-3">
+                <button type="button" class="btn btn-teal">Gửi đơn</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Các đơn xin nghỉ phép gần đây</h3></div>
+            <div class="card-body p-0">
+              <div class="table-responsive">
+                <table class="table table-sm table-bordered mb-0">
+                  <thead>
+                    <tr>
+                      <th style="width:40px">#</th>
+                      <th>Nội dung</th>
+                      <th style="width:120px">TBP</th>
+                      <th style="width:120px">GĐ bộ phận</th>
+                      <th style="width:110px">Tình trạng</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>1</td>
+                      <td>Ngày viết: 05/02/2026<br>Nghỉ: 1 ngày<br>Từ: 07/02/2026 08:00<br>Đến: 07/02/2026 17:00<br>Lý do: Em bận việc gia đình<br>Bàn giao: NGUYỄN HOÀNG SƠN</td>
+                      <td><span class="approve-chip">Đã duyệt</span><br><small>Hoàng Sơn</small></td>
+                      <td><span class="approve-chip">Đã duyệt</span><br><small>Đình Phú</small></td>
+                      <td><span class="approve-chip">Đã xử lý</span></td>
+                    </tr>
+                    <tr>
+                      <td>2</td>
+                      <td>Ngày viết: 26/01/2026<br>Nghỉ: 0.5 ngày<br>Từ: 27/01/2026 08:00<br>Đến: 27/01/2026 13:00<br>Lý do: Em đi làm hồ sơ cá nhân hộp công ty<br>Bàn giao: Nguyễn Hoàng Sơn</td>
+                      <td><span class="approve-chip">Đã duyệt</span><br><small>Hoàng Sơn</small></td>
+                      <td><span class="approve-chip">Đã duyệt</span><br><small>Đình Phú</small></td>
+                      <td><span class="approve-chip">Đã xử lý</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="approval-leave-section" class="content-section d-none">
+          <div class="card card-teal">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h3 class="card-title">Các đơn xin nghỉ phép</h3>
+              <div class="d-flex gap-2" style="min-width:260px">
+                <input type="month" class="form-control form-control-sm" value="2026-02">
+                <select class="form-control form-control-sm"><option>Chưa duyệt</option><option>Đã duyệt</option></select>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <table class="table table-sm table-bordered mb-0">
+                <thead>
+                  <tr><th style="width:40px">#</th><th>Nội dung</th><th style="width:160px">TBP</th><th style="width:160px">GĐ Bộ phận</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="4" class="text-center text-muted py-3">Chưa có dữ liệu</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="approval-confirm-section" class="content-section d-none">
+          <div class="card card-teal">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h3 class="card-title">Các đơn xác nhận công</h3>
+              <div class="d-flex gap-2" style="min-width:260px">
+                <input type="month" class="form-control form-control-sm" value="2026-02">
+                <select class="form-control form-control-sm"><option>Chưa duyệt</option><option>Đã duyệt</option></select>
+              </div>
+            </div>
+            <div class="card-body p-0">
+              <table class="table table-sm table-bordered mb-0">
+                <thead>
+                  <tr><th style="width:40px">#</th><th>Nội dung</th><th style="width:160px">TBP</th><th style="width:160px">GĐ Bộ phận</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="4" class="text-center text-muted py-3">Chưa có dữ liệu</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="salary-table-section" class="content-section d-none">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h3 class="mb-0">Bảng lương tháng 01-2026</h3>
+            <div class="d-flex align-items-center gap-2">
+              <input type="month" class="form-control form-control-sm" style="width:120px" value="2026-01">
+              <button class="btn btn-sm btn-outline-secondary" type="button">Quản lý</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header"><h3 class="card-title">Bảng lương</h3></div>
+            <div class="card-body p-0">
+              <table class="table table-sm table-bordered mb-0">
+                <tbody>
+                  <tr><th style="width:55%">PHIẾU LƯƠNG</th><th>THÁNG 01-2026</th></tr>
+                  <tr><td>A.HỌ VÀ TÊN</td><td>Võ Quốc Bình</td></tr>
+                  <tr><td>B.BỘ PHẬN</td><td>Võ Quốc Bình</td></tr>
+                  <tr><td>C.NGÀY VÀO LÀM VIỆC</td><td>17/01/2026</td></tr>
+                  <tr><td>D.THÁNG LÀM VIỆC</td><td>1 tháng</td></tr>
+                  <tr><td><strong>I.TỔNG LƯƠNG ĐƯỢC TÍNH</strong></td><td><strong>5,050,434 đồng</strong></td></tr>
+                  <tr><td>I.1.Lương hợp đồng</td><td>3,502,534 đồng</td></tr>
+                  <tr><td>I.2.Lương thực tế được nhận</td><td>Công ngày thường: 12.5</td></tr>
+                  <tr><td>I.4.Lương ngày lễ, phép</td><td>N.A: 0.0<br>Thành tiền: 0 đồng</td></tr>
+                  <tr><td>I.5.Lương ngoài giờ</td><td></td></tr>
+                  <tr><td>- T ca ngày thường</td><td>Tổng: 0.0 giờ<br>Tiền TC thường: 0 đồng</td></tr>
+                  <tr><td>- T ca ngày chủ nhật</td><td>Tổng: 0.0 giờ<br>Tiền TC CN: 0 đồng</td></tr>
+                  <tr><td>- T ca ngày lễ</td><td>Tổng: 0.0 giờ<br>Tiền TC Lễ: 0 đồng</td></tr>
+                  <tr><td><strong>- CÁC KHOẢN PHỤ CẤP, HỖ TRỢ NGOÀI LƯƠNG</strong></td><td></td></tr>
+                  <tr><td>I.1.Phụ cấp độc hại</td><td>48,077 đồng</td></tr>
+                  <tr><td>I.2.Phụ cấp chuyên cần</td><td>0 đồng</td></tr>
+                  <tr><td>I.3.Phụ cấp PCCC</td><td>0 đồng</td></tr>
+                  <tr><td>I.4.Phụ cấp công việc</td><td>0 đồng</td></tr>
+                  <tr><td>I.5.Hỗ trợ nhà ở</td><td>576,923 đồng</td></tr>
+                  <tr><td>I.6.Hỗ trợ điện thoại</td><td>144,231 đồng</td></tr>
+                  <tr><td>I.7.Hỗ trợ tiền ăn</td><td>384,615 đồng</td></tr>
+                  <tr><td>I.8.Hỗ trợ tăng xe</td><td>384,231 đồng</td></tr>
+                  <tr><td>I.9.Bổ sung khác</td><td>0 đồng</td></tr>
+                  <tr><td>I.10.Thưởng năng suất</td><td>Nhóm khoán: Không khoán năng suất</td></tr>
+                  <tr><td><strong>II.KHẤU TRỪ</strong></td><td>0 đồng</td></tr>
+                  <tr><td>II.1.Lương tính bảo hiểm</td><td>0 đồng</td></tr>
+                  <tr><td>II.2.Bảo hiểm</td><td>0 đồng</td></tr>
+                  <tr><td>II.3.Phí công đoàn</td><td>0 đồng</td></tr>
+                  <tr><td>II.4.Khấu trừ khác</td><td>0 đồng</td></tr>
+                  <tr><td>II.5.Tạm ứng</td><td>0 đồng</td></tr>
+                  <tr><td><strong>III.TỔNG NHẬN CÒN LẠI (I) - (II)</strong></td><td><strong>5,050,434 đồng</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="system-log-section" class="content-section d-none">
+          <div class="d-flex justify-content-end mb-2">
+            <button type="button" class="btn btn-primary"><i class="fas fa-plus mr-1"></i>Thêm mới nhật ký</button>
+          </div>
+
+          <div class="card card-teal">
+            <div class="card-header"><h3 class="card-title">Lọc dữ liệu</h3></div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Từ ngày</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
+                      <input type="text" class="form-control" value="01/02/2026" />
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Đến ngày</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
+                      <input type="text" class="form-control" value="26/02/2026" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Hệ thống</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-search"></i></span></div>
+                      <select class="form-control">
+                        <option>Hãy chọn hệ thống</option>
+                        <option>Nhân sự</option>
+                        <option>Chấm công</option>
+                        <option>Bảo trì</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Tình trạng</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-check-circle"></i></span></div>
+                      <select class="form-control">
+                        <option>Chưa trả lời</option>
+                        <option>Đã trả lời</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <button type="button" class="btn btn-info px-4">Tìm kiếm</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body py-4"></div>
+          </div>
+        </div>
+
+        <div id="fuel-report-section" class="content-section d-none">
+          <div class="card card-teal mb-3">
+            <div class="card-header"><h3 class="card-title">Lọc thời gian</h3></div>
+            <div class="card-body py-2">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group mb-2">
+                    <label>Từ ngày</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
+                      <input type="text" class="form-control" value="12/01/2026">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-2">
+                    <label>Đến ngày</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
+                      <input type="text" class="form-control" value="26/02/2026">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-2">
+                    <label>Điều kiện</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-search"></i></span></div>
+                      <select class="form-control"><option>Dầu DO</option><option>Xăng</option><option>Nhớt thủy lực</option><option>Nhớt máy</option><option>Nhớt hộp số 90</option><option>Nhớt cầu 140</option><option>Mỡ bôi trơn</option></select>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-2">
+                    <label>Số phương tiện</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-car-side"></i></span></div>
+                      <input type="text" class="form-control" placeholder="Nhập số phương tiện">
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 mt-2">
+                  <button class="btn btn-info" type="button">Lọc theo ngày</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header card-teal"><h3 class="card-title">Danh mục phương tiện</h3></div>
+            <div class="card-body p-0">
+              <table class="table table-bordered table-sm mb-0">
+                <thead>
+                  <tr><th style="width:40px">#</th><th>Nội dung</th><th style="width:220px">Loại</th><th style="width:120px">Số lượng</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>Số: 61H-163.78<br>Trọng tải: 3.705 tấn<br>Tổng km: 0.0<br>Mức tiêu thụ theo VIMAP: 5.1L/100km<br>Mức tiêu thụ thực tế: 0.0L/100km<br><span class="badge badge-success">Nhiên liệu</span> <span class="badge badge-success">Quãng đường</span></td>
+                    <td>Dầu DO<br>Cấp VC: 1,144</td>
+                    <td>1,144</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Số: 61H-164.04<br>Trọng tải: 3.705 tấn<br>Tổng km: 0.0<br>Mức tiêu thụ theo VIMAP: 5.1L/100km<br>Mức tiêu thụ thực tế: 0.0L/100km<br><span class="badge badge-success">Nhiên liệu</span> <span class="badge badge-success">Quãng đường</span></td>
+                    <td>Dầu DO<br>Cấp VC: 929</td>
+                    <td>929</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Số: 61C-021.25<br>Trọng tải: 6.5 tấn<br>Tổng km: 0.0<br>Mức tiêu thụ theo VIMAP: 22.1L/100km<br>Mức tiêu thụ thực tế: 0.0L/100km<br><span class="badge badge-success">Nhiên liệu</span> <span class="badge badge-success">Quãng đường</span></td>
+                    <td>Dầu DO<br>Cấp VC: 562</td>
+                    <td>562</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" class="text-center font-weight-bold">Tổng cấp VX</td>
+                    <td>43423</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" class="text-center font-weight-bold">Tổng cấp ngoài</td>
+                    <td>1592</td>
+                  </tr>
+                  <tr>
+                    <td colspan="3" class="text-center font-weight-bold">Tổng cấp</td>
+                    <td>45015</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="fuel-request-section" class="content-section d-none">
+          <div class="card card-teal">
+            <div class="card-header"><h3 class="card-title">Đề nghị cấp nhiên liệu</h3></div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Ngày lập</label>
+                    <input type="text" class="form-control" value="27/02/2026 08:42">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Số phiếu</label>
+                    <input type="text" class="form-control" value="CNL-0226-063100">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Họ và tên</label>
+                    <input type="text" class="form-control" value="Võ Quốc Bình">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Bộ phận</label>
+                    <input type="text" class="form-control" value="IT">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Phương tiện</label>
+                    <select class="form-control"><option>Chọn xe</option><option>61H-163.78</option><option>61H-164.04</option></select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Cấp tại</label>
+                    <select class="form-control"><option>Việt Xanh</option><option>Bên ngoài</option></select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Loại</label>
+                    <select class="form-control"><option>Dầu DO</option><option>Xăng</option><option>Nhớt thủy lực</option><option>Nhớt máy</option><option>Nhớt hộp số 90</option><option>Nhớt cầu 140</option><option>Mỡ bôi trơn</option></select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Đơn vị</label>
+                    <select class="form-control"><option>Lít</option><option>Kg</option><option>Can</option></select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Số lượng dự tính</label>
+                    <input type="number" class="form-control" placeholder="">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Lý do cấp</label>
+                    <input type="text" class="form-control" value="Theo lệnh">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Số KM, kiểm soát</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Trưởng bộ phận</label>
+                    <input type="text" class="form-control" value="Nguyễn Hoàng Sơn">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>GĐ bộ phận</label>
+                    <input type="text" class="form-control" value="Nguyễn Đình Phú">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button type="button" class="btn btn-info px-4">Gửi đơn</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card card-teal">
+            <div class="card-header"><h3 class="card-title">Các giấy cung cấp nhiên liệu gần đây</h3></div>
+            <div class="card-body p-0">
+              <table class="table table-bordered table-sm mb-0">
+                <thead>
+                  <tr>
+                    <th style="width:60px">#</th>
+                    <th>Nội dung</th>
+                    <th style="width:160px">Duyệt cấp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="3" class="text-center text-muted py-3">Chưa có dữ liệu</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="gate-ticket-section" class="content-section d-none">
+          <div class="card card-teal">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h3 class="card-title">Thêm giấy ra vào cổng</h3>
+              <button type="button" class="btn btn-tool text-white"><i class="fas fa-minus"></i></button>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group"><label>Ngày nhập <span class="text-danger">*</span></label><input type="text" class="form-control" value="27/02/2026"></div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group"><label>Giờ vào <span class="text-danger">*</span></label><input type="text" class="form-control" value="08:02"></div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group"><label>Giờ ra <span class="text-danger">*</span></label><input type="text" class="form-control"></div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group"><label>Số phiếu <span class="text-danger">*</span></label><input type="text" class="form-control" value="VR-26-422571"></div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group"><label>Người lập <span class="text-danger">*</span></label><input type="text" class="form-control" value="Võ Quốc Bình"></div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group"><label>Người phụ trách mang ra <span class="text-danger">*</span></label><input type="text" class="form-control"></div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group"><label>Nhà máy <span class="text-danger">*</span></label><select class="form-control"><option>VX-01</option><option>VX-02</option></select></div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group"><label>Tên nhà thầu <span class="text-danger">*</span></label><input type="text" class="form-control"></div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group"><label>Địa chỉ <span class="text-danger">*</span></label><input type="text" class="form-control"></div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group"><label>Biển kiểm soát <span class="text-danger">*</span></label><input type="text" class="form-control"></div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group"><label>Mục đích nhập <span class="text-danger">*</span></label><input type="text" class="form-control"></div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group"><label>Nhóm ra vào <span class="text-danger">*</span></label><select class="form-control"><option>Chọn nhóm</option><option>Mang thiết bị vật tư SX-KT</option><option>Mang thiết bị vật tư BP.GNVC</option></select></div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group"><label>Người duyệt <span class="text-danger">*</span></label><input type="text" class="form-control"></div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Hình ảnh <span class="text-danger">*</span></label>
+                    <div class="border rounded p-4 text-center" style="min-height:120px;">
+                      <input id="gate-image-input" type="file" class="d-none" accept=".jpg,.jpeg,.png,image/jpeg,image/png" multiple>
+                      <button class="btn btn-info" id="gate-image-upload-btn" type="button">Gửi hình ảnh.</button>
+                      <div class="small text-primary mt-2">Có thể gửi 10 tấm cùng lúc</div>
+                      <div class="small text-muted">Chỉ chấp nhận JPG/PNG, tối đa 10MB mỗi ảnh</div>
+                      <div id="gate-image-feedback" class="small mt-2"></div>
+                      <div id="gate-image-list" class="small text-left mt-2"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-body p-0">
+              <table class="table table-bordered table-sm mb-0">
+                <thead>
+                  <tr>
+                    <th style="width:40px">#</th>
+                    <th>Tên vật tư</th>
+                    <th style="width:150px">Đơn vị</th>
+                    <th style="width:150px">Số lượng</th>
+                    <th>Chứng từ đối chứng</th>
+                    <th style="width:60px"></th>
+                  </tr>
+                </thead>
+                <tbody id="gate-items-body">
+                  <tr class="gate-item-row">
+                    <td class="gate-item-index">1</td>
+                    <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-name"></td>
+                    <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-unit"></td>
+                    <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-qty"></td>
+                    <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-doc"></td>
+                    <td class="text-center text-success font-weight-bold gate-row-add" style="font-size:1.3rem;">+</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-primary btn-lg" id="gate-submit-btn">Thêm phiếu ra vào cổng</button>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="main-footer">
+    <strong>Copyright &copy; 2026 Viet Xanh.</strong>
+  </footer>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+<script>
+  const menuItems = document.querySelectorAll('.js-menu');
+  const sections = document.querySelectorAll('.content-section');
+  const pageTitle = document.getElementById('page-title');
+
+  menuItems.forEach((item) => {
+    item.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
+      item.classList.add('active');
+
+      if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
+      if (nestedSubmenu) nestedSubmenu.classList.remove('show');
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (fuelMain) fuelMain.classList.remove('active');
+      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gateMain) gateMain.classList.remove('active');
+      if (gateSubmenu) gateSubmenu.classList.remove('show');
+      gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+
+      const targetId = item.getAttribute('data-target');
+      sections.forEach((section) => {
+        section.classList.toggle('d-none', section.id !== targetId);
+      });
+
+      pageTitle.textContent = item.getAttribute('data-title') || item.textContent.trim();
+    });
+  });
+
+  const attendanceMain = document.querySelector('.js-attendance-main');
+  const attendanceSubmenu = document.querySelector('.attendance-submenu');
+  const attendanceSubItems = document.querySelectorAll('.js-attendance-sub');
+
+  if (attendanceMain && attendanceSubmenu) {
+    attendanceMain.addEventListener('click', (event) => {
+      event.preventDefault();
+      menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
+      attendanceMain.classList.add('active');
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (fuelMain) fuelMain.classList.remove('active');
+      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gateMain) gateMain.classList.remove('active');
+      if (gateSubmenu) gateSubmenu.classList.remove('show');
+      gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceSubmenu.classList.toggle('show');
+
+      if (!attendanceSubmenu.classList.contains('show') && nestedSubmenu) {
+        nestedSubmenu.classList.remove('show');
+      }
+    });
+  }
+
+  attendanceSubItems.forEach((subItem) => {
+    subItem.addEventListener('click', (event) => {
+      event.preventDefault();
+      menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
+      attendanceMain.classList.add('active');
+      attendanceSubmenu.classList.add('show');
+      if (fuelMain) fuelMain.classList.remove('active');
+      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gateMain) gateMain.classList.remove('active');
+      if (gateSubmenu) gateSubmenu.classList.remove('show');
+      gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      const attendanceApproveSubItems = document.querySelectorAll('.js-attendance-approve-sub');
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      subItem.classList.add('active-sub');
+
+      const targetId = subItem.getAttribute('data-target');
+      sections.forEach((section) => {
+        section.classList.toggle('d-none', section.id !== targetId);
+      });
+
+      pageTitle.textContent = subItem.getAttribute('data-title') || subItem.textContent.trim();
+    });
+  });
+
+  const attendanceApproveMain = document.querySelector('.js-attendance-approve-main');
+  const nestedSubmenu = document.querySelector('.nested-submenu');
+  const attendanceApproveSubItems = document.querySelectorAll('.js-attendance-approve-sub');
+
+  if (attendanceApproveMain && nestedSubmenu) {
+    attendanceApproveMain.addEventListener('click', (event) => {
+      event.preventDefault();
+      nestedSubmenu.classList.toggle('show');
+      attendanceSubmenu.classList.add('show');
+      attendanceMain.classList.add('active');
+    });
+  }
+
+  attendanceApproveSubItems.forEach((subItem) => {
+    subItem.addEventListener('click', (event) => {
+      event.preventDefault();
+      menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
+      attendanceMain.classList.add('active');
+      attendanceSubmenu.classList.add('show');
+      nestedSubmenu.classList.add('show');
+      if (fuelMain) fuelMain.classList.remove('active');
+      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gateMain) gateMain.classList.remove('active');
+      if (gateSubmenu) gateSubmenu.classList.remove('show');
+      gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      subItem.classList.add('active-sub');
+
+      const targetId = subItem.getAttribute('data-target');
+      sections.forEach((section) => {
+        section.classList.toggle('d-none', section.id !== targetId);
+      });
+
+      pageTitle.textContent = subItem.getAttribute('data-title') || subItem.textContent.trim();
+    });
+  });
+
+  const fuelMain = document.querySelector('.js-fuel-main');
+  const fuelSubmenu = document.querySelector('.fuel-submenu');
+  const fuelSubItems = document.querySelectorAll('.js-fuel-sub');
+
+  if (fuelMain && fuelSubmenu) {
+    fuelMain.addEventListener('click', (event) => {
+      event.preventDefault();
+      menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
+      if (attendanceMain) attendanceMain.classList.remove('active');
+      if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
+      if (nestedSubmenu) nestedSubmenu.classList.remove('show');
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gateMain) gateMain.classList.remove('active');
+      if (gateSubmenu) gateSubmenu.classList.remove('show');
+      gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
+      fuelMain.classList.add('active');
+      fuelSubmenu.classList.toggle('show');
+    });
+  }
+
+  fuelSubItems.forEach((subItem) => {
+    subItem.addEventListener('click', (event) => {
+      event.preventDefault();
+      menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
+      if (attendanceMain) attendanceMain.classList.remove('active');
+      if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
+      if (nestedSubmenu) nestedSubmenu.classList.remove('show');
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gateMain) gateMain.classList.remove('active');
+      if (gateSubmenu) gateSubmenu.classList.remove('show');
+      gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+
+      fuelMain.classList.add('active');
+      fuelSubmenu.classList.add('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
+      subItem.classList.add('active-sub');
+
+      const targetId = subItem.getAttribute('data-target');
+      sections.forEach((section) => {
+        section.classList.toggle('d-none', section.id !== targetId);
+      });
+
+      pageTitle.textContent = subItem.getAttribute('data-title') || subItem.textContent.trim();
+    });
+  });
+
+  const gateMain = document.querySelector('.js-gate-main');
+  const gateSubmenu = document.querySelector('.gate-submenu');
+  const gateSubItems = document.querySelectorAll('.js-gate-sub');
+
+  if (gateMain && gateSubmenu) {
+    gateMain.addEventListener('click', (event) => {
+      event.preventDefault();
+      menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
+      if (attendanceMain) attendanceMain.classList.remove('active');
+      if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
+      if (nestedSubmenu) nestedSubmenu.classList.remove('show');
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (fuelMain) fuelMain.classList.remove('active');
+      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
+      gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+      gateMain.classList.add('active');
+      gateSubmenu.classList.toggle('show');
+    });
+  }
+
+  gateSubItems.forEach((subItem) => {
+    subItem.addEventListener('click', (event) => {
+      event.preventDefault();
+      menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
+      if (attendanceMain) attendanceMain.classList.remove('active');
+      if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
+      if (nestedSubmenu) nestedSubmenu.classList.remove('show');
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (fuelMain) fuelMain.classList.remove('active');
+      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
+
+      gateMain.classList.add('active');
+      gateSubmenu.classList.add('show');
+      gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+      subItem.classList.add('active-sub');
+
+      const targetId = subItem.getAttribute('data-target');
+      sections.forEach((section) => {
+        section.classList.toggle('d-none', section.id !== targetId);
+      });
+
+      pageTitle.textContent = subItem.getAttribute('data-title') || subItem.textContent.trim();
+    });
+  });
+
+  const gateItemsBody = document.getElementById('gate-items-body');
+  const gateSubmitBtn = document.getElementById('gate-submit-btn');
+  const gateImageUploadBtn = document.getElementById('gate-image-upload-btn');
+  const gateImageInput = document.getElementById('gate-image-input');
+  const gateImageFeedback = document.getElementById('gate-image-feedback');
+  const gateImageList = document.getElementById('gate-image-list');
+
+  const GATE_MAX_FILES = 10;
+  const GATE_MAX_SIZE_MB = 10;
+  const GATE_MAX_SIZE_BYTES = GATE_MAX_SIZE_MB * 1024 * 1024;
+  const GATE_ALLOWED_TYPES = new Set(['image/jpeg', 'image/png']);
+
+  const setGateImageFeedback = (message, isError = false) => {
+    if (!gateImageFeedback) return;
+    gateImageFeedback.textContent = message || '';
+    gateImageFeedback.classList.toggle('text-danger', isError);
+    gateImageFeedback.classList.toggle('text-success', !isError && !!message);
+  };
+
+  const renderGateImageList = (files) => {
+    if (!gateImageList) return;
+    if (!files.length) {
+      gateImageList.innerHTML = '';
+      return;
+    }
+
+    const lines = files.map((file, index) => {
+      const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+      return `${index + 1}. ${file.name} (${sizeMb} MB)`;
+    });
+    gateImageList.innerHTML = lines.join('<br>');
+  };
+
+  if (gateImageUploadBtn && gateImageInput) {
+    gateImageUploadBtn.addEventListener('click', () => {
+      gateImageInput.click();
+    });
+
+    gateImageInput.addEventListener('change', () => {
+      const selectedFiles = Array.from(gateImageInput.files || []);
+
+      if (!selectedFiles.length) {
+        setGateImageFeedback('');
+        renderGateImageList([]);
+        return;
+      }
+
+      if (selectedFiles.length > GATE_MAX_FILES) {
+        gateImageInput.value = '';
+        renderGateImageList([]);
+        setGateImageFeedback(`Chỉ được chọn tối đa ${GATE_MAX_FILES} ảnh.`, true);
+        return;
+      }
+
+      const invalidType = selectedFiles.find((file) => !GATE_ALLOWED_TYPES.has(file.type));
+      if (invalidType) {
+        gateImageInput.value = '';
+        renderGateImageList([]);
+        setGateImageFeedback('Chỉ chấp nhận file JPG hoặc PNG.', true);
+        return;
+      }
+
+      const invalidSize = selectedFiles.find((file) => file.size > GATE_MAX_SIZE_BYTES);
+      if (invalidSize) {
+        gateImageInput.value = '';
+        renderGateImageList([]);
+        setGateImageFeedback(`Mỗi ảnh tối đa ${GATE_MAX_SIZE_MB}MB.`, true);
+        return;
+      }
+
+      setGateImageFeedback(`Đã chọn ${selectedFiles.length} ảnh hợp lệ.`);
+      renderGateImageList(selectedFiles);
+    });
+  }
+
+  const validateGateRow = (row) => {
+    let valid = true;
+    row.querySelectorAll('.gate-item-input').forEach((input) => {
+      if (!input.value.trim()) {
+        input.classList.add('is-invalid');
+        valid = false;
+      } else {
+        input.classList.remove('is-invalid');
+      }
+    });
+    return valid;
+  };
+
+  const createGateRow = (index) => {
+    const tr = document.createElement('tr');
+    tr.className = 'gate-item-row';
+    tr.innerHTML = `
+      <td class="gate-item-index">${index}</td>
+      <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-name"></td>
+      <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-unit"></td>
+      <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-qty"></td>
+      <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-doc"></td>
+      <td class="text-center text-success font-weight-bold gate-row-add" style="font-size:1.3rem;">+</td>
+    `;
+    return tr;
+  };
+
+  if (gateItemsBody) {
+    gateItemsBody.addEventListener('click', (event) => {
+      const addBtn = event.target.closest('.gate-row-add');
+      if (!addBtn) return;
+
+      const row = addBtn.closest('.gate-item-row');
+      if (!row) return;
+
+      if (!validateGateRow(row)) {
+        return;
+      }
+
+      const nextIndex = gateItemsBody.querySelectorAll('.gate-item-row').length + 1;
+      gateItemsBody.appendChild(createGateRow(nextIndex));
+    });
+
+    gateItemsBody.addEventListener('input', (event) => {
+      if (event.target.classList.contains('gate-item-input')) {
+        event.target.classList.remove('is-invalid');
+      }
+    });
+  }
+
+  if (gateSubmitBtn && gateItemsBody) {
+    gateSubmitBtn.addEventListener('click', () => {
+      const rows = gateItemsBody.querySelectorAll('.gate-item-row');
+      let allValid = true;
+
+      rows.forEach((row) => {
+        if (!validateGateRow(row)) allValid = false;
+      });
+
+      if (!allValid) {
+        return;
+      }
+
+      // Prototype-only: success state can be integrated with API later.
+    });
+  }
+
+  const contractorDateInputs = document.querySelectorAll('.contractor-date');
+  contractorDateInputs.forEach((input) => {
+    input.setAttribute('title', 'DD-MM-YYYY');
+  });
+
+  const overtimeDateTimeInputs = document.querySelectorAll('.overtime-datetime');
+  overtimeDateTimeInputs.forEach((input) => {
+    input.setAttribute('title', 'DD-MM-YYYY HH:SS');
+  });
+
+  const trainingLink = document.querySelector('.js-training-link');
+  if (trainingLink) {
+    trainingLink.addEventListener('click', () => {
+      menuItems.forEach((m) => m.classList.remove('active'));
+      trainingLink.classList.add('active');
+      if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
+      if (nestedSubmenu) nestedSubmenu.classList.remove('show');
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (fuelMain) fuelMain.classList.remove('active');
+      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gateMain) gateMain.classList.remove('active');
+      if (gateSubmenu) gateSubmenu.classList.remove('show');
+      gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+    });
+  }
+</script>
+</body>
+</html>
