@@ -146,6 +146,20 @@
       color: #111 !important;
     }
 
+    .gate-row-add {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .gate-item-input.is-invalid {
+      border-color: #dc3545;
+      padding-right: calc(1.5em + .75rem);
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-2 -2 7 7'%3e%3ccircle r='3' fill='%23dc3545'/%3e%3cpath stroke='%23fff' d='M-1 0h2'/%3e%3cpath stroke='%23fff' d='M0-1v2'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right calc(.375em + .1875rem) center;
+      background-size: calc(.75em + .375rem) calc(.75em + .375rem);
+    }
+
     .legend-dot {
       width: 10px;
       height: 10px;
@@ -1375,14 +1389,14 @@
                     <th style="width:60px"></th>
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td><input type="text" class="form-control form-control-sm"></td>
-                    <td><input type="text" class="form-control form-control-sm"></td>
-                    <td><input type="text" class="form-control form-control-sm"></td>
-                    <td><input type="text" class="form-control form-control-sm"></td>
-                    <td class="text-center text-success font-weight-bold" style="font-size:1.3rem;">+</td>
+                <tbody id="gate-items-body">
+                  <tr class="gate-item-row">
+                    <td class="gate-item-index">1</td>
+                    <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-name"></td>
+                    <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-unit"></td>
+                    <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-qty"></td>
+                    <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-doc"></td>
+                    <td class="text-center text-success font-weight-bold gate-row-add" style="font-size:1.3rem;">+</td>
                   </tr>
                 </tbody>
               </table>
@@ -1390,7 +1404,7 @@
           </div>
 
           <div class="d-flex justify-content-end">
-            <button type="button" class="btn btn-primary btn-lg">Thêm phiếu ra vào cổng</button>
+            <button type="button" class="btn btn-primary btn-lg" id="gate-submit-btn">Thêm phiếu ra vào cổng</button>
           </div>
         </div>
         </div>
@@ -1643,6 +1657,76 @@
       pageTitle.textContent = subItem.getAttribute('data-title') || subItem.textContent.trim();
     });
   });
+
+  const gateItemsBody = document.getElementById('gate-items-body');
+  const gateSubmitBtn = document.getElementById('gate-submit-btn');
+
+  const validateGateRow = (row) => {
+    let valid = true;
+    row.querySelectorAll('.gate-item-input').forEach((input) => {
+      if (!input.value.trim()) {
+        input.classList.add('is-invalid');
+        valid = false;
+      } else {
+        input.classList.remove('is-invalid');
+      }
+    });
+    return valid;
+  };
+
+  const createGateRow = (index) => {
+    const tr = document.createElement('tr');
+    tr.className = 'gate-item-row';
+    tr.innerHTML = `
+      <td class="gate-item-index">${index}</td>
+      <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-name"></td>
+      <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-unit"></td>
+      <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-qty"></td>
+      <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-doc"></td>
+      <td class="text-center text-success font-weight-bold gate-row-add" style="font-size:1.3rem;">+</td>
+    `;
+    return tr;
+  };
+
+  if (gateItemsBody) {
+    gateItemsBody.addEventListener('click', (event) => {
+      const addBtn = event.target.closest('.gate-row-add');
+      if (!addBtn) return;
+
+      const row = addBtn.closest('.gate-item-row');
+      if (!row) return;
+
+      if (!validateGateRow(row)) {
+        return;
+      }
+
+      const nextIndex = gateItemsBody.querySelectorAll('.gate-item-row').length + 1;
+      gateItemsBody.appendChild(createGateRow(nextIndex));
+    });
+
+    gateItemsBody.addEventListener('input', (event) => {
+      if (event.target.classList.contains('gate-item-input')) {
+        event.target.classList.remove('is-invalid');
+      }
+    });
+  }
+
+  if (gateSubmitBtn && gateItemsBody) {
+    gateSubmitBtn.addEventListener('click', () => {
+      const rows = gateItemsBody.querySelectorAll('.gate-item-row');
+      let allValid = true;
+
+      rows.forEach((row) => {
+        if (!validateGateRow(row)) allValid = false;
+      });
+
+      if (!allValid) {
+        return;
+      }
+
+      // Prototype-only: success state can be integrated with API later.
+    });
+  }
 
   const contractorDateInputs = document.querySelectorAll('.contractor-date');
   contractorDateInputs.forEach((input) => {
