@@ -256,8 +256,8 @@
               <p>Cung cấp nhiên liệu <i class="fas fa-angle-left right"></i></p>
             </a>
             <ul class="nav nav-treeview fuel-submenu">
-              <li class="nav-item"><a href="#" class="nav-link js-fuel-sub" data-target="fuel-report-section"><i class="far fa-square nav-icon"></i><p>Báo cáo nhiên liệu</p></a></li>
-              <li class="nav-item"><a href="#" class="nav-link js-fuel-sub" data-target="fuel-request-section"><i class="far fa-square nav-icon"></i><p>Đề nghị cấp</p></a></li>
+              <li class="nav-item"><a href="#" class="nav-link js-fuel-sub" data-target="fuel-report-section" data-title="Báo cáo nhiên liệu"><i class="far fa-square nav-icon"></i><p>Báo cáo nhiên liệu</p></a></li>
+              <li class="nav-item"><a href="#" class="nav-link js-fuel-sub" data-target="fuel-request-section" data-title="Đề nghị cấp nhiên liệu"><i class="far fa-square nav-icon"></i><p>Đề nghị cấp</p></a></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -1156,17 +1156,109 @@
 
         <div id="fuel-request-section" class="content-section d-none">
           <div class="card card-teal">
-            <div class="card-header d-flex justify-content-between align-items-center">
-              <h3 class="card-title">Đề nghị cấp nhiên liệu</h3>
-              <button class="btn btn-sm btn-primary" type="button"><i class="fas fa-plus mr-1"></i>Tạo đề nghị</button>
-            </div>
+            <div class="card-header"><h3 class="card-title">Đề nghị cấp nhiên liệu</h3></div>
             <div class="card-body">
-              <div class="form-row">
-                <div class="form-group col-md-4"><label>Biển số xe</label><input type="text" class="form-control" placeholder="VD: 61H-163.78"></div>
-                <div class="form-group col-md-4"><label>Loại nhiên liệu</label><select class="form-control"><option>Dầu DO</option><option>Xăng A95</option></select></div>
-                <div class="form-group col-md-4"><label>Số lượng đề nghị</label><input type="number" class="form-control" placeholder="0"></div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Ngày lập</label>
+                    <input type="text" class="form-control" value="27/02/2026 08:42">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Số phiếu</label>
+                    <input type="text" class="form-control" value="CNL-0226-063100">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Họ và tên</label>
+                    <input type="text" class="form-control" value="Võ Quốc Bình">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Bộ phận</label>
+                    <input type="text" class="form-control" value="IT">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Phương tiện</label>
+                    <select class="form-control"><option>Chọn xe</option><option>61H-163.78</option><option>61H-164.04</option></select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Cấp tại</label>
+                    <select class="form-control"><option>Việt Xanh</option><option>Bên ngoài</option></select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Loại</label>
+                    <select class="form-control"><option>Dầu DO</option><option>Xăng</option><option>Nhớt thủy lực</option><option>Nhớt máy</option><option>Nhớt hộp số 90</option><option>Nhớt cầu 140</option><option>Mỡ bôi trơn</option></select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Đơn vị</label>
+                    <select class="form-control"><option>Lít</option><option>Kg</option><option>Can</option></select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Số lượng dự tính</label>
+                    <input type="number" class="form-control" placeholder="">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Lý do cấp</label>
+                    <input type="text" class="form-control" value="Theo lệnh">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="form-group">
+                    <label>Số KM, kiểm soát</label>
+                    <input type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Trưởng bộ phận</label>
+                    <input type="text" class="form-control" value="Nguyễn Hoàng Sơn">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>GĐ bộ phận</label>
+                    <input type="text" class="form-control" value="Nguyễn Đình Phú">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button type="button" class="btn btn-info px-4">Gửi đơn</button>
+                </div>
               </div>
-              <button class="btn btn-info" type="button">Gửi đề nghị</button>
+            </div>
+          </div>
+
+          <div class="card card-teal">
+            <div class="card-header"><h3 class="card-title">Các giấy cung cấp nhiên liệu gần đây</h3></div>
+            <div class="card-body p-0">
+              <table class="table table-bordered table-sm mb-0">
+                <thead>
+                  <tr>
+                    <th style="width:60px">#</th>
+                    <th>Nội dung</th>
+                    <th style="width:160px">Duyệt cấp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="3" class="text-center text-muted py-3">Chưa có dữ liệu</td></tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -1260,7 +1352,7 @@
         section.classList.toggle('d-none', section.id !== targetId);
       });
 
-      pageTitle.textContent = subItem.textContent.trim();
+      pageTitle.textContent = subItem.getAttribute('data-title') || subItem.textContent.trim();
     });
   });
 
@@ -1299,7 +1391,7 @@
         section.classList.toggle('d-none', section.id !== targetId);
       });
 
-      pageTitle.textContent = subItem.textContent.trim();
+      pageTitle.textContent = subItem.getAttribute('data-title') || subItem.textContent.trim();
     });
   });
 
@@ -1346,7 +1438,7 @@
         section.classList.toggle('d-none', section.id !== targetId);
       });
 
-      pageTitle.textContent = subItem.textContent.trim();
+      pageTitle.textContent = subItem.getAttribute('data-title') || subItem.textContent.trim();
     });
   });
 
