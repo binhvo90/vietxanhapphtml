@@ -381,19 +381,19 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link js-menu" data-target="gnvc-repair-request-section" data-title="Đề nghị sửa chữa phương tiện vận chuyển" data-breadcrumb="Home|GNVC|Đề nghị sửa chữa phương tiện">
+            <a href="#" class="nav-link js-menu" data-target="gnvc-repair-request-section" data-title="Đề nghị sửa chữa phương tiện vận chuyển">
               <i class="nav-icon fas fa-truck-medical"></i>
               <p>GNVCKế hoạch sửa chữa</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link js-menu" data-target="gnvc-repair-request-section" data-title="Đề nghị sửa chữa phương tiện vận chuyển" data-breadcrumb="Home|GNVC|Đề nghị sửa chữa phương tiện">
+            <a href="#" class="nav-link js-menu" data-target="gnvc-repair-request-section" data-title="Đề nghị sửa chữa phương tiện vận chuyển">
               <i class="nav-icon fas fa-screwdriver-wrench"></i>
               <p>Kế hoạch sửa chữa</p>
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link js-menu" data-target="gnvc-patrol-section" data-title="Tuần tra bảo vệ" data-breadcrumb="Home|GNVC|Tuần tra bảo vệ">
+            <a href="#" class="nav-link js-menu" data-target="gnvc-patrol-section" data-title="Tuần tra bảo vệ">
               <i class="nav-icon fas fa-user-shield"></i>
               <p>Tuần tra bảo vệ</p>
             </a>
@@ -415,12 +415,6 @@
         <div class="row mb-2">
           <div class="col-sm-6">
             <h1 id="page-title">Trang chính</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right mb-0" id="page-breadcrumb">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">ERP</li>
-            </ol>
           </div>
         </div>
 
@@ -1705,17 +1699,6 @@
   const menuItems = document.querySelectorAll('.js-menu');
   const sections = document.querySelectorAll('.content-section');
   const pageTitle = document.getElementById('page-title');
-  const pageBreadcrumb = document.getElementById('page-breadcrumb');
-
-  const setBreadcrumb = (items = ['Home', 'ERP']) => {
-    if (!pageBreadcrumb) return;
-    pageBreadcrumb.innerHTML = items.map((item, idx) => {
-      const isLast = idx === items.length - 1;
-      if (isLast) return `<li class="breadcrumb-item active">${item}</li>`;
-      return `<li class="breadcrumb-item"><a href="#">${item}</a></li>`;
-    }).join('');
-  };
-
   menuItems.forEach((item) => {
     item.addEventListener('click', (event) => {
       event.preventDefault();
@@ -1742,7 +1725,6 @@
       });
 
       pageTitle.textContent = item.getAttribute('data-title') || item.textContent.trim();
-      setBreadcrumb((item.getAttribute('data-breadcrumb') || 'Home|ERP').split('|'));
     });
   });
 
