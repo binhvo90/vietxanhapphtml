@@ -182,6 +182,31 @@
       background: #f8f9fa;
     }
 
+
+    .patrol-table th,
+    .patrol-table td {
+      font-size: .82rem;
+      padding: .35rem .45rem;
+      vertical-align: middle;
+    }
+
+    .patrol-group-row td {
+      text-align: center;
+      font-weight: 600;
+      color: #1f2937;
+      background: #fff;
+    }
+
+    .status-ok {
+      color: #28a745;
+      font-weight: 700;
+    }
+
+    .status-warn {
+      color: #ffc107;
+      font-weight: 700;
+    }
+
     .gate-row-add {
       cursor: pointer;
       user-select: none;
@@ -393,7 +418,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link js-menu" data-target="gnvc-patrol-section" data-title="Tuần tra bảo vệ">
+            <a href="#" class="nav-link js-menu" data-target="gnvc-patrol-section" data-title="Báo cáo tuần tra bảo vệ">
               <i class="nav-icon fas fa-user-shield"></i>
               <p>Tuần tra bảo vệ</p>
             </a>
@@ -1560,8 +1585,73 @@
         </div>
 
         <div id="gnvc-patrol-section" class="content-section d-none">
-          <div class="card">
-            <div class="card-body">Nội dung Tuần tra bảo vệ</div>
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h4 class="mb-0">Báo cáo tuần tra bảo vệ</h4>
+            <ol class="breadcrumb bg-transparent p-0 mb-0">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">Báo cáo tuần tra bảo vệ</li>
+            </ol>
+          </div>
+
+          <div class="card card-teal mb-2">
+            <div class="card-header py-2"><h3 class="card-title">Lọc thời gian</h3></div>
+            <div class="card-body">
+              <div class="form-row align-items-end">
+                <div class="col-md-12">
+                  <label>Từ ngày</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
+                    <input type="date" class="form-control" value="2026-02-28">
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-info mt-3">Lọc theo ngày</button>
+            </div>
+          </div>
+
+          <div class="card card-teal mb-0">
+            <div class="card-header py-2"><h3 class="card-title">Từ 27/02/2026 06:00 đến 28/02/2026 06:00</h3></div>
+            <div class="table-responsive">
+              <table class="table table-bordered patrol-table mb-0">
+                <thead>
+                  <tr>
+                    <th style="width:40px">#</th>
+                    <th>Khu vực</th>
+                    <th style="width:200px">Thời gian quét</th>
+                    <th style="width:90px">Tình trạng</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="patrol-group-row"><td colspan="4">Việt Xanh 01<br><small>Mã tuần tra: TTBV-0226-160162 &nbsp; | &nbsp; Bắt đầu: 27/02 20:57 &nbsp; Kết thúc:</small></td></tr>
+                  <tr><td>1</td><td>Cầu kho A</td><td>27/02 20:59</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>2</td><td>Cầu phụ kho A (Cầu phụny)</td><td>27/02 20:58</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>3</td><td>Góc Ngoài bờ dốc</td><td>27/02 21:02</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>4</td><td>Khu Bồn trộn gỗ đốt</td><td>27/02 21:01</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>5</td><td>Khu đóng gạch</td><td>27/02 21:03</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>6</td><td>Khu đập phế</td><td>27/02 21:04</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>7</td><td>Khu xử lý nước</td><td>27/02 21:00</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>8</td><td>Nhà xe CBNV</td><td>27/02 20:58</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>9</td><td>Nhà xe VP Xưởng</td><td>27/02 21:04</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>10</td><td>Trạm điện</td><td>27/02 21:00</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>11</td><td>Xưởng C1</td><td>27/02 20:59</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>12</td><td>Xưởng C2</td><td></td><td class="text-center"><span class="status-warn">⚠</span></td></tr>
+
+                  <tr class="patrol-group-row"><td colspan="4">Mã tuần tra: TTBV-0226-415500<br><small>Bắt đầu: 27/02 22:02 &nbsp; Kết thúc:</small></td></tr>
+                  <tr><td>1</td><td>Cầu kho A</td><td>27/02 22:12</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>2</td><td>Cầu phụ kho A (Cầu phụny)</td><td>27/02 22:11</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>3</td><td>Góc Ngoài bờ dốc</td><td>27/02 22:05</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>4</td><td>Khu Bồn trộn gỗ đốt</td><td>27/02 22:10</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>5</td><td>Khu đóng gạch</td><td>27/02 22:05</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>6</td><td>Khu đập phế</td><td>27/02 22:04</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>7</td><td>Khu xử lý nước</td><td>27/02 22:10</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>8</td><td>Nhà xe CBNV</td><td>27/02 22:11</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>9</td><td>Nhà xe VP Xưởng</td><td>27/02 22:03</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>10</td><td>Trạm điện</td><td>27/02 22:10</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>11</td><td>Xưởng C1</td><td>27/02 22:13</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>12</td><td>Xưởng C2</td><td></td><td class="text-center"><span class="status-warn">⚠</span></td></tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
