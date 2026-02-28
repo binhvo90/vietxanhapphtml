@@ -146,8 +146,119 @@
       color: #111 !important;
     }
 
-    .gate-row-add {
-      cursor: pointer;
+    .gnvc-submenu {
+      display: none;
+      padding-left: 10px;
+    }
+
+    .gnvc-submenu.show {
+      display: block;
+    }
+
+    .gnvc-submenu .nav-link {
+      color: #c2c7d0;
+    }
+
+    .gnvc-submenu .nav-link.active-sub {
+      background: #1f8fff !important;
+      color: #fff !important;
+    }
+
+    .gnvc-submenu .nav-link.active-sub p,
+    .gnvc-submenu .nav-link.active-sub .nav-icon {
+      color: #fff !important;
+    }
+
+    .gnvc-filter-card {
+      border: 1px solid rgba(0, 0, 0, .125);
+      border-radius: .25rem;
+      background: #f8f9fa;
+    }
+
+    .gnvc-empty-card {
+      border: 1px solid rgba(0, 0, 0, .125);
+      border-radius: .25rem;
+      height: 36px;
+      background: #f8f9fa;
+    }
+
+
+    .patrol-table th,
+    .patrol-table td {
+      font-size: .82rem;
+      padding: .35rem .45rem;
+      vertical-align: middle;
+    }
+
+    .patrol-group-row td {
+      text-align: center;
+      font-weight: 600;
+      color: #1f2937;
+      background: #fff;
+    }
+
+    .status-ok {
+      color: #28a745;
+      font-weight: 700;
+    }
+
+    .status-warn {
+      color: #ffc107;
+      font-weight: 700;
+    }
+
+
+    .dashboard-panel .card-header {
+      padding: .45rem .75rem;
+    }
+
+    .dashboard-panel .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .notice-table th,
+    .notice-table td {
+      font-size: .84rem;
+      vertical-align: top;
+    }
+
+    .notice-table td {
+      padding: .55rem .5rem;
+    }
+
+    .msg-item {
+      border: 1px solid #dee2e6;
+      border-radius: .25rem;
+      background: #fff;
+      padding: .75rem;
+      margin-bottom: .75rem;
+    }
+
+    .msg-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid #28a745;
+      color: #28a745;
+      font-weight: 700;
+      margin-right: .5rem;
+      flex-shrink: 0;
+    }
+
+    .btn-view {
+      min-width: 72px;
+    }
+
+    .notice-scroll,
+    .message-scroll {
+      max-height: 360px;
+      overflow: auto;
+    }
+
+    .gate-row-add {      cursor: pointer;
       user-select: none;
     }
 
@@ -188,6 +299,36 @@
       display: inline-block;
       white-space: nowrap;
     }
+
+    .survey-header {
+      background: #17a2b8;
+      color: #fff;
+      font-size: 1.5rem;
+      font-weight: 500;
+      padding: 10px 16px;
+      border-radius: .25rem .25rem 0 0;
+    }
+
+    .survey-search-box {
+      border: 1px solid rgba(0, 0, 0, .125);
+      border-top: 0;
+      padding: 18px;
+      border-radius: 0 0 .25rem .25rem;
+      background: #f7f7f7;
+    }
+
+    .survey-card {
+      border: 1px solid rgba(0, 0, 0, .125);
+      border-radius: .25rem;
+      background: #fff;
+      box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    }
+
+    .survey-table th,
+    .survey-table td {
+      font-size: .95rem;
+      vertical-align: middle;
+    }
   </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -223,7 +364,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column menu-compact" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="#" class="nav-link js-menu active" data-target="dashboard-section">
+            <a href="#" class="nav-link js-menu active" data-target="dashboard-section" data-title="Trang thông tin">
               <i class="nav-icon fas fa-house"></i>
               <p>Trang chính</p>
             </a>
@@ -309,9 +450,27 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="login.html" class="nav-link">
-              <i class="nav-icon fas fa-right-to-bracket"></i>
-              <p>Login Page</p>
+            <a href="#" class="nav-link js-menu" data-target="survey-program-section" data-title="Chương Trình Khảo Sát">
+              <i class="nav-icon fas fa-icons"></i>
+              <p>Chương trình khảo sát</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-menu" data-target="gnvc-repair-request-section" data-title="Đề nghị sửa chữa">
+              <i class="nav-icon fas fa-truck-medical"></i>
+              <p>GNVCKế hoạch sửa chữa</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-menu" data-target="gnvc-repair-request-section" data-title="Đề nghị sửa chữa">
+              <i class="nav-icon fas fa-screwdriver-wrench"></i>
+              <p>Kế hoạch sửa chữa</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-menu" data-target="gnvc-patrol-section" data-title="Báo cáo tuần tra bảo vệ">
+              <i class="nav-icon fas fa-user-shield"></i>
+              <p>Tuần tra bảo vệ</p>
             </a>
           </li>
         </ul>
@@ -333,28 +492,81 @@
 
     <section class="content">
       <div class="container-fluid">
-        <div id="dashboard-section" class="content-section">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="small-box bg-info">
-                <div class="inner">
-                  <h3>150</h3>
-                  <p>Đơn hàng mới</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-cart-shopping"></i>
+        <div id="dashboard-section" class="content-section dashboard-panel">
+          <h2 class="h3 mb-3">Trang thông tin</h2>
+
+          <div class="card mb-2">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-inbox mr-1"></i>Thông báo</h3>
+              <div class="card-tools d-flex align-items-center">
+                <button class="btn btn-tool btn-sm mr-1"><i class="fas fa-list"></i></button>
+                <div class="input-group input-group-sm" style="width: 180px;">
+                  <input type="text" class="form-control" placeholder="Tìm thông báo">
+                  <div class="input-group-append"><button class="btn btn-default"><i class="fas fa-search"></i></button></div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="small-box bg-success">
-                <div class="inner">
-                  <h3>53%</h3>
-                  <p>Tỷ lệ tăng trưởng</p>
+            <div class="card-body p-0 notice-scroll">
+              <table class="table table-bordered notice-table mb-0">
+                <thead>
+                  <tr>
+                    <th style="width:40px">STT</th>
+                    <th>Thông báo</th>
+                    <th style="width:120px">Xem</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td><strong>THÔNG BÁO CHUẨN BỊ NGHỈ TẾT NGUYÊN ĐÁN 2026</strong><br>Số: 24/2026/MTVX-TB<br>Ngày ban hành: 12/02/2026</td><td class="text-center"><button class="btn btn-info btn-sm btn-view">Xem</button></td></tr>
+                  <tr><td>2</td><td><strong>THÔNG BÁO THƯỞNG TẾT VÀ CHẾ ĐỘ LÀM TẾT 2026</strong><br>Số: 23/2026/MTVX-TB<br>Ngày ban hành: 03/02/2026</td><td class="text-center"><button class="btn btn-info btn-sm btn-view">Xem</button></td></tr>
+                  <tr><td>3</td><td><strong>THÔNG BÁO NGHỈ TẾT 2026</strong><br>Số: 22/2026/MTVX-TB<br>Ngày ban hành: 27/01/2026</td><td class="text-center"><button class="btn btn-info btn-sm btn-view">Xem</button></td></tr>
+                  <tr><td>4</td><td><strong>BỔ NHIỆM ÔNG LÊ XUÂN HOÀNG</strong><br>Số: 34/2026/MTVX-QĐ<br>Ngày ban hành: 22/01/2026</td><td class="text-center"><button class="btn btn-info btn-sm btn-view">Xem</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card mb-0">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-location-arrow mr-1"></i>Tin nhắn</h3>
+            </div>
+            <div class="card-body message-scroll">
+              <div class="msg-item">
+                <div class="d-flex align-items-start">
+                  <div class="msg-logo">V</div>
+                  <div>
+                    <div class="text-primary font-weight-bold">Việt Xanh APP</div>
+                    <div class="small text-muted">11:30 28/02/2026</div>
+                  </div>
                 </div>
-                <div class="icon">
-                  <i class="fas fa-chart-line"></i>
+                <div class="mt-2 small">
+                  📢 Người gửi: BP HCNS Việt Xanh<br>
+                  ⏰ Thời gian: 28/02/2026 11:30:56<br>
+                  👋 Xin chào Võ Quốc Bình!<br>
+                  Đây là tin nhắn tự động từ bộ phận HCNS Việt Xanh. Vui lòng vào Việt Xanh APP để kiểm tra công của bạn.<br>
+                  Chúc bạn một ngày vui vẻ và hiệu quả! 🌻
                 </div>
+              </div>
+
+              <div class="msg-item">
+                <div class="d-flex align-items-start">
+                  <div class="msg-logo">V</div>
+                  <div>
+                    <div class="text-primary font-weight-bold">Việt Xanh APP</div>
+                    <div class="small text-muted">08:01 28/02/2026</div>
+                  </div>
+                </div>
+                <div class="mt-2 small">🕘 Thông tin chấm công: Vào 08h01m28 28/02/2026 Chấm tại máy MCC Bảo vệ VX01 - Vào</div>
+              </div>
+
+              <div class="msg-item mb-0">
+                <div class="d-flex align-items-start">
+                  <div class="msg-logo">V</div>
+                  <div>
+                    <div class="text-primary font-weight-bold">Việt Xanh APP</div>
+                    <div class="small text-muted">17:05 27/02/2026</div>
+                  </div>
+                </div>
+                <div class="mt-2 small">🕔 Thông tin chấm công: Ra 17h05m52 27/02/2026 Chấm tại máy MCC Bảo vệ VX01 - Ra</div>
               </div>
             </div>
           </div>
@@ -440,7 +652,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                     </div>
-                    <input type="date" class="form-control contractor-date" value="2026-02-01" data-display-format="DD-MM-YYYY">
+                    <input type="date" class="form-control contractor-date" value="2026-01-01" data-display-format="DD-MM-YYYY">
                   </div>
                 </div>
                 <div class="form-group col-md-4">
@@ -1222,7 +1434,7 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label>Họ và tên</label>
-                    <input type="text" class="form-control" value="Võ Quốc Bình">
+                    <input type="text" class="form-control" value="Võ Quốc Bình" readonly>
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -1412,6 +1624,192 @@
           </div>
         </div>
         </div>
+
+        <div id="gnvc-repair-request-section" class="content-section d-none">
+          <div class="d-flex justify-content-end mb-2">
+            <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#gnvcCreateModal"><i class="fas fa-plus mr-1"></i>Thêm mới</button>
+          </div>
+          <div class="card card-teal">
+            <div class="card-header py-2">
+              <h3 class="card-title">Lọc dữ liệu</h3>
+            </div>
+            <div class="card-body">
+              <div class="gnvc-filter-card p-3 mb-3">
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>Từ ngày</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
+                      <input type="date" class="form-control" value="2026-01-01">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label>Đến ngày</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
+                      <input type="date" class="form-control" value="2026-02-28">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row mt-3">
+                  <div class="col-md-6">
+                    <label>Từ khóa</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-search"></i></span></div>
+                      <input type="text" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label>Tình trạng</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-check-circle"></i></span></div>
+                      <select class="form-control">
+                        <option selected>Chưa nghiệm thu</option>
+                        <option>Đã nghiệm thu</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4">
+                  <button class="btn btn-info px-4">Tìm kiếm</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gnvc-empty-card mt-3"></div>
+        </div>
+
+        <div id="gnvc-patrol-section" class="content-section d-none">
+          <div class="card card-teal mb-2">
+            <div class="card-header py-2"><h3 class="card-title">Lọc thời gian</h3></div>
+            <div class="card-body">
+              <div class="form-row align-items-end">
+                <div class="col-md-12">
+                  <label>Từ ngày</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
+                    <input type="date" class="form-control" value="2026-02-28">
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-info mt-3">Lọc theo ngày</button>
+            </div>
+          </div>
+
+          <div class="card card-teal mb-0">
+            <div class="card-header py-2"><h3 class="card-title">Từ 27/02/2026 06:00 đến 28/02/2026 06:00</h3></div>
+            <div class="table-responsive">
+              <table class="table table-bordered patrol-table mb-0">
+                <thead>
+                  <tr>
+                    <th style="width:40px">#</th>
+                    <th>Khu vực</th>
+                    <th style="width:200px">Thời gian quét</th>
+                    <th style="width:90px">Tình trạng</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="patrol-group-row"><td colspan="4">Việt Xanh 01<br><small>Mã tuần tra: TTBV-0226-160162 &nbsp; | &nbsp; Bắt đầu: 27/02 20:57 &nbsp; Kết thúc:</small></td></tr>
+                  <tr><td>1</td><td>Cầu kho A</td><td>27/02 20:59</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>2</td><td>Cầu phụ kho A (Cầu phụny)</td><td>27/02 20:58</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>3</td><td>Góc Ngoài bờ dốc</td><td>27/02 21:02</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>4</td><td>Khu Bồn trộn gỗ đốt</td><td>27/02 21:01</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>5</td><td>Khu đóng gạch</td><td>27/02 21:03</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>6</td><td>Khu đập phế</td><td>27/02 21:04</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>7</td><td>Khu xử lý nước</td><td>27/02 21:00</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>8</td><td>Nhà xe CBNV</td><td>27/02 20:58</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>9</td><td>Nhà xe VP Xưởng</td><td>27/02 21:04</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>10</td><td>Trạm điện</td><td>27/02 21:00</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>11</td><td>Xưởng C1</td><td>27/02 20:59</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>12</td><td>Xưởng C2</td><td></td><td class="text-center"><span class="status-warn">⚠</span></td></tr>
+
+                  <tr class="patrol-group-row"><td colspan="4">Mã tuần tra: TTBV-0226-415500<br><small>Bắt đầu: 27/02 22:02 &nbsp; Kết thúc:</small></td></tr>
+                  <tr><td>1</td><td>Cầu kho A</td><td>27/02 22:12</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>2</td><td>Cầu phụ kho A (Cầu phụny)</td><td>27/02 22:11</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>3</td><td>Góc Ngoài bờ dốc</td><td>27/02 22:05</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>4</td><td>Khu Bồn trộn gỗ đốt</td><td>27/02 22:10</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>5</td><td>Khu đóng gạch</td><td>27/02 22:05</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>6</td><td>Khu đập phế</td><td>27/02 22:04</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>7</td><td>Khu xử lý nước</td><td>27/02 22:10</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>8</td><td>Nhà xe CBNV</td><td>27/02 22:11</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>9</td><td>Nhà xe VP Xưởng</td><td>27/02 22:03</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>10</td><td>Trạm điện</td><td>27/02 22:10</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>11</td><td>Xưởng C1</td><td>27/02 22:13</td><td class="text-center"><span class="status-ok">▣</span></td></tr>
+                  <tr><td>12</td><td>Xưởng C2</td><td></td><td class="text-center"><span class="status-warn">⚠</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="survey-program-section" class="content-section d-none">
+          <div class="survey-header">Tìm kiếm</div>
+          <div class="survey-search-box mb-3">
+            <div class="form-row align-items-end">
+              <div class="col-md-5">
+                <label for="survey-date-from">Từ ngày</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="far fa-clock"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="survey-date-from" value="01/01/2026">
+                </div>
+              </div>
+              <div class="col-md-5">
+                <label for="survey-date-to">Đến ngày</label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="far fa-clock"></i></span>
+                  </div>
+                  <input type="text" class="form-control" id="survey-date-to" value="31/12/2026">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <button class="btn btn-primary btn-block"><i class="fas fa-search mr-1"></i>Tìm kiếm</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="survey-card">
+            <div class="card-header bg-white border-bottom">
+              <h3 class="card-title">Chương trình khảo sát</h3>
+            </div>
+            <div class="card-body pb-0">
+              <div class="d-flex justify-content-end align-items-center mb-2">
+                <label class="mb-0 mr-2" for="survey-search-input">Search:</label>
+                <input id="survey-search-input" type="text" class="form-control form-control-sm" style="width: 180px;">
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover survey-table mb-0">
+                <thead>
+                  <tr>
+                    <th style="width: 60px;">STT</th>
+                    <th>Tên phiếu khảo sát</th>
+                    <th style="width: 170px;">Ngày bắt đầu</th>
+                    <th style="width: 170px;">Ngày kết thúc</th>
+                    <th style="width: 160px;">Tình trạng</th>
+                    <th style="width: 150px;">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td colspan="6" class="text-center text-muted py-4">No data available in table</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <p class="mb-0">Showing 0 to 0 of 0 entries</p>
+              <div class="btn-group btn-group-sm">
+                <button class="btn btn-default" disabled>Previous</button>
+                <button class="btn btn-default" disabled>Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -1421,6 +1819,38 @@
   </footer>
 </div>
 
+
+  <div class="modal fade" id="gnvcCreateModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Thêm phiếu đề nghị sửa chữa</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-row">
+              <div class="col-md-3 mb-3"><label>Số phiếu <span class="text-danger">*</span></label><input type="text" class="form-control" value="KHSC-2602-395" readonly></div>
+              <div class="col-md-3 mb-3"><label>Ngày viết đơn <span class="text-danger">*</span></label><input type="text" class="form-control" value="28/02/2026" readonly></div>
+              <div class="col-md-3 mb-3"><label>Họ và tên <span class="text-danger">*</span></label><input type="text" class="form-control" value="Võ Quốc Bình" readonly></div>
+              <div class="col-md-3 mb-3"><label>Bộ phận <span class="text-danger">*</span></label><input type="text" class="form-control" value="IT" readonly></div>
+            </div>
+            <div class="form-group mb-3"><label>Yêu cầu <span class="text-danger">*</span></label><select class="form-control"><option>Sửa chữa</option></select></div>
+            <div class="form-group mb-3"><label>Tên thiết bị <span class="text-danger">*</span></label><input type="text" class="form-control"></div>
+            <div class="form-group mb-3"><label>Tình trạng <span class="text-danger">*</span></label><input type="text" class="form-control"></div>
+            <div class="form-row">
+              <div class="col-md-6 mb-3"><label>Thời gian hoàn thành <span class="text-danger">*</span></label><input type="text" class="form-control" value="28/02/2026"></div>
+              <div class="col-md-6 mb-3"><label>GĐ bộ phận <span class="text-danger">*</span></label><input type="text" class="form-control" value="Nguyễn Đình Phú" readonly></div>
+            </div>
+            <button type="button" class="btn btn-primary">Thêm mới</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
@@ -1428,7 +1858,6 @@
   const menuItems = document.querySelectorAll('.js-menu');
   const sections = document.querySelectorAll('.content-section');
   const pageTitle = document.getElementById('page-title');
-
   menuItems.forEach((item) => {
     item.addEventListener('click', (event) => {
       event.preventDefault();
@@ -1661,6 +2090,7 @@
       pageTitle.textContent = subItem.getAttribute('data-title') || subItem.textContent.trim();
     });
   });
+
 
   const gateItemsBody = document.getElementById('gate-items-body');
   const gateSubmitBtn = document.getElementById('gate-submit-btn');
