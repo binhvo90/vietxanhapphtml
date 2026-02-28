@@ -207,8 +207,58 @@
       font-weight: 700;
     }
 
-    .gate-row-add {
-      cursor: pointer;
+
+    .dashboard-panel .card-header {
+      padding: .45rem .75rem;
+    }
+
+    .dashboard-panel .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .notice-table th,
+    .notice-table td {
+      font-size: .84rem;
+      vertical-align: top;
+    }
+
+    .notice-table td {
+      padding: .55rem .5rem;
+    }
+
+    .msg-item {
+      border: 1px solid #dee2e6;
+      border-radius: .25rem;
+      background: #fff;
+      padding: .75rem;
+      margin-bottom: .75rem;
+    }
+
+    .msg-logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      border: 1px solid #28a745;
+      color: #28a745;
+      font-weight: 700;
+      margin-right: .5rem;
+      flex-shrink: 0;
+    }
+
+    .btn-view {
+      min-width: 72px;
+    }
+
+    .notice-scroll,
+    .message-scroll {
+      max-height: 360px;
+      overflow: auto;
+    }
+
+    .gate-row-add {      cursor: pointer;
       user-select: none;
     }
 
@@ -314,7 +364,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column menu-compact" role="menu" data-accordion="false">
           <li class="nav-item">
-            <a href="#" class="nav-link js-menu active" data-target="dashboard-section">
+            <a href="#" class="nav-link js-menu active" data-target="dashboard-section" data-title="Trang thông tin">
               <i class="nav-icon fas fa-house"></i>
               <p>Trang chính</p>
             </a>
@@ -442,28 +492,81 @@
 
     <section class="content">
       <div class="container-fluid">
-        <div id="dashboard-section" class="content-section">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="small-box bg-info">
-                <div class="inner">
-                  <h3>150</h3>
-                  <p>Đơn hàng mới</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-cart-shopping"></i>
+        <div id="dashboard-section" class="content-section dashboard-panel">
+          <h2 class="h3 mb-3">Trang thông tin</h2>
+
+          <div class="card mb-2">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-inbox mr-1"></i>Thông báo</h3>
+              <div class="card-tools d-flex align-items-center">
+                <button class="btn btn-tool btn-sm mr-1"><i class="fas fa-list"></i></button>
+                <div class="input-group input-group-sm" style="width: 180px;">
+                  <input type="text" class="form-control" placeholder="Tìm thông báo">
+                  <div class="input-group-append"><button class="btn btn-default"><i class="fas fa-search"></i></button></div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="small-box bg-success">
-                <div class="inner">
-                  <h3>53%</h3>
-                  <p>Tỷ lệ tăng trưởng</p>
+            <div class="card-body p-0 notice-scroll">
+              <table class="table table-bordered notice-table mb-0">
+                <thead>
+                  <tr>
+                    <th style="width:40px">STT</th>
+                    <th>Thông báo</th>
+                    <th style="width:120px">Xem</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>1</td><td><strong>THÔNG BÁO CHUẨN BỊ NGHỈ TẾT NGUYÊN ĐÁN 2026</strong><br>Số: 24/2026/MTVX-TB<br>Ngày ban hành: 12/02/2026</td><td class="text-center"><button class="btn btn-info btn-sm btn-view">Xem</button></td></tr>
+                  <tr><td>2</td><td><strong>THÔNG BÁO THƯỞNG TẾT VÀ CHẾ ĐỘ LÀM TẾT 2026</strong><br>Số: 23/2026/MTVX-TB<br>Ngày ban hành: 03/02/2026</td><td class="text-center"><button class="btn btn-info btn-sm btn-view">Xem</button></td></tr>
+                  <tr><td>3</td><td><strong>THÔNG BÁO NGHỈ TẾT 2026</strong><br>Số: 22/2026/MTVX-TB<br>Ngày ban hành: 27/01/2026</td><td class="text-center"><button class="btn btn-info btn-sm btn-view">Xem</button></td></tr>
+                  <tr><td>4</td><td><strong>BỔ NHIỆM ÔNG LÊ XUÂN HOÀNG</strong><br>Số: 34/2026/MTVX-QĐ<br>Ngày ban hành: 22/01/2026</td><td class="text-center"><button class="btn btn-info btn-sm btn-view">Xem</button></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card mb-0">
+            <div class="card-header">
+              <h3 class="card-title"><i class="fas fa-location-arrow mr-1"></i>Tin nhắn</h3>
+            </div>
+            <div class="card-body message-scroll">
+              <div class="msg-item">
+                <div class="d-flex align-items-start">
+                  <div class="msg-logo">V</div>
+                  <div>
+                    <div class="text-primary font-weight-bold">Việt Xanh APP</div>
+                    <div class="small text-muted">11:30 28/02/2026</div>
+                  </div>
                 </div>
-                <div class="icon">
-                  <i class="fas fa-chart-line"></i>
+                <div class="mt-2 small">
+                  📢 Người gửi: BP HCNS Việt Xanh<br>
+                  ⏰ Thời gian: 28/02/2026 11:30:56<br>
+                  👋 Xin chào Võ Quốc Bình!<br>
+                  Đây là tin nhắn tự động từ bộ phận HCNS Việt Xanh. Vui lòng vào Việt Xanh APP để kiểm tra công của bạn.<br>
+                  Chúc bạn một ngày vui vẻ và hiệu quả! 🌻
                 </div>
+              </div>
+
+              <div class="msg-item">
+                <div class="d-flex align-items-start">
+                  <div class="msg-logo">V</div>
+                  <div>
+                    <div class="text-primary font-weight-bold">Việt Xanh APP</div>
+                    <div class="small text-muted">08:01 28/02/2026</div>
+                  </div>
+                </div>
+                <div class="mt-2 small">🕘 Thông tin chấm công: Vào 08h01m28 28/02/2026 Chấm tại máy MCC Bảo vệ VX01 - Vào</div>
+              </div>
+
+              <div class="msg-item mb-0">
+                <div class="d-flex align-items-start">
+                  <div class="msg-logo">V</div>
+                  <div>
+                    <div class="text-primary font-weight-bold">Việt Xanh APP</div>
+                    <div class="small text-muted">17:05 27/02/2026</div>
+                  </div>
+                </div>
+                <div class="mt-2 small">🕔 Thông tin chấm công: Ra 17h05m52 27/02/2026 Chấm tại máy MCC Bảo vệ VX01 - Ra</div>
               </div>
             </div>
           </div>
