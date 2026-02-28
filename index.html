@@ -381,14 +381,22 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link js-gnvc-main">
+            <a href="#" class="nav-link js-menu" data-target="gnvc-repair-request-section" data-title="Đề nghị sửa chữa phương tiện vận chuyển" data-breadcrumb="Home|GNVC|Đề nghị sửa chữa phương tiện">
               <i class="nav-icon fas fa-truck-medical"></i>
-              <p>GNVCKế hoạch sửa chữa <i class="fas fa-angle-left right"></i></p>
+              <p>GNVCKế hoạch sửa chữa</p>
             </a>
-            <ul class="nav nav-treeview gnvc-submenu">
-              <li class="nav-item"><a href="#" class="nav-link js-gnvc-sub" data-target="gnvc-repair-request-section" data-title="Đề nghị sửa chữa phương tiện vận chuyển" data-breadcrumb="Home|GNVC|Đề nghị sửa chữa phương tiện"><i class="far fa-square nav-icon"></i><p>Kế hoạch sửa chữa</p></a></li>
-              <li class="nav-item"><a href="#" class="nav-link js-gnvc-sub" data-target="gnvc-patrol-section" data-title="Tuần tra bảo vệ" data-breadcrumb="Home|GNVC|Tuần tra bảo vệ"><i class="far fa-square nav-icon"></i><p>Tuần tra bảo vệ</p></a></li>
-            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-menu" data-target="gnvc-repair-request-section" data-title="Đề nghị sửa chữa phương tiện vận chuyển" data-breadcrumb="Home|GNVC|Đề nghị sửa chữa phương tiện">
+              <i class="nav-icon fas fa-screwdriver-wrench"></i>
+              <p>Kế hoạch sửa chữa</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link js-menu" data-target="gnvc-patrol-section" data-title="Tuần tra bảo vệ" data-breadcrumb="Home|GNVC|Tuần tra bảo vệ">
+              <i class="nav-icon fas fa-user-shield"></i>
+              <p>Tuần tra bảo vệ</p>
+            </a>
           </li>
           <li class="nav-item">
             <a href="login.html" class="nav-link">
@@ -1683,9 +1691,6 @@
       if (gateMain) gateMain.classList.remove('active');
       if (gateSubmenu) gateSubmenu.classList.remove('show');
       gateSubItems.forEach((i) => i.classList.remove('active-sub'));
-      if (gnvcMain) gnvcMain.classList.remove('active');
-      if (gnvcSubmenu) gnvcSubmenu.classList.remove('show');
-      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
 
       const targetId = item.getAttribute('data-target');
       sections.forEach((section) => {
@@ -1693,7 +1698,7 @@
       });
 
       pageTitle.textContent = item.getAttribute('data-title') || item.textContent.trim();
-      setBreadcrumb(['Home', 'ERP']);
+      setBreadcrumb((item.getAttribute('data-breadcrumb') || 'Home|ERP').split('|'));
     });
   });
 
@@ -1738,9 +1743,6 @@
       if (gateMain) gateMain.classList.remove('active');
       if (gateSubmenu) gateSubmenu.classList.remove('show');
       gateSubItems.forEach((i) => i.classList.remove('active-sub'));
-      if (gnvcMain) gnvcMain.classList.remove('active');
-      if (gnvcSubmenu) gnvcSubmenu.classList.remove('show');
-      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
 
       attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
       const attendanceApproveSubItems = document.querySelectorAll('.js-attendance-approve-sub');
@@ -1784,9 +1786,6 @@
       if (gateMain) gateMain.classList.remove('active');
       if (gateSubmenu) gateSubmenu.classList.remove('show');
       gateSubItems.forEach((i) => i.classList.remove('active-sub'));
-      if (gnvcMain) gnvcMain.classList.remove('active');
-      if (gnvcSubmenu) gnvcSubmenu.classList.remove('show');
-      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
 
       attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
       attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
@@ -1819,9 +1818,6 @@
       if (gateMain) gateMain.classList.remove('active');
       if (gateSubmenu) gateSubmenu.classList.remove('show');
       gateSubItems.forEach((i) => i.classList.remove('active-sub'));
-      if (gnvcMain) gnvcMain.classList.remove('active');
-      if (gnvcSubmenu) gnvcSubmenu.classList.remove('show');
-      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
       fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
       fuelMain.classList.add('active');
       fuelSubmenu.classList.toggle('show');
@@ -1842,9 +1838,6 @@
       if (gateMain) gateMain.classList.remove('active');
       if (gateSubmenu) gateSubmenu.classList.remove('show');
       gateSubItems.forEach((i) => i.classList.remove('active-sub'));
-      if (gnvcMain) gnvcMain.classList.remove('active');
-      if (gnvcSubmenu) gnvcSubmenu.classList.remove('show');
-      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
 
       fuelMain.classList.add('active');
       fuelSubmenu.classList.add('show');
@@ -1879,9 +1872,6 @@
       if (fuelSubmenu) fuelSubmenu.classList.remove('show');
       fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
       gateSubItems.forEach((i) => i.classList.remove('active-sub'));
-      if (gnvcMain) gnvcMain.classList.remove('active');
-      if (gnvcSubmenu) gnvcSubmenu.classList.remove('show');
-      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
       gateMain.classList.add('active');
       gateSubmenu.classList.toggle('show');
     });
@@ -1901,9 +1891,6 @@
       if (fuelMain) fuelMain.classList.remove('active');
       if (fuelSubmenu) fuelSubmenu.classList.remove('show');
       fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
-      if (gnvcMain) gnvcMain.classList.remove('active');
-      if (gnvcSubmenu) gnvcSubmenu.classList.remove('show');
-      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
 
       gateMain.classList.add('active');
       gateSubmenu.classList.add('show');
@@ -1919,67 +1906,6 @@
     });
   });
 
-
-  const gnvcMain = document.querySelector('.js-gnvc-main');
-  const gnvcSubmenu = document.querySelector('.gnvc-submenu');
-  const gnvcSubItems = document.querySelectorAll('.js-gnvc-sub');
-
-  if (gnvcMain && gnvcSubmenu) {
-    gnvcMain.addEventListener('click', (event) => {
-      event.preventDefault();
-      menuItems.forEach((m) => m.classList.remove('active'));
-      const trainingLink = document.querySelector('.js-training-link');
-      if (trainingLink) trainingLink.classList.remove('active');
-      if (attendanceMain) attendanceMain.classList.remove('active');
-      if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
-      if (nestedSubmenu) nestedSubmenu.classList.remove('show');
-      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
-      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
-      if (fuelMain) fuelMain.classList.remove('active');
-      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
-      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
-      if (gateMain) gateMain.classList.remove('active');
-      if (gateSubmenu) gateSubmenu.classList.remove('show');
-      gateSubItems.forEach((i) => i.classList.remove('active-sub'));
-      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
-      gnvcMain.classList.add('active');
-      gnvcSubmenu.classList.toggle('show');
-    });
-  }
-
-  gnvcSubItems.forEach((subItem) => {
-    subItem.addEventListener('click', (event) => {
-      event.preventDefault();
-      menuItems.forEach((m) => m.classList.remove('active'));
-      const trainingLink = document.querySelector('.js-training-link');
-      if (trainingLink) trainingLink.classList.remove('active');
-      if (attendanceMain) attendanceMain.classList.remove('active');
-      if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
-      if (nestedSubmenu) nestedSubmenu.classList.remove('show');
-      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
-      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
-      if (fuelMain) fuelMain.classList.remove('active');
-      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
-      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
-      if (gateMain) gateMain.classList.remove('active');
-      if (gateSubmenu) gateSubmenu.classList.remove('show');
-      gateSubItems.forEach((i) => i.classList.remove('active-sub'));
-
-      gnvcMain.classList.add('active');
-      gnvcSubmenu.classList.add('show');
-      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
-      subItem.classList.add('active-sub');
-
-      const targetId = subItem.getAttribute('data-target');
-      sections.forEach((section) => {
-        section.classList.toggle('d-none', section.id !== targetId);
-      });
-
-      pageTitle.textContent = subItem.getAttribute('data-title') || subItem.textContent.trim();
-      const breadcrumb = (subItem.getAttribute('data-breadcrumb') || 'Home|ERP').split('|');
-      setBreadcrumb(breadcrumb);
-    });
-  });
 
   const gateItemsBody = document.getElementById('gate-items-body');
   const gateSubmitBtn = document.getElementById('gate-submit-btn');
