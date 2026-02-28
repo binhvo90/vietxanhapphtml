@@ -146,6 +146,42 @@
       color: #111 !important;
     }
 
+    .gnvc-submenu {
+      display: none;
+      padding-left: 10px;
+    }
+
+    .gnvc-submenu.show {
+      display: block;
+    }
+
+    .gnvc-submenu .nav-link {
+      color: #c2c7d0;
+    }
+
+    .gnvc-submenu .nav-link.active-sub {
+      background: #1f8fff !important;
+      color: #fff !important;
+    }
+
+    .gnvc-submenu .nav-link.active-sub p,
+    .gnvc-submenu .nav-link.active-sub .nav-icon {
+      color: #fff !important;
+    }
+
+    .gnvc-filter-card {
+      border: 1px solid rgba(0, 0, 0, .125);
+      border-radius: .25rem;
+      background: #f8f9fa;
+    }
+
+    .gnvc-empty-card {
+      border: 1px solid rgba(0, 0, 0, .125);
+      border-radius: .25rem;
+      height: 36px;
+      background: #f8f9fa;
+    }
+
     .gate-row-add {
       cursor: pointer;
       user-select: none;
@@ -345,6 +381,16 @@
             </a>
           </li>
           <li class="nav-item">
+            <a href="#" class="nav-link js-gnvc-main">
+              <i class="nav-icon fas fa-truck-medical"></i>
+              <p>GNVCKế hoạch sửa chữa <i class="fas fa-angle-left right"></i></p>
+            </a>
+            <ul class="nav nav-treeview gnvc-submenu">
+              <li class="nav-item"><a href="#" class="nav-link js-gnvc-sub" data-target="gnvc-repair-request-section" data-title="Đề nghị sửa chữa phương tiện vận chuyển" data-breadcrumb="Home|GNVC|Đề nghị sửa chữa phương tiện"><i class="far fa-square nav-icon"></i><p>Kế hoạch sửa chữa</p></a></li>
+              <li class="nav-item"><a href="#" class="nav-link js-gnvc-sub" data-target="gnvc-patrol-section" data-title="Tuần tra bảo vệ" data-breadcrumb="Home|GNVC|Tuần tra bảo vệ"><i class="far fa-square nav-icon"></i><p>Tuần tra bảo vệ</p></a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
             <a href="login.html" class="nav-link">
               <i class="nav-icon fas fa-right-to-bracket"></i>
               <p>Login Page</p>
@@ -363,7 +409,7 @@
             <h1 id="page-title">Trang chính</h1>
           </div>
           <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right mb-0">
+            <ol class="breadcrumb float-sm-right mb-0" id="page-breadcrumb">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">ERP</li>
             </ol>
@@ -1455,6 +1501,76 @@
         </div>
         </div>
 
+        <div id="gnvc-repair-request-section" class="content-section d-none">
+          <div class="d-flex justify-content-end mb-2">
+            <button class="btn btn-primary"><i class="fas fa-plus mr-1"></i>Thêm mới</button>
+          </div>
+          <div class="card card-teal">
+            <div class="card-header py-2">
+              <h3 class="card-title">Lọc dữ liệu</h3>
+            </div>
+            <div class="card-body">
+              <div class="gnvc-filter-card p-3 mb-3">
+                <div class="form-row">
+                  <div class="col-md-6">
+                    <label>Từ ngày</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
+                      <input type="text" class="form-control" value="01/02/2026">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label>Đến ngày</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-calendar-alt"></i></span></div>
+                      <input type="text" class="form-control" value="28/02/2026">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row mt-3">
+                  <div class="col-md-3">
+                    <label>Số phiếu</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-search"></i></span></div>
+                      <input type="text" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <label>Số xe</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-truck-moving"></i></span></div>
+                      <select class="form-control">
+                        <option>Hãy chọn phương tiện</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label>Tình trạng</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend"><span class="input-group-text"><i class="fas fa-check-circle"></i></span></div>
+                      <select class="form-control">
+                        <option>Chưa nghiệm thu</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-4">
+                  <button class="btn btn-info px-4">Tìm kiếm</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gnvc-empty-card mt-3"></div>
+        </div>
+
+        <div id="gnvc-patrol-section" class="content-section d-none">
+          <div class="card">
+            <div class="card-body">Nội dung Tuần tra bảo vệ</div>
+          </div>
+        </div>
+
         <div id="survey-program-section" class="content-section d-none">
           <div class="survey-header">Tìm kiếm</div>
           <div class="survey-search-box mb-3">
@@ -1537,6 +1653,16 @@
   const menuItems = document.querySelectorAll('.js-menu');
   const sections = document.querySelectorAll('.content-section');
   const pageTitle = document.getElementById('page-title');
+  const pageBreadcrumb = document.getElementById('page-breadcrumb');
+
+  const setBreadcrumb = (items = ['Home', 'ERP']) => {
+    if (!pageBreadcrumb) return;
+    pageBreadcrumb.innerHTML = items.map((item, idx) => {
+      const isLast = idx === items.length - 1;
+      if (isLast) return `<li class="breadcrumb-item active">${item}</li>`;
+      return `<li class="breadcrumb-item"><a href="#">${item}</a></li>`;
+    }).join('');
+  };
 
   menuItems.forEach((item) => {
     item.addEventListener('click', (event) => {
@@ -1557,6 +1683,9 @@
       if (gateMain) gateMain.classList.remove('active');
       if (gateSubmenu) gateSubmenu.classList.remove('show');
       gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gnvcMain) gnvcMain.classList.remove('active');
+      if (gnvcSubmenu) gnvcSubmenu.classList.remove('show');
+      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
 
       const targetId = item.getAttribute('data-target');
       sections.forEach((section) => {
@@ -1564,6 +1693,7 @@
       });
 
       pageTitle.textContent = item.getAttribute('data-title') || item.textContent.trim();
+      setBreadcrumb(['Home', 'ERP']);
     });
   });
 
@@ -1608,6 +1738,9 @@
       if (gateMain) gateMain.classList.remove('active');
       if (gateSubmenu) gateSubmenu.classList.remove('show');
       gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gnvcMain) gnvcMain.classList.remove('active');
+      if (gnvcSubmenu) gnvcSubmenu.classList.remove('show');
+      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
 
       attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
       const attendanceApproveSubItems = document.querySelectorAll('.js-attendance-approve-sub');
@@ -1651,6 +1784,9 @@
       if (gateMain) gateMain.classList.remove('active');
       if (gateSubmenu) gateSubmenu.classList.remove('show');
       gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gnvcMain) gnvcMain.classList.remove('active');
+      if (gnvcSubmenu) gnvcSubmenu.classList.remove('show');
+      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
 
       attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
       attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
@@ -1683,6 +1819,9 @@
       if (gateMain) gateMain.classList.remove('active');
       if (gateSubmenu) gateSubmenu.classList.remove('show');
       gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gnvcMain) gnvcMain.classList.remove('active');
+      if (gnvcSubmenu) gnvcSubmenu.classList.remove('show');
+      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
       fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
       fuelMain.classList.add('active');
       fuelSubmenu.classList.toggle('show');
@@ -1703,6 +1842,9 @@
       if (gateMain) gateMain.classList.remove('active');
       if (gateSubmenu) gateSubmenu.classList.remove('show');
       gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gnvcMain) gnvcMain.classList.remove('active');
+      if (gnvcSubmenu) gnvcSubmenu.classList.remove('show');
+      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
 
       fuelMain.classList.add('active');
       fuelSubmenu.classList.add('show');
@@ -1737,6 +1879,9 @@
       if (fuelSubmenu) fuelSubmenu.classList.remove('show');
       fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
       gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gnvcMain) gnvcMain.classList.remove('active');
+      if (gnvcSubmenu) gnvcSubmenu.classList.remove('show');
+      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
       gateMain.classList.add('active');
       gateSubmenu.classList.toggle('show');
     });
@@ -1756,6 +1901,9 @@
       if (fuelMain) fuelMain.classList.remove('active');
       if (fuelSubmenu) fuelSubmenu.classList.remove('show');
       fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gnvcMain) gnvcMain.classList.remove('active');
+      if (gnvcSubmenu) gnvcSubmenu.classList.remove('show');
+      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
 
       gateMain.classList.add('active');
       gateSubmenu.classList.add('show');
@@ -1768,6 +1916,68 @@
       });
 
       pageTitle.textContent = subItem.getAttribute('data-title') || subItem.textContent.trim();
+    });
+  });
+
+
+  const gnvcMain = document.querySelector('.js-gnvc-main');
+  const gnvcSubmenu = document.querySelector('.gnvc-submenu');
+  const gnvcSubItems = document.querySelectorAll('.js-gnvc-sub');
+
+  if (gnvcMain && gnvcSubmenu) {
+    gnvcMain.addEventListener('click', (event) => {
+      event.preventDefault();
+      menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
+      if (attendanceMain) attendanceMain.classList.remove('active');
+      if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
+      if (nestedSubmenu) nestedSubmenu.classList.remove('show');
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (fuelMain) fuelMain.classList.remove('active');
+      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gateMain) gateMain.classList.remove('active');
+      if (gateSubmenu) gateSubmenu.classList.remove('show');
+      gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
+      gnvcMain.classList.add('active');
+      gnvcSubmenu.classList.toggle('show');
+    });
+  }
+
+  gnvcSubItems.forEach((subItem) => {
+    subItem.addEventListener('click', (event) => {
+      event.preventDefault();
+      menuItems.forEach((m) => m.classList.remove('active'));
+      const trainingLink = document.querySelector('.js-training-link');
+      if (trainingLink) trainingLink.classList.remove('active');
+      if (attendanceMain) attendanceMain.classList.remove('active');
+      if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
+      if (nestedSubmenu) nestedSubmenu.classList.remove('show');
+      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (fuelMain) fuelMain.classList.remove('active');
+      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
+      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
+      if (gateMain) gateMain.classList.remove('active');
+      if (gateSubmenu) gateSubmenu.classList.remove('show');
+      gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+
+      gnvcMain.classList.add('active');
+      gnvcSubmenu.classList.add('show');
+      gnvcSubItems.forEach((i) => i.classList.remove('active-sub'));
+      subItem.classList.add('active-sub');
+
+      const targetId = subItem.getAttribute('data-target');
+      sections.forEach((section) => {
+        section.classList.toggle('d-none', section.id !== targetId);
+      });
+
+      pageTitle.textContent = subItem.getAttribute('data-title') || subItem.textContent.trim();
+      const breadcrumb = (subItem.getAttribute('data-breadcrumb') || 'Home|ERP').split('|');
+      setBreadcrumb(breadcrumb);
     });
   });
 
