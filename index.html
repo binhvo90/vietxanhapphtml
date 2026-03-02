@@ -1937,6 +1937,16 @@
     if (!targetId) return;
 
     event.preventDefault();
+    const nextSlug = sectionRouteMap[targetId] || targetId;
+
+    if (window.location.protocol === 'file:') {
+      const nextHash = `#${nextSlug}`;
+      if (window.location.hash !== nextHash) {
+        window.location.hash = nextSlug;
+      }
+      return;
+    }
+
     const nextPath = buildSectionPath(targetId);
     if (window.location.pathname !== nextPath) {
       window.location.href = nextPath;
@@ -2461,6 +2471,9 @@
   };
 
   const getTargetFromLocation = () => {
+    const hashSlug = window.location.hash.replace(/^#/, '');
+    if (hashSlug && routeSectionMap[hashSlug]) return routeSectionMap[hashSlug];
+
     const segments = window.location.pathname.split('/').filter(Boolean);
     const last = segments[segments.length - 1];
 
@@ -2478,6 +2491,12 @@
   if (initialTarget) {
     activateSectionByTarget(initialTarget);
   }
+
+
+  window.addEventListener('hashchange', () => {
+    const target = getTargetFromLocation() || 'dashboard-section';
+    activateSectionByTarget(target);
+  });
 
 </script>
 </body>
