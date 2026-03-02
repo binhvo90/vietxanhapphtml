@@ -23,14 +23,9 @@
   });
 
   const buildMenuHref = (targetId) => {
-    const slug = sectionRouteMap[targetId] || targetId;
     const path = window.location.pathname.replace(/\/+/g, '/');
-
-    const pagesRoot = path.includes('/pages/')
-      ? path.split('/pages/')[0] + '/pages'
-      : path.replace(/\/index\.html$/, '') + '/pages';
-
-    return `${pagesRoot}/${slug}/index.html`.replace(/\/+/g, '/');
+    const base = path.replace(/\/index\.html$/, '').replace(/\/$/, '');
+    return `${base}/index.html?page=${encodeURIComponent(targetId)}`.replace(/\/+/g, '/');
   };
 
   document.addEventListener('click', (event) => {
@@ -548,14 +543,11 @@
   };
 
   const getTargetFromLocation = () => {
-    if (window.__INITIAL_SECTION) return window.__INITIAL_SECTION;
-
-    const path = window.location.pathname.replace(/\/+/g, '/');
-    const match = path.match(/\/pages\/([^\/]+)\/index\.html$/);
-    if (match && routeSectionMap[match[1]]) return routeSectionMap[match[1]];
-
     const pageFromQuery = new URLSearchParams(window.location.search).get('page');
     if (pageFromQuery) return pageFromQuery;
+
+    const hashSlug = window.location.hash.replace(/^#/, '');
+    if (hashSlug && routeSectionMap[hashSlug]) return routeSectionMap[hashSlug];
 
     return 'dashboard-section';
   };
