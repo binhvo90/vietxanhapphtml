@@ -1937,8 +1937,11 @@
     if (!targetId) return;
 
     event.preventDefault();
-    event.stopPropagation();
-    window.location.href = `index.html?page=${encodeURIComponent(targetId)}`;
+    const nextSlug = sectionRouteMap[targetId] || targetId;
+    const nextPath = `/${nextSlug}`;
+    if (window.location.pathname !== nextPath) {
+      window.history.pushState({ sectionId: targetId }, '', nextPath);
+    }
   }, true);
 
   const noticeViewButtons = document.querySelectorAll('.js-notice-view');
@@ -1954,6 +1957,33 @@
   const menuItems = document.querySelectorAll('.js-menu');
   const sections = document.querySelectorAll('.content-section');
   const pageTitle = document.getElementById('page-title');
+
+
+  const sectionRouteMap = {
+    'dashboard-section': 'trang-chinh',
+    'feedback-section': 'phan-anh-gop-y',
+    'contractor-section': 'dang-ky-khach-nha-thau',
+    'personal-section': 'thong-tin-ca-nhan',
+    'salary-advance-section': 'tam-ung-luong',
+    'attendance-overtime-section': 'tang-ca',
+    'attendance-check-section': 'kiem-tra-cong',
+    'attendance-confirm-section': 'xac-nhan-cong',
+    'attendance-leave-section': 'xin-nghi-phep',
+    'approval-leave-section': 'duyet-nghi-phep',
+    'approval-confirm-section': 'duyet-xac-nhan-cong',
+    'salary-table-section': 'xem-bang-luong',
+    'system-log-section': 'nhat-ky-he-thong',
+    'fuel-report-section': 'bao-cao-nhien-lieu',
+    'fuel-request-section': 'de-nghi-cap-nhien-lieu',
+    'gate-ticket-section': 'lap-phieu-ra-cong',
+    'gnvc-repair-request-section': 'ke-hoach-sua-chua',
+    'gnvc-patrol-section': 'tuan-tra-bao-ve',
+    'survey-program-section': 'chuong-trinh-khao-sat'
+  };
+
+  const routeSectionMap = Object.fromEntries(
+    Object.entries(sectionRouteMap).map(([sectionId, slug]) => [slug, sectionId])
+  );
   menuItems.forEach((item) => {
     item.addEventListener('click', (event) => {
       event.preventDefault();
@@ -2358,60 +2388,80 @@
     });
   }
 
-  const pageFromUrl = new URLSearchParams(window.location.search).get('page');
-  if (pageFromUrl) {
-    const targetLink = document.querySelector(`.sidebar .nav-link[data-target="${pageFromUrl}"]`);
-    if (targetLink) {
-      sections.forEach((section) => {
-        section.classList.toggle('d-none', section.id !== pageFromUrl);
-      });
+  const activateSectionByTarget = (targetId) => {
+    if (!targetId) return;
+    const targetLink = document.querySelector(`.sidebar .nav-link[data-target="${targetId}"]`);
+    if (!targetLink) return;
 
-      menuItems.forEach((m) => m.classList.remove('active'));
-      attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
-      attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
-      fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
-      gateSubItems.forEach((i) => i.classList.remove('active-sub'));
+    sections.forEach((section) => {
+      section.classList.toggle('d-none', section.id !== targetId);
+    });
 
-      if (attendanceMain) attendanceMain.classList.remove('active');
-      if (fuelMain) fuelMain.classList.remove('active');
-      if (gateMain) gateMain.classList.remove('active');
-      if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
-      if (nestedSubmenu) nestedSubmenu.classList.remove('show');
-      if (fuelSubmenu) fuelSubmenu.classList.remove('show');
-      if (gateSubmenu) gateSubmenu.classList.remove('show');
+    menuItems.forEach((m) => m.classList.remove('active'));
+    attendanceSubItems.forEach((i) => i.classList.remove('active-sub'));
+    attendanceApproveSubItems.forEach((i) => i.classList.remove('active-sub'));
+    fuelSubItems.forEach((i) => i.classList.remove('active-sub'));
+    gateSubItems.forEach((i) => i.classList.remove('active-sub'));
 
-      if (targetLink.classList.contains('js-menu')) {
-        targetLink.classList.add('active');
-      }
+    if (attendanceMain) attendanceMain.classList.remove('active');
+    if (fuelMain) fuelMain.classList.remove('active');
+    if (gateMain) gateMain.classList.remove('active');
+    if (attendanceSubmenu) attendanceSubmenu.classList.remove('show');
+    if (nestedSubmenu) nestedSubmenu.classList.remove('show');
+    if (fuelSubmenu) fuelSubmenu.classList.remove('show');
+    if (gateSubmenu) gateSubmenu.classList.remove('show');
 
-      if (targetLink.classList.contains('js-attendance-sub')) {
-        if (attendanceMain) attendanceMain.classList.add('active');
-        if (attendanceSubmenu) attendanceSubmenu.classList.add('show');
-        targetLink.classList.add('active-sub');
-      }
-
-      if (targetLink.classList.contains('js-attendance-approve-sub')) {
-        if (attendanceMain) attendanceMain.classList.add('active');
-        if (attendanceSubmenu) attendanceSubmenu.classList.add('show');
-        if (nestedSubmenu) nestedSubmenu.classList.add('show');
-        targetLink.classList.add('active-sub');
-      }
-
-      if (targetLink.classList.contains('js-fuel-sub')) {
-        if (fuelMain) fuelMain.classList.add('active');
-        if (fuelSubmenu) fuelSubmenu.classList.add('show');
-        targetLink.classList.add('active-sub');
-      }
-
-      if (targetLink.classList.contains('js-gate-sub')) {
-        if (gateMain) gateMain.classList.add('active');
-        if (gateSubmenu) gateSubmenu.classList.add('show');
-        targetLink.classList.add('active-sub');
-      }
-
-      pageTitle.textContent = targetLink.getAttribute('data-title') || targetLink.textContent.trim();
+    if (targetLink.classList.contains('js-menu')) {
+      targetLink.classList.add('active');
     }
+
+    if (targetLink.classList.contains('js-attendance-sub')) {
+      if (attendanceMain) attendanceMain.classList.add('active');
+      if (attendanceSubmenu) attendanceSubmenu.classList.add('show');
+      targetLink.classList.add('active-sub');
+    }
+
+    if (targetLink.classList.contains('js-attendance-approve-sub')) {
+      if (attendanceMain) attendanceMain.classList.add('active');
+      if (attendanceSubmenu) attendanceSubmenu.classList.add('show');
+      if (nestedSubmenu) nestedSubmenu.classList.add('show');
+      targetLink.classList.add('active-sub');
+    }
+
+    if (targetLink.classList.contains('js-fuel-sub')) {
+      if (fuelMain) fuelMain.classList.add('active');
+      if (fuelSubmenu) fuelSubmenu.classList.add('show');
+      targetLink.classList.add('active-sub');
+    }
+
+    if (targetLink.classList.contains('js-gate-sub')) {
+      if (gateMain) gateMain.classList.add('active');
+      if (gateSubmenu) gateSubmenu.classList.add('show');
+      targetLink.classList.add('active-sub');
+    }
+
+    pageTitle.textContent = targetLink.getAttribute('data-title') || targetLink.textContent.trim();
+  };
+
+  const getTargetFromLocation = () => {
+    const slug = window.location.pathname.replace(/^\/+|\/+$/g, '');
+    if (slug && routeSectionMap[slug]) return routeSectionMap[slug];
+
+    const pageFromQuery = new URLSearchParams(window.location.search).get('page');
+    if (pageFromQuery) return pageFromQuery;
+
+    return null;
+  };
+
+  const initialTarget = getTargetFromLocation();
+  if (initialTarget) {
+    activateSectionByTarget(initialTarget);
   }
+
+  window.addEventListener('popstate', () => {
+    const target = getTargetFromLocation() || 'dashboard-section';
+    activateSectionByTarget(target);
+  });
 
 </script>
 </body>
