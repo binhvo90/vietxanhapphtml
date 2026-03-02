@@ -1937,8 +1937,7 @@
     if (!targetId) return;
 
     event.preventDefault();
-    const nextSlug = sectionRouteMap[targetId] || targetId;
-    const nextPath = `/${nextSlug}`;
+    const nextPath = buildSectionPath(targetId);
     if (window.location.pathname !== nextPath) {
       window.history.pushState({ sectionId: targetId }, '', nextPath);
     }
@@ -1984,6 +1983,24 @@
   const routeSectionMap = Object.fromEntries(
     Object.entries(sectionRouteMap).map(([sectionId, slug]) => [slug, sectionId])
   );
+
+  const getBasePath = () => {
+    const segments = window.location.pathname.split('/').filter(Boolean);
+    if (!segments.length) return '';
+
+    const last = segments[segments.length - 1];
+    if (last === 'index.html' || routeSectionMap[last]) {
+      return `/${segments.slice(0, -1).join('/')}`.replace(/\/$/, '');
+    }
+
+    return `/${segments.join('/')}`.replace(/\/$/, '');
+  };
+
+  const buildSectionPath = (targetId) => {
+    const slug = sectionRouteMap[targetId] || targetId;
+    const base = getBasePath();
+    return `${base}/${slug}`.replace(/\/+/g, '/');
+  };
   menuItems.forEach((item) => {
     item.addEventListener('click', (event) => {
       event.preventDefault();
@@ -2444,8 +2461,12 @@
   };
 
   const getTargetFromLocation = () => {
-    const slug = window.location.pathname.replace(/^\/+|\/+$/g, '');
-    if (slug && routeSectionMap[slug]) return routeSectionMap[slug];
+    const segments = window.location.pathname.split('/').filter(Boolean);
+    const last = segments[segments.length - 1];
+
+    if (last && last !== 'index.html' && routeSectionMap[last]) {
+      return routeSectionMap[last];
+    }
 
     const pageFromQuery = new URLSearchParams(window.location.search).get('page');
     if (pageFromQuery) return pageFromQuery;
