@@ -1920,13 +1920,27 @@
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 <script>
 
-  window.addEventListener('load', () => {
+  const showPageLoading = (keepVisible = false) => {
     const loading = document.getElementById('page-loading');
     if (!loading) return;
+    loading.classList.remove('hidden');
+    loading.style.display = 'flex';
+    if (!keepVisible) {
+      setTimeout(() => hidePageLoading(), 450);
+    }
+  };
+
+  const hidePageLoading = () => {
+    const loading = document.getElementById('page-loading');
+    if (!loading) return;
+    loading.classList.add('hidden');
     setTimeout(() => {
-      loading.classList.add('hidden');
-      setTimeout(() => loading.remove(), 320);
-    }, 350);
+      loading.style.display = 'none';
+    }, 320);
+  };
+
+  window.addEventListener('load', () => {
+    setTimeout(() => hidePageLoading(), 350);
   });
 
   document.addEventListener('click', (event) => {
@@ -1940,15 +1954,21 @@
     const nextSlug = sectionRouteMap[targetId] || targetId;
 
     if (window.location.protocol === 'file:') {
+      showPageLoading();
       const nextHash = `#${nextSlug}`;
       if (window.location.hash !== nextHash) {
         window.location.hash = nextSlug;
+      } else {
+        const target = getTargetFromLocation() || targetId;
+        activateSectionByTarget(target);
+        hidePageLoading();
       }
       return;
     }
 
     const nextPath = buildSectionPath(targetId);
     if (window.location.pathname !== nextPath) {
+      showPageLoading(true);
       window.location.href = nextPath;
     }
   }, true);
@@ -2496,6 +2516,7 @@
   window.addEventListener('hashchange', () => {
     const target = getTargetFromLocation() || 'dashboard-section';
     activateSectionByTarget(target);
+    hidePageLoading();
   });
 
 </script>
