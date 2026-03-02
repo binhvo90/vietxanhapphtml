@@ -198,6 +198,12 @@ if (gateMain && gateSubmenu) {
   });
 }
 
+
+const feedbackImageUploadBtn = document.getElementById('feedback-image-upload-btn');
+const feedbackImageInput = document.getElementById('feedback-image-input');
+const feedbackImageFeedback = document.getElementById('feedback-image-feedback');
+const feedbackImageList = document.getElementById('feedback-image-list');
+
 const gateItemsBody = document.getElementById('gate-items-body');
 const gateSubmitBtn = document.getElementById('gate-submit-btn');
 const gateImageUploadBtn = document.getElementById('gate-image-upload-btn');
@@ -210,17 +216,18 @@ const GATE_MAX_SIZE_MB = 10;
 const GATE_MAX_SIZE_BYTES = GATE_MAX_SIZE_MB * 1024 * 1024;
 const GATE_ALLOWED_TYPES = new Set(['image/jpeg', 'image/png']);
 
-const setGateImageFeedback = (message, isError = false) => {
-  if (!gateImageFeedback) return;
-  gateImageFeedback.textContent = message || '';
-  gateImageFeedback.classList.toggle('text-danger', isError);
-  gateImageFeedback.classList.toggle('text-success', !isError && !!message);
+
+const setImageFeedback = (element, message, isError = false) => {
+  if (!element) return;
+  element.textContent = message || '';
+  element.classList.toggle('text-danger', isError);
+  element.classList.toggle('text-success', !isError && !!message);
 };
 
-const renderGateImageList = (files) => {
-  if (!gateImageList) return;
+const renderImageList = (element, files) => {
+  if (!element) return;
   if (!files.length) {
-    gateImageList.innerHTML = '';
+    element.innerHTML = '';
     return;
   }
 
@@ -228,50 +235,66 @@ const renderGateImageList = (files) => {
     const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
     return `${index + 1}. ${file.name} (${sizeMb} MB)`;
   });
-  gateImageList.innerHTML = lines.join('<br>');
+  element.innerHTML = lines.join('<br>');
 };
 
-if (gateImageUploadBtn && gateImageInput) {
-  gateImageUploadBtn.addEventListener('click', () => {
-    gateImageInput.click();
+const bindImageUploadValidation = ({ trigger, input, feedbackEl, listEl }) => {
+  if (!trigger || !input) return;
+
+  trigger.addEventListener('click', () => {
+    input.click();
   });
 
-  gateImageInput.addEventListener('change', () => {
-    const selectedFiles = Array.from(gateImageInput.files || []);
+  input.addEventListener('change', () => {
+    const selectedFiles = Array.from(input.files || []);
 
     if (!selectedFiles.length) {
-      setGateImageFeedback('');
-      renderGateImageList([]);
+      setImageFeedback(feedbackEl, '');
+      renderImageList(listEl, []);
       return;
     }
 
     if (selectedFiles.length > GATE_MAX_FILES) {
-      gateImageInput.value = '';
-      renderGateImageList([]);
-      setGateImageFeedback(`Chỉ được chọn tối đa ${GATE_MAX_FILES} ảnh.`, true);
+      input.value = '';
+      renderImageList(listEl, []);
+      setImageFeedback(feedbackEl, `Chỉ được chọn tối đa ${GATE_MAX_FILES} ảnh.`, true);
       return;
     }
 
     const invalidType = selectedFiles.find((file) => !GATE_ALLOWED_TYPES.has(file.type));
     if (invalidType) {
-      gateImageInput.value = '';
-      renderGateImageList([]);
-      setGateImageFeedback('Chỉ chấp nhận file JPG hoặc PNG.', true);
+      input.value = '';
+      renderImageList(listEl, []);
+      setImageFeedback(feedbackEl, 'Chỉ chấp nhận file JPG hoặc PNG.', true);
       return;
     }
 
     const invalidSize = selectedFiles.find((file) => file.size > GATE_MAX_SIZE_BYTES);
     if (invalidSize) {
-      gateImageInput.value = '';
-      renderGateImageList([]);
-      setGateImageFeedback(`Mỗi ảnh tối đa ${GATE_MAX_SIZE_MB}MB.`, true);
+      input.value = '';
+      renderImageList(listEl, []);
+      setImageFeedback(feedbackEl, `Mỗi ảnh tối đa ${GATE_MAX_SIZE_MB}MB.`, true);
       return;
     }
 
-    setGateImageFeedback(`Đã chọn ${selectedFiles.length} ảnh hợp lệ.`);
-    renderGateImageList(selectedFiles);
+    setImageFeedback(feedbackEl, `Đã chọn ${selectedFiles.length} ảnh hợp lệ.`);
+    renderImageList(listEl, selectedFiles);
   });
-}
+};
+
+bindImageUploadValidation({
+  trigger: gateImageUploadBtn,
+  input: gateImageInput,
+  feedbackEl: gateImageFeedback,
+  listEl: gateImageList
+});
+
+bindImageUploadValidation({
+  trigger: feedbackImageUploadBtn,
+  input: feedbackImageInput,
+  feedbackEl: feedbackImageFeedback,
+  listEl: feedbackImageList
+});
 
 const validateGateRow = (row) => {
   let valid = true;

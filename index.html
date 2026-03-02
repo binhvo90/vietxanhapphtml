@@ -298,8 +298,11 @@
                 <div class="col-sm-10">
                   <div class="upload-box">
                     <div class="text-center">
-                      <button class="btn btn-teal" type="button">Gửi hình ảnh.</button>
-                      <div class="small text-info mt-2">Có thể gửi 10 tấm cùng lúc</div>
+                      <input id="feedback-image-input" type="file" class="d-none" accept=".jpg,.jpeg,.png,image/jpeg,image/png" multiple>
+                      <button class="btn btn-teal" id="feedback-image-upload-btn" type="button">Gửi hình ảnh.</button>
+                      <div class="small text-info mt-2">Tối đa 10 ảnh, mỗi ảnh không quá 10MB. Chỉ nhận JPG/PNG.</div>
+                      <div id="feedback-image-feedback" class="small mt-2"></div>
+                      <div id="feedback-image-list" class="small text-left mt-2"></div>
                     </div>
                   </div>
                 </div>
