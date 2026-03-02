@@ -19,6 +19,26 @@
       line-height: 1.2;
     }
 
+
+    .menu-compact .nav-link {
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+    }
+
+    .menu-compact .nav-link .nav-icon {
+      font-size: 1.02rem;
+      width: 1.35rem;
+      text-align: center;
+      margin-right: .2rem;
+      opacity: 1;
+    }
+
+    .menu-compact .nav-treeview .nav-link .nav-icon {
+      font-size: .98rem;
+      width: 1.3rem;
+    }
+
     .input-group-text i {
       width: 14px;
     }
