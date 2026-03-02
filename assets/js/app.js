@@ -102,18 +102,60 @@ const activateSection = (targetId, targetLink) => {
   }
 };
 
+const viToAsciiSlug = (value = '') => value
+  .toLowerCase()
+  .normalize('NFD')
+  .replace(/[̀-ͯ]/g, '')
+  .replace(/đ/g, 'd')
+  .replace(/[^a-z0-9]+/g, '-')
+  .replace(/^-+|-+$/g, '');
+
+const sectionSlugMap = {
+  'dashboard-section': 'trang-chinh',
+  'feedback-section': 'phan-anh-gop-y',
+  'contractor-section': 'dang-ky-khach-nha-thau',
+  'personal-section': 'thong-tin-ca-nhan',
+  'salary-advance-section': 'tam-ung-luong',
+  'attendance-overtime-section': 'tang-ca',
+  'attendance-check-section': 'kiem-tra-cong',
+  'attendance-confirm-section': 'xac-nhan-cong',
+  'attendance-leave-section': 'xin-nghi-phep',
+  'approval-leave-section': 'duyet-nghi-phep',
+  'approval-confirm-section': 'duyet-xac-nhan-cong',
+  'salary-table-section': 'xem-bang-luong',
+  'system-log-section': 'nhat-ky-he-thong',
+  'fuel-report-section': 'bao-cao-nhien-lieu',
+  'fuel-request-section': 'de-nghi-cap-nhien-lieu',
+  'gate-ticket-section': 'lap-phieu-ra-cong'
+};
+
+const getSlugByLink = (link, targetId) => {
+  const customSlug = link.getAttribute('data-slug');
+  if (customSlug) return customSlug;
+  if (sectionSlugMap[targetId]) return sectionSlugMap[targetId];
+
+  const titleText = link.getAttribute('data-title') || link.textContent.trim();
+  return viToAsciiSlug(titleText || targetId.replace(/-section$/, ''));
+};
+
 if (sections.length && targetLinks.length) {
   targetLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
       event.preventDefault();
       const targetId = link.getAttribute('data-target');
       if (!targetId) return;
+
+      showPageLoading(true);
       activateSection(targetId, link);
-      window.location.hash = targetId;
+      const slug = getSlugByLink(link, targetId);
+      window.location.hash = slug;
+      setTimeout(() => hidePageLoading(), 220);
     });
   });
 
-  const targetFromHash = window.location.hash.replace(/^#/, '');
+  const routeSectionMap = Object.fromEntries(Object.entries(sectionSlugMap).map(([sectionId, slug]) => [slug, sectionId]));
+  const hashValue = window.location.hash.replace(/^#/, '');
+  const targetFromHash = routeSectionMap[hashValue] || hashValue;
   const initialTarget = targetFromHash || window.__INITIAL_SECTION || targetLinks[0].getAttribute('data-target');
   activateSection(initialTarget);
 }
