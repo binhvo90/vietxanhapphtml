@@ -1939,7 +1939,7 @@
     event.preventDefault();
     const nextPath = buildSectionPath(targetId);
     if (window.location.pathname !== nextPath) {
-      window.history.pushState({ sectionId: targetId }, '', nextPath);
+      window.location.href = nextPath;
     }
   }, true);
 
@@ -2478,11 +2478,6 @@
   if (initialTarget) {
     activateSectionByTarget(initialTarget);
   }
-
-  window.addEventListener('popstate', () => {
-    const target = getTargetFromLocation() || 'dashboard-section';
-    activateSectionByTarget(target);
-  });
 
 </script>
 </body>
