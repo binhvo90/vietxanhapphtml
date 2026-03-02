@@ -126,7 +126,10 @@ const sectionSlugMap = {
   'system-log-section': 'nhat-ky-he-thong',
   'fuel-report-section': 'bao-cao-nhien-lieu',
   'fuel-request-section': 'de-nghi-cap-nhien-lieu',
-  'gate-ticket-section': 'lap-phieu-ra-cong'
+  'gate-ticket-section': 'lap-phieu-ra-cong',
+  'survey-program-section': 'chuong-trinh-khao-sat',
+  'gnvc-repair-request-section': 'ke-hoach-sua-chua',
+  'gnvc-patrol-section': 'tuan-tra-bao-ve'
 };
 
 const getSlugByLink = (link, targetId) => {
