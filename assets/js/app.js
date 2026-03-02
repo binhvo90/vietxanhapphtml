@@ -1,0 +1,362 @@
+const showPageLoading = (keepVisible = false) => {
+  const loading = document.getElementById('page-loading');
+  if (!loading) return;
+  loading.classList.remove('hidden');
+  loading.style.display = 'flex';
+  if (!keepVisible) {
+    setTimeout(() => hidePageLoading(), 450);
+  }
+};
+
+const hidePageLoading = () => {
+  const loading = document.getElementById('page-loading');
+  if (!loading) return;
+  loading.classList.add('hidden');
+  setTimeout(() => {
+    loading.style.display = 'none';
+  }, 320);
+};
+
+window.addEventListener('load', () => {
+  setTimeout(() => hidePageLoading(), 350);
+});
+
+const noticeViewButtons = document.querySelectorAll('.js-notice-view');
+const noticeDetailTitle = document.getElementById('noticeDetailTitle');
+
+noticeViewButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    if (!noticeDetailTitle) return;
+    noticeDetailTitle.textContent = button.getAttribute('data-notice-title') || 'Chi tiết thông báo';
+  });
+});
+
+const contractorDateInputs = document.querySelectorAll('.contractor-date');
+contractorDateInputs.forEach((input) => {
+  input.setAttribute('title', 'DD-MM-YYYY');
+});
+
+const overtimeDateTimeInputs = document.querySelectorAll('.overtime-datetime');
+overtimeDateTimeInputs.forEach((input) => {
+  input.setAttribute('title', 'DD-MM-YYYY HH:SS');
+});
+
+
+const pageTitle = document.getElementById('page-title');
+const sections = document.querySelectorAll('.content-section');
+const targetLinks = document.querySelectorAll('.sidebar .nav-link[data-target]');
+
+const attendanceMain = document.querySelector('.js-attendance-main');
+const attendanceSubmenu = document.querySelector('.attendance-submenu');
+const attendanceApproveMain = document.querySelector('.js-attendance-approve-main');
+const nestedSubmenu = document.querySelector('.nested-submenu');
+const fuelMain = document.querySelector('.js-fuel-main');
+const fuelSubmenu = document.querySelector('.fuel-submenu');
+const gateMain = document.querySelector('.js-gate-main');
+const gateSubmenu = document.querySelector('.gate-submenu');
+
+const resetMenuState = () => {
+  document.querySelectorAll('.sidebar .nav-link').forEach((link) => link.classList.remove('active', 'active-sub'));
+  [attendanceSubmenu, nestedSubmenu, fuelSubmenu, gateSubmenu].forEach((submenu) => {
+    if (submenu) submenu.classList.remove('show');
+  });
+};
+
+const activateSection = (targetId, targetLink) => {
+  if (!targetId || !sections.length) return;
+
+  sections.forEach((section) => {
+    section.classList.toggle('d-none', section.id !== targetId);
+  });
+
+  if (!targetLink) {
+    targetLink = document.querySelector(`.sidebar .nav-link[data-target="${targetId}"]`);
+  }
+  if (!targetLink) return;
+
+  resetMenuState();
+
+  if (targetLink.classList.contains('js-attendance-sub')) {
+    if (attendanceMain) attendanceMain.classList.add('active');
+    if (attendanceSubmenu) attendanceSubmenu.classList.add('show');
+    targetLink.classList.add('active-sub');
+  } else if (targetLink.classList.contains('js-attendance-approve-sub')) {
+    if (attendanceMain) attendanceMain.classList.add('active');
+    if (attendanceSubmenu) attendanceSubmenu.classList.add('show');
+    if (nestedSubmenu) nestedSubmenu.classList.add('show');
+    targetLink.classList.add('active-sub');
+  } else if (targetLink.classList.contains('js-fuel-sub')) {
+    if (fuelMain) fuelMain.classList.add('active');
+    if (fuelSubmenu) fuelSubmenu.classList.add('show');
+    targetLink.classList.add('active-sub');
+  } else if (targetLink.classList.contains('js-gate-sub')) {
+    if (gateMain) gateMain.classList.add('active');
+    if (gateSubmenu) gateSubmenu.classList.add('show');
+    targetLink.classList.add('active-sub');
+  } else {
+    targetLink.classList.add('active');
+  }
+
+  if (pageTitle) {
+    pageTitle.textContent = targetLink.getAttribute('data-title') || targetLink.textContent.trim();
+  }
+};
+
+const viToAsciiSlug = (value = '') => value
+  .toLowerCase()
+  .normalize('NFD')
+  .replace(/[̀-ͯ]/g, '')
+  .replace(/đ/g, 'd')
+  .replace(/[^a-z0-9]+/g, '-')
+  .replace(/^-+|-+$/g, '');
+
+const sectionSlugMap = {
+  'dashboard-section': 'trang-chinh',
+  'feedback-section': 'phan-anh-gop-y',
+  'contractor-section': 'dang-ky-khach-nha-thau',
+  'personal-section': 'thong-tin-ca-nhan',
+  'salary-advance-section': 'tam-ung-luong',
+  'attendance-overtime-section': 'tang-ca',
+  'attendance-check-section': 'kiem-tra-cong',
+  'attendance-confirm-section': 'xac-nhan-cong',
+  'attendance-leave-section': 'xin-nghi-phep',
+  'approval-leave-section': 'duyet-nghi-phep',
+  'approval-confirm-section': 'duyet-xac-nhan-cong',
+  'salary-table-section': 'xem-bang-luong',
+  'system-log-section': 'nhat-ky-he-thong',
+  'fuel-report-section': 'bao-cao-nhien-lieu',
+  'fuel-request-section': 'de-nghi-cap-nhien-lieu',
+  'gate-ticket-section': 'lap-phieu-ra-cong',
+  'survey-program-section': 'chuong-trinh-khao-sat',
+  'gnvc-repair-request-section': 'ke-hoach-sua-chua',
+  'gnvc-patrol-section': 'tuan-tra-bao-ve'
+};
+
+const getSlugByLink = (link, targetId) => {
+  const customSlug = link.getAttribute('data-slug');
+  if (customSlug) return customSlug;
+  if (sectionSlugMap[targetId]) return sectionSlugMap[targetId];
+
+  const titleText = link.getAttribute('data-title') || link.textContent.trim();
+  return viToAsciiSlug(titleText || targetId.replace(/-section$/, ''));
+};
+
+if (sections.length && targetLinks.length) {
+  targetLinks.forEach((link) => {
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      const targetId = link.getAttribute('data-target');
+      if (!targetId) return;
+
+      showPageLoading(true);
+      activateSection(targetId, link);
+      const slug = getSlugByLink(link, targetId);
+      window.location.hash = slug;
+      setTimeout(() => hidePageLoading(), 220);
+    });
+  });
+
+  const routeSectionMap = Object.fromEntries(Object.entries(sectionSlugMap).map(([sectionId, slug]) => [slug, sectionId]));
+  const hashValue = window.location.hash.replace(/^#/, '');
+  const targetFromHash = routeSectionMap[hashValue] || hashValue;
+  const initialTarget = targetFromHash || window.__INITIAL_SECTION || targetLinks[0].getAttribute('data-target');
+  activateSection(initialTarget);
+}
+
+if (attendanceMain && attendanceSubmenu) {
+  attendanceMain.addEventListener('click', (event) => {
+    event.preventDefault();
+    attendanceMain.classList.toggle('active');
+    attendanceSubmenu.classList.toggle('show');
+    if (!attendanceSubmenu.classList.contains('show') && nestedSubmenu) {
+      nestedSubmenu.classList.remove('show');
+    }
+  });
+}
+
+if (attendanceApproveMain && nestedSubmenu && attendanceSubmenu) {
+  attendanceApproveMain.addEventListener('click', (event) => {
+    event.preventDefault();
+    attendanceSubmenu.classList.add('show');
+    nestedSubmenu.classList.toggle('show');
+  });
+}
+
+if (fuelMain && fuelSubmenu) {
+  fuelMain.addEventListener('click', (event) => {
+    event.preventDefault();
+    fuelMain.classList.toggle('active');
+    fuelSubmenu.classList.toggle('show');
+  });
+}
+
+if (gateMain && gateSubmenu) {
+  gateMain.addEventListener('click', (event) => {
+    event.preventDefault();
+    gateMain.classList.toggle('active');
+    gateSubmenu.classList.toggle('show');
+  });
+}
+
+
+const feedbackImageUploadBtn = document.getElementById('feedback-image-upload-btn');
+const feedbackImageInput = document.getElementById('feedback-image-input');
+const feedbackImageFeedback = document.getElementById('feedback-image-feedback');
+const feedbackImageList = document.getElementById('feedback-image-list');
+
+const gateItemsBody = document.getElementById('gate-items-body');
+const gateSubmitBtn = document.getElementById('gate-submit-btn');
+const gateImageUploadBtn = document.getElementById('gate-image-upload-btn');
+const gateImageInput = document.getElementById('gate-image-input');
+const gateImageFeedback = document.getElementById('gate-image-feedback');
+const gateImageList = document.getElementById('gate-image-list');
+
+const GATE_MAX_FILES = 10;
+const GATE_MAX_SIZE_MB = 10;
+const GATE_MAX_SIZE_BYTES = GATE_MAX_SIZE_MB * 1024 * 1024;
+const GATE_ALLOWED_TYPES = new Set(['image/jpeg', 'image/png']);
+
+
+const setImageFeedback = (element, message, isError = false) => {
+  if (!element) return;
+  element.textContent = message || '';
+  element.classList.toggle('text-danger', isError);
+  element.classList.toggle('text-success', !isError && !!message);
+};
+
+const renderImageList = (element, files) => {
+  if (!element) return;
+  if (!files.length) {
+    element.innerHTML = '';
+    return;
+  }
+
+  const lines = files.map((file, index) => {
+    const sizeMb = (file.size / (1024 * 1024)).toFixed(2);
+    return `${index + 1}. ${file.name} (${sizeMb} MB)`;
+  });
+  element.innerHTML = lines.join('<br>');
+};
+
+const bindImageUploadValidation = ({ trigger, input, feedbackEl, listEl }) => {
+  if (!trigger || !input) return;
+
+  trigger.addEventListener('click', () => {
+    input.click();
+  });
+
+  input.addEventListener('change', () => {
+    const selectedFiles = Array.from(input.files || []);
+
+    if (!selectedFiles.length) {
+      setImageFeedback(feedbackEl, '');
+      renderImageList(listEl, []);
+      return;
+    }
+
+    if (selectedFiles.length > GATE_MAX_FILES) {
+      input.value = '';
+      renderImageList(listEl, []);
+      setImageFeedback(feedbackEl, `Chỉ được chọn tối đa ${GATE_MAX_FILES} ảnh.`, true);
+      return;
+    }
+
+    const invalidType = selectedFiles.find((file) => !GATE_ALLOWED_TYPES.has(file.type));
+    if (invalidType) {
+      input.value = '';
+      renderImageList(listEl, []);
+      setImageFeedback(feedbackEl, 'Chỉ chấp nhận file JPG hoặc PNG.', true);
+      return;
+    }
+
+    const invalidSize = selectedFiles.find((file) => file.size > GATE_MAX_SIZE_BYTES);
+    if (invalidSize) {
+      input.value = '';
+      renderImageList(listEl, []);
+      setImageFeedback(feedbackEl, `Mỗi ảnh tối đa ${GATE_MAX_SIZE_MB}MB.`, true);
+      return;
+    }
+
+    setImageFeedback(feedbackEl, `Đã chọn ${selectedFiles.length} ảnh hợp lệ.`);
+    renderImageList(listEl, selectedFiles);
+  });
+};
+
+bindImageUploadValidation({
+  trigger: gateImageUploadBtn,
+  input: gateImageInput,
+  feedbackEl: gateImageFeedback,
+  listEl: gateImageList
+});
+
+bindImageUploadValidation({
+  trigger: feedbackImageUploadBtn,
+  input: feedbackImageInput,
+  feedbackEl: feedbackImageFeedback,
+  listEl: feedbackImageList
+});
+
+const validateGateRow = (row) => {
+  let valid = true;
+  row.querySelectorAll('.gate-item-input').forEach((input) => {
+    if (!input.value.trim()) {
+      input.classList.add('is-invalid');
+      valid = false;
+    } else {
+      input.classList.remove('is-invalid');
+    }
+  });
+  return valid;
+};
+
+const createGateRow = (index) => {
+  const tr = document.createElement('tr');
+  tr.className = 'gate-item-row';
+  tr.innerHTML = `
+    <td class="gate-item-index">${index}</td>
+    <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-name"></td>
+    <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-unit"></td>
+    <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-qty"></td>
+    <td><input type="text" class="form-control form-control-sm gate-item-input gate-item-doc"></td>
+    <td class="text-center text-success font-weight-bold gate-row-add" style="font-size:1.3rem;">+</td>
+  `;
+  return tr;
+};
+
+if (gateItemsBody) {
+  gateItemsBody.addEventListener('click', (event) => {
+    const addBtn = event.target.closest('.gate-row-add');
+    if (!addBtn) return;
+
+    const row = addBtn.closest('.gate-item-row');
+    if (!row) return;
+
+    if (!validateGateRow(row)) {
+      return;
+    }
+
+    const nextIndex = gateItemsBody.querySelectorAll('.gate-item-row').length + 1;
+    gateItemsBody.appendChild(createGateRow(nextIndex));
+  });
+
+  gateItemsBody.addEventListener('input', (event) => {
+    if (event.target.classList.contains('gate-item-input')) {
+      event.target.classList.remove('is-invalid');
+    }
+  });
+}
+
+if (gateSubmitBtn && gateItemsBody) {
+  gateSubmitBtn.addEventListener('click', () => {
+    const rows = gateItemsBody.querySelectorAll('.gate-item-row');
+    let allValid = true;
+
+    rows.forEach((row) => {
+      if (!validateGateRow(row)) allValid = false;
+    });
+
+    if (!allValid) {
+      return;
+    }
+  });
+}
